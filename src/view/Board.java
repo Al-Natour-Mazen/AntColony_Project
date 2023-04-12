@@ -10,12 +10,10 @@ import model.Fourmiliere;
 
 public class Board extends Pane {
 
-    private Fourmiliere antColony;
+    private final Fourmiliere antColony;
     private int gridheight;
 	private int gridwidth;
-    private final int cellSize = 20; // taille par défaut d'une cellule
-
-
+    private final static int cellSize = 20; // taille par défaut d'une cellule
 	private Rectangle[][] cells;
 
     public Board(Fourmiliere antColony) {
@@ -107,7 +105,7 @@ public class Board extends Pane {
 	}
 	
 	public Rectangle getcell(int x,int y) {
-		return cells[x][y];
+		return cells[y][x];
 	}
 	
     public int getCellSize() {
