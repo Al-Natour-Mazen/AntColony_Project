@@ -26,7 +26,11 @@ public class Fourmiliere {
   // dans le tableau fourmis
   private List<Fourmi> lesFourmis ;  
 	
-  // Tableaux contenant les murs, les fourmis et les graines. 
+  
+
+
+
+// Tableaux contenant les murs, les fourmis et les graines. 
   // Attention : pour un terrain [1..hauteur]x[1..largeur], ces tableaux 
   // sont indicés de [0..hauteur+1][0..largeur+1], cela permet de simplifier 
   // certains traitements en ne traitant pas le cas particulier des bordures. 
@@ -329,7 +333,9 @@ public class Fourmiliere {
     return res ; 
   }	
 
-
+  public List<Fourmi> getLesFourmis() {
+		return lesFourmis;
+	}
 
   /**
    * Exemple de main manipulant une fourmiliere 

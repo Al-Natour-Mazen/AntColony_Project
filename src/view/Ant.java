@@ -5,7 +5,8 @@ import javafx.scene.shape.Circle;
 
 public class Ant extends Circle{
 	
-	private Boolean HasSeed = false ;
+	private Boolean HasSeed ;
+	private int x,y;
 	
 	/**
 	   * Construction  d'une fourmi au point (x,y) du terrain
@@ -21,6 +22,8 @@ public class Ant extends Circle{
 		setLayoutX(x);
 		setLayoutY(y);
 		setHasSeed(hasseed);
+		setX(x);
+		setY(y);
 		changeColorAnt();
 	}
 
@@ -38,6 +41,22 @@ public class Ant extends Circle{
 		}
 		else
 			this.setFill(Color.GREEN);
+	}
+	
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
 	}
 
 }
