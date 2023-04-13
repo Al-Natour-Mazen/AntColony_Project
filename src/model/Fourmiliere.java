@@ -2,6 +2,10 @@ package model;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+
 import java.util.Iterator;
 
 /**
@@ -27,7 +31,19 @@ public class Fourmiliere {
   private List<Fourmi> lesFourmis ;  
 	
   
+  private final DoubleProperty NbFourmiProperty;
+  
+  public DoubleProperty NbFourmiProperty() {
+      return NbFourmiProperty;
+  }
 
+  public double getNbFourmi() {
+      return NbFourmiProperty.get();
+  }
+
+  public void setNbFourmi(double value) {
+	  NbFourmiProperty.set(value);
+  }
 
 
 // Tableaux contenant les murs, les fourmis et les graines. 
@@ -47,6 +63,7 @@ public class Fourmiliere {
    * @param qMax                la qte max de graines par case
    */
   public Fourmiliere(int l, int h, int qMax) {
+	NbFourmiProperty = new SimpleDoubleProperty();
     this.largeur = l;
     this.hauteur = h;
     this.qMax = qMax ; 
@@ -142,6 +159,7 @@ public class Fourmiliere {
       Fourmi f = new Fourmi(x,y,false);
       fourmis[y][x]=true ; 			
       lesFourmis.add(f);
+      setNbFourmi(getNbFourmi()+1);
     };
   }
 		

@@ -18,10 +18,11 @@ public class ViewAntColony extends BorderPane{
 	private HBox bottomBox;
 	private VBox rightBox;
 	private Slider sld;
-	private Label lfourmi,lgraines,lite;
+	private Label lgraines,lite;
 	private Fourmiliere antcolony;
 	private PlayPauseButton playpause;
 	private ZoomWindow zoomedWindow;
+	private LabelWithBind lfourmi;
 	
 	private ObjectProperty<ZoomWindow> zoomWindowProperty;
 	
@@ -73,7 +74,7 @@ public class ViewAntColony extends BorderPane{
 			sld = new Slider(1,10, 10);
 			sld.setShowTickLabels(true);
 			sld.setShowTickMarks(true);
-			lfourmi = new Label("Nombre de Fourmi");
+			lfourmi = new LabelWithBind("Nombre de Fourmi :",antcolony.NbFourmiProperty());
 			lgraines = new Label("nombre de graines");
 			lite = new Label("Nombre d'iterations");
 		
