@@ -19,6 +19,7 @@ public class ViewAntColony extends BorderPane{
 	private Label lfourmi,lgraines,lite;
 	private Fourmiliere antcolony;
 	private PlayPauseButton playpause;
+	private ZoomWindow zm;
 	
 	public ViewAntColony(Fourmiliere fm) {
 		// TODO Auto-generated constructor stub
@@ -32,10 +33,10 @@ public class ViewAntColony extends BorderPane{
 		this.setCenter(plateau);
 		
 		bottomBox = new HBox(10);
-		    playpause = new PlayPauseButton(20,antcolony,plateau);
+		    playpause = new PlayPauseButton(20,antcolony,plateau,zm);
 			loupe = new Button("Loupe");
 			loupe.setOnAction(e->{
-				ZoomWindow zm = new ZoomWindow(plateau);
+				 zm = new ZoomWindow(plateau);
 			});
 			quit = new Button("Quit");
 			quit.setOnAction(e -> {
@@ -46,7 +47,7 @@ public class ViewAntColony extends BorderPane{
 		this.setBottom(bottomBox);
 		
 		rightBox = new VBox(10);
-			sld = new Slider(1,100, 5);
+			sld = new Slider(1,10, 10);
 			sld.setShowTickLabels(true);
 			sld.setShowTickMarks(true);
 			lfourmi = new Label("Nombre de Fourmi");

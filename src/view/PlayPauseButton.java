@@ -134,6 +134,8 @@ public class PlayPauseButton extends Button {
                     	Platform.runLater(()->{
                 			antcolony.evolue();
                     		plateau.updateGrid();
+                    		if(zoom != null)
+                    			zoom.updateZoomGrid();
   
                   		
                 		});
@@ -151,12 +153,15 @@ public class PlayPauseButton extends Button {
     
 	private final Fourmiliere antcolony;
 	private final Board plateau;
+	private final ZoomWindow zoom;
+	
 	private final DoubleProperty valueSpeedProperty;
 	private final static int DefaultSpeed = 10;
 	
     private boolean isPlaying;   
 
-    public PlayPauseButton(int size, Fourmiliere fm, Board board) {
+    public PlayPauseButton(int size, Fourmiliere fm, Board board, ZoomWindow zoomepane) {
+    	this.zoom = zoomepane;
 		this.antcolony =fm;
 		this.plateau = board;
         // Charger les images depuis les fichiers

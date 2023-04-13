@@ -1,9 +1,5 @@
 package view;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -14,17 +10,14 @@ import model.Fourmiliere;
 public class Board extends Pane {
 
     private final Fourmiliere antColony;
-    private int gridheight;
+ 
+	private int gridheight;
 	private int gridwidth;
     private final static int cellSize = 10; // taille par défaut d'une cellule
 	private Rectangle[][] cells;
-	private List<Fourmi> antsList ;
-
-
-
+	private Ant[][] Ants;
 
 	public Board(Fourmiliere antColony) {
-		this.antsList = antColony.getLesFourmis();
         this.antColony = antColony;
         this.gridheight = antColony.getHauteur();
         this.gridwidth = antColony.getLargeur();       
@@ -40,6 +33,7 @@ public class Board extends Pane {
                 getChildren().add(cell);
             }
         }
+        Ants = new Ant[gridheight+2][gridwidth+2];
         updateGrid();
     }
 
@@ -58,6 +52,7 @@ public class Board extends Pane {
         		    }
         		    if (!foundAnt) {
         		        addAnt(j, i, false);
+        		        
         		    }
                 }else if (antColony.getMur(j, i)) {
                     cells[j][i].setFill(Color.BLACK);
@@ -89,6 +84,7 @@ public class Board extends Pane {
     private void addAnt(int x , int y , boolean Hasseed) {
     	Ant ant = new Ant(cellSize/2,x*cellSize+(cellSize/2),y*cellSize+(cellSize/2), Hasseed);
     	ant.changeColorAnt();
+    	Ants[y][x] = ant;
     	this.getChildren().add(ant);
     }
     
@@ -97,6 +93,7 @@ public class Board extends Pane {
             if (node instanceof Ant) {
                 Ant ant = (Ant) node;
                 if (ant.getX() == x * cellSize + (cellSize/2) && ant.getY() == y * cellSize + (cellSize/2)) {
+                	Ants[y][x] = null;
                     this.getChildren().remove(ant);
                     break;
                 }
@@ -115,12 +112,11 @@ public class Board extends Pane {
 	public Rectangle getcell(int x,int y) {
 		return cells[y][x];
 	}
+	public Ant getAntCell(int x,int y) {
+		return Ants[x][y];
+	}
 	
     public int getCellSize() {
 		return cellSize;
 	}
-    public List<Fourmi> getAntsList() {
-		return antsList;
-	}
-	
 }
