@@ -38,7 +38,16 @@ public class PlayPauseButton extends Button {
              		     System.out.println(antcolony.stringGraines());	
              		     System.out.println(antcolony.stringFourmis());
                     
-                        Thread.sleep((long) getValueSpeed()*10);
+             		   // Récupérer la valeur de valuespeed
+             		    double valuespeed = getValueSpeed();
+
+             		    // Calculer le temps de sommeil en fonction de valuespeed
+             		    long sleepTime = (long) (1050 - (valuespeed * 100)) /2  ;
+
+             		    // Vérifier que le temps de sommeil est supérieur à zéro pour éviter une exception
+             		    if (sleepTime > 0) {
+             		        Thread.sleep(sleepTime);
+             		    }
                     }
                     return null;
                 }

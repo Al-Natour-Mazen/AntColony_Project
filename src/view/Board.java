@@ -78,7 +78,7 @@ public class Board extends Pane {
     	 for (int i = 0; i < gridheight+2; i++){
              for (int j = 0; j < gridwidth+2; j++){
                      cells[j][i].setFill(Color.WHITE);   
-                     removeAnt(i, j);
+                     removeAnt(j, i);
              }
     	 }
     }
