@@ -86,7 +86,7 @@ public class ViewAntColony extends BorderPane{
 		this.setBottom(bottomBox);
 		
 		rightBox = new VBox(10);
-			vitesseSimulation = new Slider(1,10, 5);
+			vitesseSimulation = new Slider(1,10, 1);
 			vitesseSimulation.setShowTickLabels(true);
 			vitesseSimulation.setShowTickMarks(true);
 			lfourmi = new LabelWithBind("Nombre de Fourmi :",antcolony.NbFourmiProperty());

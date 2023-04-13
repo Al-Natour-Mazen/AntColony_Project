@@ -6,6 +6,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -102,6 +103,7 @@ public class PlayPauseButton extends Button {
         
         valueSpeedProperty = new SimpleDoubleProperty(DefaultSpeed);
         setStyle("-fx-background-color: transparent;");
+        //setPadding(new Insets(0,0,10,0));
     }
     
     public DoubleProperty valueSpeedProperty() {
