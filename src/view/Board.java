@@ -11,10 +11,10 @@ import model.Fourmiliere;
 public class Board extends Pane {
 
     private final Fourmiliere antColony;
- 
-	private int gridheight;
-	private int gridwidth;
     private final static int cellSize = 10; // taille par défaut d'une cellule
+	
+    private int gridheight;
+	private int gridwidth;
 	private Rectangle[][] cells;
 	private Ant[][] Ants;
 
@@ -126,8 +126,11 @@ public class Board extends Pane {
 
 	        if (event.getDeltaY() > 0) {
 	            antColony.setQteGraines(x, y, antColony.getQteGraines(x, y) + 1);
+	            antColony.MAJNbGrainesTotal();
+	          
 	        } else {
 	            antColony.setQteGraines(x, y, antColony.getQteGraines(x, y) - 1);
+	            antColony.MAJNbGrainesTotal();
 	        }
 	        updateGrid();
 	    });

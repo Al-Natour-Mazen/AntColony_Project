@@ -30,7 +30,7 @@ public class Fourmiliere {
   // dans le tableau fourmis
   private List<Fourmi> lesFourmis ;  
 	
-  
+  /************************************AJOUTE**************************************************/
   private final DoubleProperty NbFourmiProperty;
   
   public DoubleProperty NbFourmiProperty() {
@@ -45,7 +45,38 @@ public class Fourmiliere {
 	  NbFourmiProperty.set(value);
   }
 
+  
+  
+  private final DoubleProperty NbGraineProperty;
+  
+  public DoubleProperty NbGraineProperty() {
+      return NbGraineProperty;
+  }
 
+  public double getNbGraine() {
+      return NbGraineProperty.get();
+  }
+
+  public void setNbGraine(double qte) {
+	  NbGraineProperty.set(qte);
+  }
+  
+  public List<Fourmi> getLesFourmis() {
+		return lesFourmis;
+  }
+  public void MAJNbGrainesTotal() {
+	    int nbGrainesTotal = 0;
+	    for (int i = 1; i <= hauteur; i++) {
+	        for (int j = 1; j <= largeur; j++) {
+	            nbGrainesTotal += qteGraines[i][j];
+	        }
+	    }
+	    setNbGraine(nbGrainesTotal);
+	}
+
+  /************************************FIN AJOUT**************************************************/
+  
+  
 // Tableaux contenant les murs, les fourmis et les graines. 
   // Attention : pour un terrain [1..hauteur]x[1..largeur], ces tableaux 
   // sont indicés de [0..hauteur+1][0..largeur+1], cela permet de simplifier 
@@ -64,6 +95,7 @@ public class Fourmiliere {
    */
   public Fourmiliere(int l, int h, int qMax) {
 	NbFourmiProperty = new SimpleDoubleProperty();
+	NbGraineProperty = new SimpleDoubleProperty();
     this.largeur = l;
     this.hauteur = h;
     this.qMax = qMax ; 
@@ -84,6 +116,8 @@ public class Fourmiliere {
     for (int i =0 ; i < hauteur+2 ; i++)
       for (int j =0 ; j < largeur+2; j++)
 	qteGraines [i][j]=0 ; 
+    
+    MAJNbGrainesTotal();
   }
     
   /**
@@ -351,9 +385,7 @@ public class Fourmiliere {
     return res ; 
   }	
 
-  public List<Fourmi> getLesFourmis() {
-		return lesFourmis;
-	}
+
 
   /**
    * Exemple de main manipulant une fourmiliere 

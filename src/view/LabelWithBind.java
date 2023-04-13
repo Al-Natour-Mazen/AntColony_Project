@@ -16,20 +16,18 @@ public class LabelWithBind extends Label{
 		textProperty().bind(mybind);;
 	}
 	
-	
-
     public class MyStringBinding extends StringBinding{
 
     	private DoubleProperty prop;
 
     	public MyStringBinding(final DoubleProperty theProp) {
     		this.prop = theProp;
-    		bind(prop);
+    		bind(theProp);
     	}
     		
 		@Override
 		protected String computeValue() {
-			return labelText + " "+ prop.get();
+			return labelText + " " + prop.get();
 		}
     	
     }
