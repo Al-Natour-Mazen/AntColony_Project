@@ -104,13 +104,12 @@ public class Board extends Pane {
     }
     
     private void doEventsChangeTerrain() {
-	    // Ajoute un gestionnaire d'événements de souris à la grille
 	    setOnMouseClicked(event -> {
-	        int x = (int) (event.getX() / cellSize);
-	        int y = (int) (event.getY() / cellSize);
+		        int x = (int) (event.getX() / cellSize);
+		        int y = (int) (event.getY() / cellSize);
 	        
-	        if (event.getButton() == MouseButton.PRIMARY) {
-		            if (event.isShiftDown()) {
+	        	if (event.getButton() == MouseButton.PRIMARY) {
+		            if (event.isShiftDown() && !antColony.contientFourmi(x, y)) {
 		                // Ajoute une fourmi à la position (x, y)
 		                antColony.ajouteFourmi(x, y);
 		            } else if (antColony.getQteGraines(x, y) == 0) {
