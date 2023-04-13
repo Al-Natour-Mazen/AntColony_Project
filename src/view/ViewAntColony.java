@@ -3,6 +3,8 @@ package view;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
@@ -33,6 +35,8 @@ public class ViewAntColony extends BorderPane{
 	public void initComponent() {
 		plateau = new Board(antcolony);	
 		this.setCenter(plateau);
+		BorderPane.setAlignment(plateau, Pos.CENTER);
+		plateau.setPadding(new Insets(10));
 		
 		bottomBox = new HBox(10);
 		    playpause = new PlayPauseButton(20,antcolony,plateau,zoomedWindow);
