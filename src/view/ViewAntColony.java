@@ -39,7 +39,6 @@ public class ViewAntColony extends BorderPane{
 		plateau = new Board(antcolony);	
 		this.setCenter(plateau);
 		BorderPane.setAlignment(plateau, Pos.CENTER);
-		plateau.setPadding(new Insets(10));
 		
 		bottomBox = new HBox(10);
 		    playpause = new PlayPauseButton(20,antcolony,plateau,zoomedWindow);
@@ -101,7 +100,7 @@ public class ViewAntColony extends BorderPane{
 		
 		playpause.valueSpeedProperty().bind(vitesseSimulation.valueProperty());
 		//System.out.println(antcolony.NbFourmiProperty().equals(antcolony.NbGraineProperty())); // Affiche "false" si les propriétés sont différentes
-		
+		setPadding(new Insets(20));
 		
 	}
 
