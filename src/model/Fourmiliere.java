@@ -31,48 +31,63 @@ public class Fourmiliere {
   private List<Fourmi> lesFourmis ;  
 	
   /************************************AJOUTE**************************************************/
-  private final DoubleProperty NbFourmiProperty;
-  
-  public DoubleProperty NbFourmiProperty() {
-      return NbFourmiProperty;
-  }
-
-  public double getNbFourmi() {
-      return NbFourmiProperty.get();
-  }
-
-  public void setNbFourmi(double value) {
-	  NbFourmiProperty.set(value);
-  }
-
-  
-  
-  private final DoubleProperty NbGraineProperty;
-  
-  public DoubleProperty NbGraineProperty() {
-      return NbGraineProperty;
-  }
-
-  public double getNbGraine() {
-      return NbGraineProperty.get();
-  }
-
-  public void setNbGraine(double qte) {
-	  NbGraineProperty.set(qte);
-  }
-  
-  public List<Fourmi> getLesFourmis() {
-		return lesFourmis;
-  }
-  public void MAJNbGrainesTotal() {
-	    int nbGrainesTotal = 0;
-	    for (int i = 1; i <= hauteur; i++) {
-	        for (int j = 1; j <= largeur; j++) {
-	            nbGrainesTotal += qteGraines[i][j];
-	        }
-	    }
-	    setNbGraine(nbGrainesTotal);
-	}
+			  /*****************/
+  			  // POUR LE NOMBRE DE FOURMI
+  			  /*****************/
+  			  private final DoubleProperty NbFourmiProperty;
+			  public DoubleProperty NbFourmiProperty() {
+			      return NbFourmiProperty;
+			  }	
+			  public double getNbFourmi() {
+			      return NbFourmiProperty.get();
+			  }		
+			  public void setNbFourmi(double value) {
+				  NbFourmiProperty.set(value);
+			  }
+			
+			  /*****************/
+  			  // POUR LE NOMBRE DE GRAINE
+  			  /*****************/
+			  private final DoubleProperty NbGraineProperty;  
+			  public DoubleProperty NbGraineProperty() {
+			      return NbGraineProperty;
+			  }
+			  public double getNbGraine() {
+			      return NbGraineProperty.get();
+			  }		
+			  public void setNbGraine(double qte) {
+				  NbGraineProperty.set(qte);
+			  }		  
+			  public void MAJNbGrainesTotal() {
+				    int nbGrainesTotal = 0;
+				    for (int i = 1; i <= hauteur; i++) {
+				        for (int j = 1; j <= largeur; j++) {
+				            nbGrainesTotal += qteGraines[i][j];
+				        }
+				    }
+				    setNbGraine(nbGrainesTotal);
+			  }
+			  
+			  /*****************/
+  			  // POUR LE NOMBRE D ITERATION
+  			  /*****************/
+			  private final DoubleProperty IterationProperty;  
+			  public DoubleProperty IterationProperty() {
+			      return IterationProperty;
+			  }
+			  public double getIteration() {
+			      return IterationProperty.get();
+			  }		
+			  public void setIteration(double val) {
+				  IterationProperty.set(val);
+			  }	
+			  
+			  /*****************/
+  			  // POUR L'AFFICHAGE DES FOURMI DANS LE PLATEAU
+  			  /*****************/
+			  public List<Fourmi> getLesFourmis() {
+					return lesFourmis;
+			  }
 
   /************************************FIN AJOUT**************************************************/
   
@@ -96,6 +111,7 @@ public class Fourmiliere {
   public Fourmiliere(int l, int h, int qMax) {
 	NbFourmiProperty = new SimpleDoubleProperty();
 	NbGraineProperty = new SimpleDoubleProperty();
+	IterationProperty = new SimpleDoubleProperty();
     this.largeur = l;
     this.hauteur = h;
     this.qMax = qMax ; 
@@ -255,6 +271,7 @@ public class Fourmiliere {
   public void evolue() {
     Iterator<Fourmi> ItFourmi = lesFourmis.iterator();
     while (ItFourmi.hasNext()) {
+    	setIteration(getIteration()+1);
       Fourmi f = ItFourmi.next();
       int posX = f.getX(); 
       int posY = f.getY(); 
