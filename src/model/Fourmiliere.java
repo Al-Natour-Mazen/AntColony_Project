@@ -262,6 +262,7 @@ public class Fourmiliere {
       return;
     }
     this.qteGraines[y][x]=qte;
+    MAJNbGrainesTotal();
   }
 
   /**

@@ -113,7 +113,7 @@ public class Board extends Pane {
 		            if (event.isShiftDown()) {
 		                // Ajoute une fourmi à la position (x, y)
 		                antColony.ajouteFourmi(x, y);
-		            } else {
+		            } else if (antColony.getQteGraines(x, y) == 0) {
 	                	// Change l'état du mur à la position (x, y)
     	                antColony.setMur(x, y, !antColony.getMur(x, y));
 		            }
@@ -121,19 +121,22 @@ public class Board extends Pane {
     	        updateGrid();
     	    });
     	    
+	    
 	    setOnScroll(event -> {
 	        int x = (int) (event.getX() / cellSize);
 	        int y = (int) (event.getY() / cellSize);
-
-	        if (event.getDeltaY() > 0) {
-	            antColony.setQteGraines(x, y, antColony.getQteGraines(x, y) + 1);
-	            antColony.MAJNbGrainesTotal();
-	          
-	        } else {
-	            antColony.setQteGraines(x, y, antColony.getQteGraines(x, y) - 1);
-	            antColony.MAJNbGrainesTotal();
+	        
+	        if(!antColony.getMur(x, y)) {
+	        	if (event.getDeltaY() > 0) {
+		            antColony.setQteGraines(x, y, antColony.getQteGraines(x, y) + 1);
+		           // antColony.MAJNbGrainesTotal();
+		          
+		        } else {
+		            antColony.setQteGraines(x, y, antColony.getQteGraines(x, y) - 1);
+		          //  antColony.MAJNbGrainesTotal();
+		        }
+		        updateGrid();
 	        }
-	        updateGrid();
 	    });
     }
 

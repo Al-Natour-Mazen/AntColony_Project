@@ -56,8 +56,8 @@ public class ViewAntColony extends BorderPane{
 			});
 			loupe.setOnAction(e -> {
 			    if (zoomWindowProperty.get() == null) { // vérifier si la propriété est à null
-			        ZoomWindow zoomWindow = new ZoomWindow(plateau);
-			        zoomWindowProperty.set(zoomWindow); // affecter la nouvelle fenêtre à la propriété
+			        zoomedWindow = new ZoomWindow(plateau);
+			        zoomWindowProperty.set(zoomedWindow); // affecter la nouvelle fenêtre à la propriété
 			    }
 			});
 			
@@ -81,9 +81,8 @@ public class ViewAntColony extends BorderPane{
 			sld.setShowTickMarks(true);
 			lfourmi = new LabelWithBind("Nombre de Fourmi :",antcolony.NbFourmiProperty());
 			//on met à jour le nombre de graine pour le label
-			antcolony.MAJNbGrainesTotal();
-			lgraines = new LabelWithBind("Nombre de graines :",antcolony.NbGraineProperty());
-			
+			//antcolony.MAJNbGrainesTotal();
+			lgraines = new LabelWithBind("Nombre de graines :",antcolony.NbGraineProperty());	
 			lite = new LabelWithBind("Nombre d'iterations :",antcolony.IterationProperty());
 		
 		rightBox.getChildren().addAll(sld,lfourmi,lgraines,lite);
