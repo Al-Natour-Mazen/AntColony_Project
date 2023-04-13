@@ -83,10 +83,37 @@ public class Fourmiliere {
 			  }	
 			  
 			  /*****************/
-  			  // POUR L'AFFICHAGE DES FOURMI DANS LE PLATEAU
+  			  // POUR L AFFICHAGE DES FOURMIS DANS LE PLATEAU
   			  /*****************/
 			  public List<Fourmi> getLesFourmis() {
 					return lesFourmis;
+			  }
+			  
+			  /*****************/
+  			  // POUR LA REsINISIALISATION ALEATOIRE
+  			  /*****************/
+			  public void Reset() {
+				  setNbFourmi(0);
+				  setNbGraine(0);
+				  setIteration(0);
+				  this.lesFourmis = new LinkedList<Fourmi>(); 
+			    	
+				    fourmis = new boolean[hauteur+2][largeur+2];
+				    for (int i =0 ; i < hauteur+2 ; i++)
+				      for (int j =0 ; j < largeur+2 ; j++)
+					fourmis[i][j] = false ; 
+					
+				    murs = new boolean[hauteur+2][largeur+2];
+				    for (int i =0 ; i < hauteur+2 ; i++)
+				      for (int j =0 ; j < largeur+2 ; j++)
+					murs[i][j] = (i==0)||(i==hauteur+1)||(j==0)||(j==largeur+1) ;
+					
+				    qteGraines = new int[hauteur+2][largeur+2];
+				    for (int i =0 ; i < hauteur+2 ; i++)
+				      for (int j =0 ; j < largeur+2; j++)
+					qteGraines [i][j]=0 ; 
+				    
+				    MAJNbGrainesTotal();
 			  }
 
   /************************************FIN AJOUT**************************************************/

@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -14,7 +13,8 @@ import model.Fourmiliere;
 public class ViewAntColony extends BorderPane{
 	
 	private Board plateau;
-	private Button loupe,quit;
+
+	private Button loupe,quit,init,reset;
 	private HBox bottomBox;
 	private VBox rightBox;
 	private Slider sld;
@@ -36,8 +36,10 @@ public class ViewAntColony extends BorderPane{
 		
 		bottomBox = new HBox(10);
 		    playpause = new PlayPauseButton(20,antcolony,plateau,zoomedWindow);
-			loupe = new Button("Loupe");
-	
+			
+		    /*****************/
+		    /* Le Btn Loupe  */
+		    loupe = new Button("Loupe");
 			zoomWindowProperty = new SimpleObjectProperty<>();
 			zoomWindowProperty.addListener((observable, oldZoomWindow, newZoomWindow) -> {
 			    if (newZoomWindow != null) {
@@ -48,7 +50,6 @@ public class ViewAntColony extends BorderPane{
 			        });
 			    }
 			});
-
 			loupe.setOnAction(e -> {
 			    if (zoomWindowProperty.get() == null) { // vérifier si la propriété est à null
 			        ZoomWindow zoomWindow = new ZoomWindow(plateau);
@@ -60,13 +61,14 @@ public class ViewAntColony extends BorderPane{
 			
 			
 			
-			
+			init  = new Button("init");
+			reset = new Button("Reset");
 			quit = new Button("Quit");
 			quit.setOnAction(e -> {
 				Platform.exit();
 			});
 		
-		bottomBox.getChildren().addAll(playpause,loupe,quit);
+		bottomBox.getChildren().addAll(playpause,loupe,init,reset,quit);
 		this.setBottom(bottomBox);
 		
 		rightBox = new VBox(10);
@@ -77,6 +79,7 @@ public class ViewAntColony extends BorderPane{
 			//on met à jour le nombre de graine pour le label
 			antcolony.MAJNbGrainesTotal();
 			lgraines = new LabelWithBind("Nombre de graines :",antcolony.NbGraineProperty());
+			
 			lite = new LabelWithBind("Nombre d'iterations :",antcolony.IterationProperty());
 		
 		rightBox.getChildren().addAll(sld,lfourmi,lgraines,lite);
@@ -87,6 +90,16 @@ public class ViewAntColony extends BorderPane{
 		//System.out.println(antcolony.NbFourmiProperty().equals(antcolony.NbGraineProperty())); // Affiche "false" si les propriétés sont différentes
 		
 		
+	}
+
+	public Button getInit() {
+		return init;
+	}
+	public Board getPlateau() {
+		return plateau;
+	}
+	public Button getReset() {
+		return reset;
 	}
 
 

@@ -1,7 +1,6 @@
 package view;
 
 import java.io.InputStream;
-
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -11,111 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.Fourmiliere;
-/*
-public class PlayPauseButton extends Button{
-	
-	private Fourmiliere antcolony;
-	private Board plateau;
-	
-    private Service<Void> myService = new Service<Void>(){
-        @Override 
-        protected Task<Void> createTask(){
-            return new Task<Void>(){
-                @Override    
-                protected Void call() throws Exception {  
-                	int x =0;
-                	while(!isCancelled()) {
-                		
-                		Platform.runLater(()->{
-                			antcolony.evolue();
-                    		plateau.updateGrid();
-  
-                  		
-                		});
 
-          		      System.out.println(antcolony.stringMurs());
-          		      System.out.println(antcolony.stringGraines());	
-          		      System.out.println(antcolony.stringFourmis());
-          	
-              	      System.out.println(x);
-                		x++;
-                	}
-                    return null ; 
-                }
-            };  
-        }
-    };
-	
-	public PlayPauseButton(int size, Fourmiliere fm, Board board) {
-		this.antcolony =fm;
-		this.plateau = board;
-		InputStream imgPause =  this.getClass().getResourceAsStream("pause.png");
-		InputStream imgPlay =  this.getClass().getResourceAsStream("play.png");
-		InputStream imgStart =  this.getClass().getResourceAsStream("start.png");
-		
-				
-		Image imagePause = new Image(imgPause,size,size, true, true);
-		Image imageplay = new Image(imgPlay,size,size, true, true);
-		Image imageStart = new Image(imgStart,size,size, true, true);
-		
-		ImageView imageViewPause = new ImageView(imagePause);
-		ImageView imageViewPlay = new ImageView(imageplay);
-		ImageView imageViewStart = new ImageView(imageStart);
-		
-		this.setGraphic(imageViewStart);
-		
-		this.setOnAction(e ->{
-	       		if(this.getGraphic().equals(imageViewStart)) {
-	       			this.setGraphic(imageViewPlay);
-	       			
-	       			myService.start();
-					   myService.stateProperty().addListener( (ObservableValue, oldValue, newValue) -> {
-					       switch (newValue) {
-					           case FAILED:
-					           case CANCELLED:
-					           		myService.reset();
-					           		break;
-					           case SUCCEEDED:
-					        	 	myService.reset();
-					        	 	break;
-					           default:
-					        	   	break;            
-					       }
-					   });  
-	       		}
-	           if(this.getGraphic().equals(imageViewPause)) {
-	           		this.setGraphic(imageViewPlay);
-	           		myService.start();
-					   myService.stateProperty().addListener( (ObservableValue, oldValue, newValue) -> {
-					       switch (newValue) {
-					           case FAILED:
-					           case CANCELLED:
-					           		myService.reset();
-					           		break;
-					           case SUCCEEDED:
-					        	 	myService.reset();
-					        	 	break;
-					           default:
-					        	   	break;            
-					       }
-					   });  
-	           	   
-	           }
-	           else if (this.getGraphic().equals(imageViewPlay)) {
-	        	   this.setGraphic(imageViewPause);
-	        	   myService.cancel();
-	        	   
-	        	
-	           }
-	       
-				           		
-       });
-			
-	}
-	
-
-}
-*/
 public class PlayPauseButton extends Button {
 
     private final Image imagePause;
@@ -195,6 +90,7 @@ public class PlayPauseButton extends Button {
         });
         
         valueSpeedProperty = new SimpleDoubleProperty(DefaultSpeed);
+        setStyle("-fx-background-color: transparent;");
     }
     
     public DoubleProperty valueSpeedProperty() {

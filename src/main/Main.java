@@ -1,6 +1,7 @@
 package main;
 
 
+import controller.ControllerAntColony;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -11,41 +12,19 @@ public class Main extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        // Création du modèle
-        Fourmiliere fourmiliere = new Fourmiliere(20, 20, 10);
-        //Fourmiliere fourmiliere = new Fourmiliere(43,35,10);
-		
        
-        // On crÃ©e quelques murs
-        for (int i =1; i <8; i++)
-        	fourmiliere.setMur(i, 2*i, true);
+    	// Création du modèle
+        Fourmiliere fourmiliere = new Fourmiliere(20, 20, 10);
+     	
+        // Création de la vue
+        ViewAntColony vue = new ViewAntColony(fourmiliere);
         
-        fourmiliere.setMur(10, 2, true);
-        
-        
-        fourmiliere.ajouteFourmi(1, 1);
-        fourmiliere.ajouteFourmi(2, 2);
-        fourmiliere.ajouteFourmi(3, 3);
-        fourmiliere.ajouteFourmi(4, 4);
-        // On pose des graines
-        fourmiliere.setQteGraines(10, 10, 1);
-        fourmiliere.setQteGraines(10, 11, 2);
-        fourmiliere.setQteGraines(10, 12, 3);
-        fourmiliere.setQteGraines(10, 13, 4);
-        fourmiliere.setQteGraines(10, 14, 5);
-        fourmiliere.setQteGraines(10, 15, 6);
-        fourmiliere.setQteGraines(10, 16, 7);
-        fourmiliere.setQteGraines(10, 17, 8);
-        fourmiliere.setQteGraines(10, 18, 9);
-        fourmiliere.setQteGraines(10, 19, 10);
-   
-        // Création de la vue et du contrôleur
-       /* Vue vue = new Vue(fourmiliere);
-        Controleur controleur = new Controleur(fourmiliere, vue);*/
-        
-        ViewAntColony stg = new ViewAntColony(fourmiliere);
+        // Création du contrôleur
+        @SuppressWarnings("unused")
+		ControllerAntColony controleur = new ControllerAntColony(fourmiliere, vue);
+               
         // Configuration de la scène
-        Scene scene = new Scene(stg);
+        Scene scene = new Scene(vue);
         
         // Configuration de la fenêtre principale
         primaryStage.setScene(scene);

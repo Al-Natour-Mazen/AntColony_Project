@@ -8,7 +8,8 @@ package model;
 public class Fourmi {
 	
     private static int prPREND = 3 ; 
-    private static double prPOSE = 1.4 ; 
+    @SuppressWarnings("unused")
+	private static double prPOSE = 1.4 ; 
     private int x,y ; 
     private boolean porteGraine ;
     
