@@ -51,8 +51,7 @@ public class Board extends Pane {
         		        }
         		    }
         		    if (!foundAnt) {
-        		        addAnt(j, i, false);
-        		        
+        		        addAnt(j, i, false);  
         		    }
                 }else if (antColony.getMur(j, i)) {
                     cells[j][i].setFill(Color.BLACK);

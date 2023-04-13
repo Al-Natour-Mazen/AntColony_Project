@@ -12,7 +12,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         // Création du modèle
-        Fourmiliere fourmiliere = new Fourmiliere(20, 30, 10);
+        Fourmiliere fourmiliere = new Fourmiliere(10, 19, 10);
         //Fourmiliere fourmiliere = new Fourmiliere(43,35,10);
 		
        

@@ -1,6 +1,8 @@
 package view;
 
 import javafx.application.Platform;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -19,7 +21,9 @@ public class ViewAntColony extends BorderPane{
 	private Label lfourmi,lgraines,lite;
 	private Fourmiliere antcolony;
 	private PlayPauseButton playpause;
-	private ZoomWindow zm;
+	private ZoomWindow zoomedWindow;
+	
+	private ObjectProperty<ZoomWindow> zoomWindowProperty;
 	
 	public ViewAntColony(Fourmiliere fm) {
 		// TODO Auto-generated constructor stub
@@ -33,11 +37,32 @@ public class ViewAntColony extends BorderPane{
 		this.setCenter(plateau);
 		
 		bottomBox = new HBox(10);
-		    playpause = new PlayPauseButton(20,antcolony,plateau,zm);
+		    playpause = new PlayPauseButton(20,antcolony,plateau,zoomedWindow);
 			loupe = new Button("Loupe");
-			loupe.setOnAction(e->{
-				 zm = new ZoomWindow(plateau);
+	
+			zoomWindowProperty = new SimpleObjectProperty<>();
+			zoomWindowProperty.addListener((observable, oldZoomWindow, newZoomWindow) -> {
+			    if (newZoomWindow != null) {
+			        loupe.setDisable(true); // désactiver le bouton si la fenêtre est ouverte
+			        newZoomWindow.setOnCloseRequest(e -> {
+			            loupe.setDisable(false); // réactiver le bouton lorsque la fenêtre se ferme
+			            zoomWindowProperty.set(null); // réinitialiser la propriété à null
+			        });
+			    }
 			});
+
+			loupe.setOnAction(e -> {
+			    if (zoomWindowProperty.get() == null) { // vérifier si la propriété est à null
+			        ZoomWindow zoomWindow = new ZoomWindow(plateau);
+			        zoomWindowProperty.set(zoomWindow); // affecter la nouvelle fenêtre à la propriété
+			    }
+			});
+			
+			
+			
+			
+			
+			
 			quit = new Button("Quit");
 			quit.setOnAction(e -> {
 				Platform.exit();
