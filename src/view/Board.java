@@ -1,6 +1,9 @@
 package view;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -13,10 +16,15 @@ public class Board extends Pane {
     private final Fourmiliere antColony;
     private int gridheight;
 	private int gridwidth;
-    private final static int cellSize = 20; // taille par défaut d'une cellule
+    private final static int cellSize = 10; // taille par défaut d'une cellule
 	private Rectangle[][] cells;
+	private List<Fourmi> antsList ;
 
-    public Board(Fourmiliere antColony) {
+
+
+
+	public Board(Fourmiliere antColony) {
+		this.antsList = antColony.getLesFourmis();
         this.antColony = antColony;
         this.gridheight = antColony.getHauteur();
         this.gridwidth = antColony.getLargeur();       
@@ -110,6 +118,9 @@ public class Board extends Pane {
 	
     public int getCellSize() {
 		return cellSize;
+	}
+    public List<Fourmi> getAntsList() {
+		return antsList;
 	}
 	
 }
