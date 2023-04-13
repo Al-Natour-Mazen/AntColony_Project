@@ -1,5 +1,6 @@
 package view;
 
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
@@ -37,6 +38,7 @@ public class Board extends Pane {
         Ants = new Ant[gridheight+2][gridwidth+2];
         updateGrid();
         doEventsChangeTerrain();
+        setPadding(new Insets(20));
     }
 
     

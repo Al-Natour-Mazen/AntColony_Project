@@ -17,6 +17,15 @@ public class PlayPauseButton extends Button {
     private final Image imagePlay;
     private final ImageView imageViewPause;
     private final ImageView imageViewPlay;
+    
+	private final Fourmiliere antcolony;
+	private final Board plateau;
+	private final ZoomWindow zoom;
+	
+	private final DoubleProperty valueSpeedProperty;
+	private final static int DefaultSpeed = 10;
+	
+    private boolean isPlaying;   
  
     // Créer le service qui sera lancé en arrière-plan
     private final Service<Void> service = new Service<>() {
@@ -31,17 +40,17 @@ public class PlayPauseButton extends Button {
                     		plateau.updateGrid();
                     		if(zoom != null)
                     			zoom.updateZoomGrid();
-  
-                  		
                 		});
-                    	 System.out.println(antcolony.stringMurs());
-             		     System.out.println(antcolony.stringGraines());	
-             		     System.out.println(antcolony.stringFourmis());
+                    	
+                    	// on affiche l'affichage console pour verifier que tout va bien
+                    	System.out.println(antcolony.stringMurs());
+             		    System.out.println(antcolony.stringGraines());	
+             		    System.out.println(antcolony.stringFourmis());
                     
              		   // Récupérer la valeur de valuespeed
              		    double valuespeed = getValueSpeed();
 
-             		    // Calculer le temps de sommeil en fonction de valuespeed
+             		    // On Calcule le temps de sommeil en fonction de valuespeed
              		    long sleepTime = (long) (1050 - (valuespeed * 100)) /2  ;
 
              		    // Vérifier que le temps de sommeil est supérieur à zéro pour éviter une exception
@@ -55,14 +64,7 @@ public class PlayPauseButton extends Button {
         }
     };
     
-	private final Fourmiliere antcolony;
-	private final Board plateau;
-	private final ZoomWindow zoom;
-	
-	private final DoubleProperty valueSpeedProperty;
-	private final static int DefaultSpeed = 10;
-	
-    private boolean isPlaying;   
+
 
     public PlayPauseButton(int size, Fourmiliere fm, Board board, ZoomWindow zoomepane) {
     	this.zoom = zoomepane;
