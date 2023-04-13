@@ -26,10 +26,8 @@ public class ViewAntColony extends BorderPane{
 	private ObjectProperty<ZoomWindow> zoomWindowProperty;
 	
 	public ViewAntColony(Fourmiliere fm) {
-		// TODO Auto-generated constructor stub
 		this.antcolony = fm;
 		initComponent();
-		
 	}
 	
 	public void initComponent() {

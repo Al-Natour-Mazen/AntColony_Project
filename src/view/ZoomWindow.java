@@ -70,9 +70,9 @@ public class ZoomWindow extends Stage {
                 cell.setX((x - startX) * cellSize);
                 cell.setY((y - startY) * cellSize);
                 thepane.getChildren().add(cell);
-                Ant antplateau = plateau.getAntCell(y, x);
+                Ant antplateau = plateau.getAntCell(x, y);
                 if(antplateau != null){
-                    Ant antView = new Ant(cellSize/2, (y - startX) * cellSize + cellSize/2, (x - startY) * cellSize + cellSize/2, antplateau.getHasSeed());
+                    Ant antView = new Ant(cellSize/2, (x - startX) * cellSize + cellSize/2, (y - startY) * cellSize + cellSize/2, antplateau.getHasSeed());
                     antView.changeColorAnt();
                     thepane.getChildren().add(antView);
                 }                

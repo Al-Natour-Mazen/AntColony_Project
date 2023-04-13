@@ -1,6 +1,7 @@
 package view;
 
 import javafx.scene.Node;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -35,6 +36,7 @@ public class Board extends Pane {
         }
         Ants = new Ant[gridheight+2][gridwidth+2];
         updateGrid();
+        doEventsChangeTerrain();
     }
 
     
@@ -83,7 +85,7 @@ public class Board extends Pane {
     private void addAnt(int x , int y , boolean Hasseed) {
     	Ant ant = new Ant(cellSize/2,x*cellSize+(cellSize/2),y*cellSize+(cellSize/2), Hasseed);
     	ant.changeColorAnt();
-    	Ants[y][x] = ant;
+    	Ants[x][y] = ant;
     	this.getChildren().add(ant);
     }
     
@@ -92,13 +94,45 @@ public class Board extends Pane {
             if (node instanceof Ant) {
                 Ant ant = (Ant) node;
                 if (ant.getX() == x * cellSize + (cellSize/2) && ant.getY() == y * cellSize + (cellSize/2)) {
-                	Ants[y][x] = null;
+                	Ants[x][y] = null;
                     this.getChildren().remove(ant);
                     break;
                 }
             }
         }
     }
+    
+    private void doEventsChangeTerrain() {
+	    // Ajoute un gestionnaire d'événements de souris à la grille
+	    setOnMouseClicked(event -> {
+	        int x = (int) (event.getX() / cellSize);
+	        int y = (int) (event.getY() / cellSize);
+	        
+	        if (event.getButton() == MouseButton.PRIMARY) {
+		            if (event.isShiftDown()) {
+		                // Ajoute une fourmi à la position (x, y)
+		                antColony.ajouteFourmi(x, y);
+		            } else {
+	                	// Change l'état du mur à la position (x, y)
+    	                antColony.setMur(x, y, !antColony.getMur(x, y));
+		            }
+    	        }
+    	        updateGrid();
+    	    });
+    	    
+	    setOnScroll(event -> {
+	        int x = (int) (event.getX() / cellSize);
+	        int y = (int) (event.getY() / cellSize);
+
+	        if (event.getDeltaY() > 0) {
+	            antColony.setQteGraines(x, y, antColony.getQteGraines(x, y) + 1);
+	        } else {
+	            antColony.setQteGraines(x, y, antColony.getQteGraines(x, y) - 1);
+	        }
+	        updateGrid();
+	    });
+    }
+
     
     public int getGridheight() {
 		return gridheight;
