@@ -4,11 +4,13 @@ import java.util.Optional;
 import java.util.Random;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import model.Fourmiliere;
 import view.Board;
 import view.MyCustomAlert;
+import view.MyInfoTab;
 import view.PlayPauseButton;
 import view.ViewAntColony;
 
@@ -16,6 +18,7 @@ public class ControllerAntColony {
 	
 	private Fourmiliere antcolony;
 	private ViewAntColony viewantcolony;
+	private Button init,reset;
 	private int nbmurs , nbfourmi ,nbgraines ;
 	
 	public ControllerAntColony(Fourmiliere colony, ViewAntColony vue) {
@@ -49,23 +52,24 @@ public class ControllerAntColony {
 			}
 		});
 		
-		/*viewantcolony.getConfirmerParam().setOnAction(e -> {			
-			String newcap = viewantcolony.getChangecapacite().getTextFieldInput();
+		/*viewantcolony.getConfirmerParamTaille().setOnAction(e -> {			
 			String newtaille = viewantcolony.getChangeTaille().getTextFieldInput();
 			try {
-			    double cap = Double.parseDouble(newcap);
 			    double taille = Double.parseDouble(newtaille);
-			    if (cap >= 0 && taille >= 0) {
-			        Fourmiliere nvFormuliere = new Fourmiliere((int)taille, (int)taille, (int)cap);
+			    if ( taille >= 0) {
+			        Fourmiliere nvFormuliere = new Fourmiliere((int)taille, (int)taille, antcolony.getQMax());
 			        Board nvplateau = new Board(nvFormuliere);
-			        PlayPauseButton nvbtn = new PlayPauseButton(viewantcolony.getPlaypause().getSize(), nvFormuliere, nvplateau, viewantcolony.getZoomedWindow());
+			       // PlayPauseButton nvbtn = new PlayPauseButton(viewantcolony.getPlaypause().getSize(), nvFormuliere, nvplateau, viewantcolony.getZoomedWindow());
 			        viewantcolony.setPlateau(nvplateau);
 			        
 			        this.setAntcolony(nvFormuliere);
 			        viewantcolony.setAntcolony(nvFormuliere);
 			        
-			        viewantcolony.setPlaypause(nvbtn);
+			        MyInfoTab nvinfo = new MyInfoTab(nvFormuliere, nvplateau);
+			        viewantcolony.setInfoTab(nvinfo);
 			        
+			       // viewantcolony.setPlaypause(nvbtn);
+			    
 			        viewantcolony.getPlateau().updateGrid();
 			    } else {
 			        // Afficher un message d'erreur si les nombres ne sont pas positifs

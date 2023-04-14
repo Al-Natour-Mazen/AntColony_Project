@@ -52,7 +52,7 @@ public class PlayPauseButton extends Button {
              		    System.out.println(antcolony.stringGraines());	
              		    System.out.println(antcolony.stringFourmis());
                     
-             		   // Récupérer la valeur de valuespeed
+             		   //On Récupére la valeur de valuespeed
              		    double valuespeed = getValueSpeed();
 
              		    // On Calcule le temps de sommeil en fonction de valuespeed
