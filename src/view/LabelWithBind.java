@@ -30,7 +30,7 @@ public class LabelWithBind extends Label{
     		
 		@Override
 		protected String computeValue() {
-			return labelText + " " + prop.get();
+			return labelText + " " + String.format("%.1f", prop.get());
 		}
     	
     }

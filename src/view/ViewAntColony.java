@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -26,11 +27,13 @@ public class ViewAntColony extends HBox{
 	private GridPane buttons;
 	
 	//elements d'interaction
-	private Button loupe,quit,init,reset, ChnagerSize;
+	private Button loupe,quit,init,reset, confirmer;
 	private Slider vitesseSimulation;
 	private PlayPauseButton playpause;
 	private ZoomWindow zoomedWindow;
 	private LabelWithBind lfourmi,lgraines,lite,lvitesseSimu;
+	private LabelTextField changeTaille,changecapacite;
+	private Label infoparam;
 	
 	// Utilitaires
 	private int tutoZoomWindow = 0;
@@ -158,12 +161,22 @@ public class ViewAntColony extends HBox{
 			/////////
 			parametreTab = new Tab("Paramètres");
 			parametreTab.setClosable(false);
-			paramBox = new VBox(10);
+			paramBox = new VBox(20);
 			parametreTab.setContent(paramBox);
 			
-			ChnagerSize = new Button("Changer la taille du plateau ?");
 			
-			paramBox.getChildren().add(ChnagerSize);
+			infoparam = new Label("Changez les parametres de la Simulation :");
+			
+			changeTaille = new LabelTextField("Taille plateau :");
+			changecapacite = new LabelTextField("Capacite graines :");
+			
+			confirmer = new Button("Confirmer");
+			SetStyleBtn(confirmer);
+			
+			MySpring springparamTop = new MySpring("VBox");
+			MySpring springparamBottom = new MySpring("VBox");
+			paramBox.getChildren().addAll(springparamTop,infoparam,changeTaille,changecapacite,confirmer,springparamBottom);
+			paramBox.setAlignment(Pos.CENTER);
 		
 		interactionPane.getTabs().addAll(infoTab,parametreTab);
 		right.getChildren().add(interactionPane);
