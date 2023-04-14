@@ -125,7 +125,8 @@ public class MyInfoTab extends Tab {
 		
 		//ajouter à la VBOx
 		MySpring springinfobox = new MySpring("VBox");
-		infoBox.getChildren().addAll(springinfobox,lvitesseSimu,vitesseSimulation,lfourmi,lgraines,lite,btnsBox,bottominfoBox);
+		MySpring springinfobox2 = new MySpring("VBox");
+		infoBox.getChildren().addAll(springinfobox,lvitesseSimu,vitesseSimulation,lfourmi,lgraines,lite,btnsBox,springinfobox2,bottominfoBox);
 		infoBox.setAlignment(Pos.CENTER);
 		
 	}
