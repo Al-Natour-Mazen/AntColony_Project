@@ -16,7 +16,7 @@ public class ControllerAntColony {
 	private Fourmiliere antcolony;
 	private ViewAntColony viewantcolony;
 	private final static int randomMur = 10;
-	// private final DoubleProperty SizeProperty;  
+	private int nbmurs , nbfourmi ,nbgraines;
 	
 	public ControllerAntColony(Fourmiliere colony, ViewAntColony vue) {
 		this.antcolony = colony;
@@ -26,38 +26,36 @@ public class ControllerAntColony {
 		    if(myCustomeAlerteConfirm("Init Game",
 		    		"Voulez-vous vraiment initialiser le jeu ?",
 		    		"Tout progrès sera perdu !")) {
-		    	
-		    	
-		    	String fourmi = viewantcolony.getProbaFourmi().getTextFieldInput();
-				String graines = viewantcolony.getProbagraines().getTextFieldInput();
-				String murs = viewantcolony.getProbamurs().getTextFieldInput();
-				try {
-					  double nbmurs = Double.parseDouble(murs);
-				    double nbfourmi = Double.parseDouble(fourmi);
-				    double nbgraines = Double.parseDouble(graines);
-				  
-				    
-				  	resetGame();
-					initAleatoire((int)nbmurs,(int)nbfourmi,(int) nbgraines);
-					viewantcolony.getPlateau().updateGrid();
-					antcolony.MAJNbGrainesTotal();
-				    
-				} catch (NumberFormatException expt) {
-				    // Afficher un message d'erreur si les entrées ne sont pas des nombres valides
-				    Alert alert = new Alert(AlertType.ERROR);
-				    alert.setTitle("Erreur");
-				    alert.setHeaderText(null);
-				    alert.setContentText("Les deux entrées doivent être des nombres valides.");
-				    alert.showAndWait();
-				}
-		    	
-		    /*	
 		       	resetGame();
-				initAleatoire(10,50);
+		       	initAleatoire(nbmurs,nbfourmi,nbgraines);
 				viewantcolony.getPlateau().updateGrid();
 				antcolony.MAJNbGrainesTotal();
-		    }*/
 		    }
+		});
+		
+		
+		viewantcolony.getConfirmerInit().setOnAction(e -> {
+			String fourmi = viewantcolony.getProbaFourmi().getTextFieldInput();
+			String graines = viewantcolony.getProbagraines().getTextFieldInput();
+			String murs = viewantcolony.getProbamurs().getTextFieldInput();
+			try {
+				double Knbmurs = Double.parseDouble(murs);
+			    double Knbfourmi = Double.parseDouble(fourmi);
+			    double Knbgraines = Double.parseDouble(graines);
+			  
+				if (Knbmurs >= 0 && Knbfourmi >= 0 && Knbgraines >=0) {
+					nbmurs = (int) Knbmurs;
+					nbfourmi = (int) Knbfourmi;
+					nbgraines = (int) Knbgraines;
+			        myCustomAlert(AlertType.INFORMATION,"Confirmation",null,"Les Valeurs Aleatoires ont été prise en compte !");	
+			    } else {
+			        // Afficher un message d'erreur si les nombres ne sont pas positifs
+			        myCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres positifs.");
+			    }	    
+			} catch (NumberFormatException expt) {
+			    // Afficher un message d'erreur si les entrées ne sont pas des nombres valides
+			    myCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres valides.");
+			}
 		});
 		
 		viewantcolony.getReset().setOnAction(e -> {
@@ -68,7 +66,7 @@ public class ControllerAntColony {
 		    }
 		    
 		});
-		/*viewantcolony.getConfirmer().setOnAction(e -> {
+		viewantcolony.getConfirmerParam().setOnAction(e -> {
 			
 			String newcap = viewantcolony.getChangecapacite().getTextFieldInput();
 			String newtaille = viewantcolony.getChangeTaille().getTextFieldInput();
@@ -103,7 +101,7 @@ public class ControllerAntColony {
 			    alert.setContentText("Les deux entrées doivent être des nombres valides.");
 			    alert.showAndWait();
 			}
-		});*/
+		});
 			 
 	}
 	
@@ -146,7 +144,7 @@ public class ControllerAntColony {
 	}
 
 
-	public boolean myCustomeAlerteConfirm(String title,String HeaderText, String ContentText) {
+	private boolean myCustomeAlerteConfirm(String title,String HeaderText, String ContentText) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 	    alert.setTitle(title);
 	    alert.setHeaderText(HeaderText);
@@ -155,6 +153,15 @@ public class ControllerAntColony {
 	    Optional<ButtonType> result = alert.showAndWait();
 	    return result.isPresent() && result.get() == ButtonType.OK;
 	}
+	
+	private void myCustomAlert(AlertType alerttype,String title,String HeaderText, String ContentText) {
+		  Alert alert = new Alert(alerttype);
+		  alert.setTitle(title);
+		  alert.setHeaderText(HeaderText);
+		  alert.setContentText(ContentText);
+		  alert.showAndWait();
+	}
+	
 	
 	public Fourmiliere getAntcolony() {
 		return antcolony;
@@ -165,15 +172,5 @@ public class ControllerAntColony {
 	}
 
 
-	/*  public DoubleProperty IterationProperty() {
-	      return IterationProperty;
-	  }
-	  public double getIteration() {
-	      return IterationProperty.get();
-	  }		
-	  public void setIteration(double val) {
-		  IterationProperty.set(val);
-	  }	
-});*/
 
 }

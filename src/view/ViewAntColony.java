@@ -195,7 +195,7 @@ public class ViewAntColony extends HBox{
 			infoInit = new Label("Changez les Valeurs Aléatoires de la Simulation :");
 			
 			probaFourmi = new LabelTextField("Nombre Fourmi :");
-			probagraines = new LabelTextField("Quantite Max/Case graines : ");
+			probagraines = new LabelTextField("Nombre graines : ");
 			probamurs = new LabelTextField("Densité des Murs : ");
 
 			confirmerInit= new Button("Confirmer");
@@ -233,6 +233,10 @@ public class ViewAntColony extends HBox{
 	public Button getConfirmerParam() {
 		return confirmerParam;
 	}
+	public Button getConfirmerInit() {
+		return confirmerInit;
+	}
+
 	public PlayPauseButton getPlaypause() {
 		return playpause;
 	}
