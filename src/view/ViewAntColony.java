@@ -21,19 +21,19 @@ public class ViewAntColony extends HBox{
 
 	//les contenaires
 	private HBox left, bottominfoBox,btnsBox;
-	private VBox right, infoBox,paramBox;
+	private VBox right, infoBox,paramBox, initBox;
 	private TabPane interactionPane;
-	private Tab infoTab,parametreTab;
+	private Tab infoTab,parametreTab, initTab;
 	private GridPane buttons;
 	
 	//elements d'interaction
-	private Button loupe,quit,init,reset, confirmer;
+	private Button loupe,quit,init,reset, confirmerParam , confirmerInit;
 	private Slider vitesseSimulation;
 	private PlayPauseButton playpause;
 	private ZoomWindow zoomedWindow;
 	private LabelWithBind lfourmi,lgraines,lite,lvitesseSimu;
-	private LabelTextField changeTaille,changecapacite;
-	private Label infoparam;
+	private LabelTextField changeTaille,changecapacite,probaFourmi,probagraines,probamurs;
+	private Label infoparam,infoInit;
 	
 	// Utilitaires
 	private int tutoZoomWindow = 0;
@@ -173,15 +173,40 @@ public class ViewAntColony extends HBox{
 			changeTaille = new LabelTextField("Taille plateau :");
 			changecapacite = new LabelTextField("Capacite graines :");
 			
-			confirmer = new Button("Confirmer");
-			SetStyleBtn(confirmer);
+			confirmerParam = new Button("Confirmer");
+			SetStyleBtn(confirmerParam);
 			
 			MySpring springparamTop = new MySpring("VBox");
 			MySpring springparamBottom = new MySpring("VBox");
-			paramBox.getChildren().addAll(springparamTop,infoparam,changeTaille,changecapacite,confirmer,springparamBottom);
+			paramBox.getChildren().addAll(springparamTop,infoparam,changeTaille,changecapacite,confirmerParam,springparamBottom);
 			paramBox.setAlignment(Pos.CENTER);
+
+			/////////////////////
+			// Les Valeurs D'init Alea
+			/////////
+			initTab = new Tab("Initialisations");
+			initTab.setClosable(false);
+
 		
-		interactionPane.getTabs().addAll(infoTab,parametreTab);
+			initBox = new VBox(20);
+			initTab.setContent(initBox);
+			
+			
+			infoInit = new Label("Changez les Valeurs Aléatoires de la Simulation :");
+			
+			probaFourmi = new LabelTextField("Nombre Fourmi :");
+			probagraines = new LabelTextField("Quantite Max/Case graines : ");
+			probamurs = new LabelTextField("Densité des Murs : ");
+
+			confirmerInit= new Button("Confirmer");
+			SetStyleBtn(confirmerInit);
+			
+			MySpring springintiTop = new MySpring("VBox");
+			MySpring springintiBottom = new MySpring("VBox");
+			initBox.getChildren().addAll(springintiTop,infoInit,probaFourmi,probagraines,probamurs,confirmerInit,springintiBottom);
+			initBox.setAlignment(Pos.CENTER);
+		
+		interactionPane.getTabs().addAll(infoTab,parametreTab,initTab);
 		right.getChildren().add(interactionPane);
 		right.setMinWidth(300);
 		
@@ -196,16 +221,72 @@ public class ViewAntColony extends HBox{
 		btn.setStyle("-fx-background-color: transparent;-fx-border-color:black;");
 	}
 	
+	
+	
 	public Button getInit() {
 		return init;
 	}
 	public Button getReset() {
 		return reset;
 	}
-	
+
+	public Button getConfirmerParam() {
+		return confirmerParam;
+	}
+	public PlayPauseButton getPlaypause() {
+		return playpause;
+	}
+	public void setPlaypause(PlayPauseButton newplaypause) {
+		buttons.add(newplaypause, 0, 0); // ajouter playpause en haut à gauche
+        playpause = newplaypause;  
+	}
+
 	
 	public Board getPlateau() {
 		return plateau;
 	}
+	public void setPlateau(Board plateau) {
+		left.getChildren().remove(this.plateau);
+		this.plateau = plateau;
+		left.getChildren().add(plateau);
+	}
+	
+	
+	
+	public LabelTextField getChangeTaille() {
+		return changeTaille;
+	}
+
+	public LabelTextField getChangecapacite() {
+		return changecapacite;
+	}
+	public LabelTextField getProbaFourmi() {
+		return probaFourmi;
+	}
+	public LabelTextField getProbagraines() {
+		return probagraines;
+	}
+	public LabelTextField getProbamurs() {
+		return probamurs;
+	}
+
+	
+	
+	public Fourmiliere getAntcolony() {
+		return antcolony;
+	}
+
+	public void setAntcolony(Fourmiliere antcolony) {
+		this.antcolony = antcolony;
+	}
+	public ZoomWindow getZoomedWindow() {
+		return zoomedWindow;
+	}
+
+	public void setZoomedWindow(ZoomWindow zoomedWindow) {
+		this.zoomedWindow = zoomedWindow;
+	}
+
+
 	
 }
