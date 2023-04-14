@@ -9,7 +9,7 @@ public class LabelTextField extends HBox{
 	
 	private Label lab;
 	private TextField tf;
-	
+
 	public LabelTextField(String text) {
 		// TODO Auto-generated constructor stub
 		super(15);
@@ -20,6 +20,12 @@ public class LabelTextField extends HBox{
 		getChildren().addAll(lab,tf);
 		setAlignment(Pos.CENTER);
 	}
+	
+	
+	public TextField getTextField() {
+		return tf;
+	}
+
 	
 	public String getTextFieldInput() {
 		return tf.getText();

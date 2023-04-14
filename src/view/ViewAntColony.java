@@ -26,7 +26,7 @@ public class ViewAntColony extends HBox{
 	private GridPane buttons;
 	
 	//elements d'interaction
-	private Button loupe,quit,init,reset, confirmerParam , confirmerInit;
+	private Button loupe,quit,init,reset, confirmerParamCap, confirmerParamTaille  , confirmerInit;
 	private Slider vitesseSimulation;
 	private PlayPauseButton playpause;
 	private ZoomWindow zoomedWindow;
@@ -197,14 +197,21 @@ public class ViewAntColony extends HBox{
 			infoparam = new Label("Changez les parametres de la Simulation :");
 			
 			changeTaille = new LabelTextField("Taille plateau :");
-			changecapacite = new LabelTextField("Capacite graines :");
+			confirmerParamTaille = new Button("Confirmer");
+			SetStyleBtn(confirmerParamTaille);
+			changeTaille.getTextField().setMaxWidth(40);
+			changeTaille.getChildren().add(confirmerParamTaille);
 			
-			confirmerParam = new Button("Confirmer");
-			SetStyleBtn(confirmerParam);
+			changecapacite = new LabelTextField("Capacite max graines :");
+			changecapacite.setTextFieldInput(String.valueOf(antcolony.getQMax()));
+			confirmerParamCap = new Button("Confirmer");
+			SetStyleBtn(confirmerParamCap);
+			changecapacite.getTextField().setMaxWidth(40);
+			changecapacite.getChildren().add(confirmerParamCap);
 			
 			MySpring springparamTop = new MySpring("VBox");
 			MySpring springparamBottom = new MySpring("VBox");
-			paramBox.getChildren().addAll(springparamTop,infoparam,changeTaille,changecapacite,confirmerParam,springparamBottom);
+			paramBox.getChildren().addAll(springparamTop,infoparam,changeTaille,changecapacite,springparamBottom);
 			paramBox.setAlignment(Pos.CENTER);
 
 		
@@ -233,8 +240,11 @@ public class ViewAntColony extends HBox{
 		return reset;
 	}
 
-	public Button getConfirmerParam() {
-		return confirmerParam;
+	public Button getConfirmerParamCap() {
+		return confirmerParamCap;
+	}
+	public Button getConfirmerParamTaille() {
+		return confirmerParamTaille;
 	}
 	public Button getConfirmerInit() {
 		return confirmerInit;
@@ -261,7 +271,9 @@ public class ViewAntColony extends HBox{
 	}
 	
 	
-	
+	//////////////////////
+	// SETTERS/GETTERS LebelTextFields
+	//
 	public LabelTextField getChangeTaille() {
 		return changeTaille;
 	}
@@ -280,14 +292,20 @@ public class ViewAntColony extends HBox{
 	}
 
 	
-	
+	//////////////////////
+	// SETTERS/GETTERS Element d'interactions
+	//
 	public Fourmiliere getAntcolony() {
 		return antcolony;
 	}
 
 	public void setAntcolony(Fourmiliere antcolony) {
 		this.antcolony = antcolony;
+		/*lfourmi.setThepropToBind(antcolony.NbFourmiProperty());
+		lgraines.setThepropToBind(antcolony.NbGraineProperty());
+		lite.setThepropToBind(antcolony.IterationProperty());	*/	
 	}
+	
 	public ZoomWindow getZoomedWindow() {
 		return zoomedWindow;
 	}

@@ -33,7 +33,23 @@ public class ControllerAntColony {
 		    
 		});
 		
-		viewantcolony.getConfirmerParam().setOnAction(e -> {			
+		viewantcolony.getConfirmerParamCap().setOnAction(e ->{
+			String newcap = viewantcolony.getChangecapacite().getTextFieldInput();
+			try {
+			    double cap = Double.parseDouble(newcap);
+			    if (cap >= 0 ) {
+			    	antcolony.setQMax((int)cap);
+			    	@SuppressWarnings("unused")
+					MyCustomAlert alert = new MyCustomAlert(AlertType.INFORMATION,"Succès",null,"La nouvelle capacité a été prise en compte !");
+			    } 
+			} catch (NumberFormatException expt) {
+			    // Afficher un message d'erreur si les entrées ne sont pas des nombres valides
+				 @SuppressWarnings("unused")
+				MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres valides.");
+			}
+		});
+		
+		/*viewantcolony.getConfirmerParam().setOnAction(e -> {			
 			String newcap = viewantcolony.getChangecapacite().getTextFieldInput();
 			String newtaille = viewantcolony.getChangeTaille().getTextFieldInput();
 			try {
@@ -61,7 +77,7 @@ public class ControllerAntColony {
 				 @SuppressWarnings("unused")
 				MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres valides.");
 			}
-		});
+		});*/
 			 
 	}
 	
@@ -96,7 +112,7 @@ public class ControllerAntColony {
 					nbfourmi = (int) Knbfourmi;
 					nbgraines = (int) Knbgraines;
 			        @SuppressWarnings("unused")
-					MyCustomAlert alert = new MyCustomAlert(AlertType.INFORMATION,"Confirmation",null,"Les Valeurs Aléatoires ont été prise en compte !");
+					MyCustomAlert alert = new MyCustomAlert(AlertType.INFORMATION,"Confirmation",null,"Les Valeurs d'initialisations ont été prise en compte !");
 			    } else {
 			        // Afficher un message d'erreur si les nombres ne sont pas positifs
 			        @SuppressWarnings("unused")

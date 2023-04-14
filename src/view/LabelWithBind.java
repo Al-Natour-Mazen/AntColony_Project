@@ -9,16 +9,17 @@ public class LabelWithBind extends Label{
 
 	private String labelText;
 	
-	public LabelWithBind(String text, DoubleProperty propToBind) {
+
+	public LabelWithBind(String text,DoubleProperty prop) {
 		// TODO Auto-generated constructor stub
 		super();
 		labelText = text;
-		MyStringBinding mybind = new MyStringBinding(propToBind);
+		MyStringBinding mybind = new MyStringBinding(prop);
 		textProperty().bind(mybind);;
 		this.setAlignment(Pos.CENTER);
 		this.setMinWidth(100);
 	}
-	
+
     public class MyStringBinding extends StringBinding{
 
     	private DoubleProperty prop;
