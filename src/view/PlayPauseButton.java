@@ -2,7 +2,9 @@ package view;
 
 import java.io.InputStream;
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -23,10 +25,12 @@ public class PlayPauseButton extends Button {
 	private final ZoomWindow zoom;
 	
 	private final DoubleProperty valueSpeedProperty;
+	private final BooleanProperty isPlayingProperty;  
 	private final static int DefaultSpeed = 1;
+	private final static boolean DefaultisPlaying = false;   
 	
 	private int size;
-	private boolean isPlaying;   
+	
  
     // Créer le service qui sera lancé en arrière-plan
     private final Service<Void> service = new Service<>() {
@@ -35,7 +39,7 @@ public class PlayPauseButton extends Button {
             return new Task<>() {
                 @Override
                 protected Void call() throws Exception {
-                    while (isPlaying) {
+                    while (getisPlaying()) {
                     	Platform.runLater(()->{
                 			antcolony.evolue();
                     		plateau.updateGrid();
@@ -84,25 +88,26 @@ public class PlayPauseButton extends Button {
 
         // Initialiser le bouton avec l'image de play
         setGraphic(imageViewPlay);
-        isPlaying = false;
+    	isPlayingProperty = new SimpleBooleanProperty(DefaultisPlaying);
+        valueSpeedProperty = new SimpleDoubleProperty(DefaultSpeed);
 
         
         // Ajouter un listener pour changer l'image et le status du service
         setOnAction(event -> {
-            if (isPlaying) {
+            if (getisPlaying()) {
                 // Passer en mode pause
                 setGraphic(imageViewPlay);
-                isPlaying = false;
+                setisPlaying(false);
                 service.cancel();
             } else {
                 // Passer en mode play
                 setGraphic(imageViewPause);
-                isPlaying = true;
+                setisPlaying(true);
                 service.restart();
             }
         });
         
-        valueSpeedProperty = new SimpleDoubleProperty(DefaultSpeed);
+	
         setStyle("-fx-background-color: transparent;");
     }
     
@@ -124,4 +129,16 @@ public class PlayPauseButton extends Button {
 	public void setSize(int size) {
 		this.size = size;
 	}
+ 
+    public BooleanProperty isPlayingProperty() {
+      return isPlayingProperty;
+    }
+    
+    public boolean getisPlaying() {
+      return isPlayingProperty.get();
+    }
+    
+    public void setisPlaying(boolean val) {
+	  isPlayingProperty.set(val);
+    }	
 }

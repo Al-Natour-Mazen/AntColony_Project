@@ -161,6 +161,9 @@ public class ViewAntColony extends HBox{
 			/////////
 			parametreTab = new Tab("Paramètres");
 			parametreTab.setClosable(false);
+			//on ne peut pas changez les parametres si on est en pleine simulation
+			parametreTab.disableProperty().bind(playpause.isPlayingProperty());
+		
 			paramBox = new VBox(20);
 			parametreTab.setContent(paramBox);
 			
@@ -185,7 +188,7 @@ public class ViewAntColony extends HBox{
 		MySpring spring = new MySpring("HBox");
 		MySpring spring2 = new MySpring("HBox");
 		this.getChildren().addAll(spring,left,spring2,right);
-		
+
 		
 	}
 	
