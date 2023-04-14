@@ -5,17 +5,21 @@ import java.util.Random;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
 import model.Fourmiliere;
+import view.Board;
+import view.PlayPauseButton;
 import view.ViewAntColony;
+import view.ViewAntColony2;
 
 public class ControllerAntColony {
 	
 	private Fourmiliere antcolony;
 	private ViewAntColony viewantcolony;
 	private final static int randomMur = 10;
+	// private final DoubleProperty SizeProperty;  
 	
 	public ControllerAntColony(Fourmiliere colony, ViewAntColony vue) {
-		// TODO Auto-generated constructor stub
 		this.antcolony = colony;
 		this.viewantcolony = vue;
 		
@@ -38,7 +42,36 @@ public class ControllerAntColony {
 		    }
 		    
 		});
-		
+		/*ViewAntColony.getChnagerSize().setOnAction(e -> {
+			TextInputDialog dialog = new TextInputDialog();
+			dialog.setTitle("Enter a Number");
+			dialog.setHeaderText("Please enter a number:");
+			dialog.setContentText("Number:");
+
+			Optional<String> result = dialog.showAndWait();
+			if (result.isPresent()) {
+			    try {
+			        int number = Integer.parseInt(result.get());
+			        Fourmiliere nvFormuliere = new Fourmiliere(number, number, number);
+			        Board nvplateau = new Board(nvFormuliere);
+			        PlayPauseButton nvbtn = new PlayPauseButton(viewantcolony.getPlaypause().getSize(), nvFormuliere, nvplateau, viewantcolony.getZoomedWindow());
+			        viewantcolony.setPlateau(nvplateau);
+			        
+			        this.setAntcolony(nvFormuliere);
+			        viewantcolony.setAntcolony(nvFormuliere);
+			        
+			        viewantcolony.setPlaypause(nvbtn, viewantcolony.getPlayPauseindex());
+			        
+			        viewantcolony.getPlateau().updateGrid();
+			       
+			        
+			    } catch (NumberFormatException excption) {
+			        // Gérer l'erreur si l'utilisateur a saisi autre chose qu'un nombre
+			    }
+			}
+
+		});*/
+			 
 	}
 	
 	public void initAleatoire(int nbFourmis, int nbGraines) {
@@ -89,7 +122,25 @@ public class ControllerAntColony {
 	    Optional<ButtonType> result = alert.showAndWait();
 	    return result.isPresent() && result.get() == ButtonType.OK;
 	}
+	
+	public Fourmiliere getAntcolony() {
+		return antcolony;
+	}
+
+	public void setAntcolony(Fourmiliere antcolony) {
+		this.antcolony = antcolony;
+	}
 
 
+	/*  public DoubleProperty IterationProperty() {
+	      return IterationProperty;
+	  }
+	  public double getIteration() {
+	      return IterationProperty.get();
+	  }		
+	  public void setIteration(double val) {
+		  IterationProperty.set(val);
+	  }	
+});*/
 
 }

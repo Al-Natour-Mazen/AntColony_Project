@@ -22,7 +22,14 @@ import java.util.Iterator;
 public class Fourmiliere {
  
   private int largeur, hauteur ;
-  // Le nombre maximal de graines par cases  
+  public void setLargeur(int largeur) {
+	this.largeur = largeur;
+  }
+public void setHauteur(int hauteur) {
+	this.hauteur = hauteur;
+	}
+
+// Le nombre maximal de graines par cases  
   private int qMax ;  	
 
   // la liste des fourmis de la fourmiliere. 

@@ -25,7 +25,8 @@ public class PlayPauseButton extends Button {
 	private final DoubleProperty valueSpeedProperty;
 	private final static int DefaultSpeed = 1;
 	
-    private boolean isPlaying;   
+	private int size;
+	private boolean isPlaying;   
  
     // Créer le service qui sera lancé en arrière-plan
     private final Service<Void> service = new Service<>() {
@@ -70,7 +71,8 @@ public class PlayPauseButton extends Button {
     	this.zoom = zoomepane;
 		this.antcolony =fm;
 		this.plateau = board;
-        // Charger les images depuis les fichiers
+		this.size = size;
+		// Charger les images depuis les fichiers
         InputStream imgPause = this.getClass().getResourceAsStream("pause.png");
         InputStream imgPlay = this.getClass().getResourceAsStream("play.png");
 
@@ -115,4 +117,11 @@ public class PlayPauseButton extends Button {
     public void setValueSpeed(double value) {
     	valueSpeedProperty.set(value);
     }
+    public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
 }

@@ -2,6 +2,7 @@ package view;
 
 import javafx.beans.binding.StringBinding;
 import javafx.beans.property.DoubleProperty;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 
 public class LabelWithBind extends Label{
@@ -14,6 +15,8 @@ public class LabelWithBind extends Label{
 		labelText = text;
 		MyStringBinding mybind = new MyStringBinding(propToBind);
 		textProperty().bind(mybind);;
+		this.setAlignment(Pos.CENTER);
+		this.setMinWidth(100);
 	}
 	
     public class MyStringBinding extends StringBinding{

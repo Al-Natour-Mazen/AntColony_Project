@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Fourmiliere;
 import view.ViewAntColony;
+import view.ViewAntColony2;
 
 public class Main extends Application {
     
