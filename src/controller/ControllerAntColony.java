@@ -22,10 +22,58 @@ public class ControllerAntColony {
 		this.antcolony = colony;
 		this.viewantcolony = vue;
 		
-		viewantcolony.getInit().setOnAction(e ->{
-		    if(myCustomeAlerteConfirm("Init Game",
-		    		"Voulez-vous vraiment initialiser le jeu ?",
+		doInitEvents();
+		
+		viewantcolony.getReset().setOnAction(e -> {
+		    if(myCustomeAlerteConfirm("Reset Simulation",
+		    		"Voulez-vous vraiment réinitialiser la simulation ?",
 		    		"Tout progrès sera perdu !")) {
+		    	resetGame();
+		    }
+		    
+		});
+		
+		viewantcolony.getConfirmerParam().setOnAction(e -> {			
+			String newcap = viewantcolony.getChangecapacite().getTextFieldInput();
+			String newtaille = viewantcolony.getChangeTaille().getTextFieldInput();
+			try {
+			    double cap = Double.parseDouble(newcap);
+			    double taille = Double.parseDouble(newtaille);
+			    if (cap >= 0 && taille >= 0) {
+			        Fourmiliere nvFormuliere = new Fourmiliere((int)taille, (int)taille, (int)cap);
+			        Board nvplateau = new Board(nvFormuliere);
+			        PlayPauseButton nvbtn = new PlayPauseButton(viewantcolony.getPlaypause().getSize(), nvFormuliere, nvplateau, viewantcolony.getZoomedWindow());
+			        viewantcolony.setPlateau(nvplateau);
+			        
+			        this.setAntcolony(nvFormuliere);
+			        viewantcolony.setAntcolony(nvFormuliere);
+			        
+			        viewantcolony.setPlaypause(nvbtn);
+			        
+			        viewantcolony.getPlateau().updateGrid();
+			    } else {
+			        // Afficher un message d'erreur si les nombres ne sont pas positifs
+			    	 @SuppressWarnings("unused")
+					MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres positifs.");
+			    }
+			} catch (NumberFormatException expt) {
+			    // Afficher un message d'erreur si les entrées ne sont pas des nombres valides
+				 @SuppressWarnings("unused")
+				MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres valides.");
+			}
+		});
+			 
+	}
+	
+	private void doInitEvents() {
+		viewantcolony.getInit().setOnAction(e ->{
+		    if(myCustomeAlerteConfirm("Init Simulation",
+		    		"Voulez-vous vraiment initialiser la simulation ?",
+		    		"Tout progrès sera perdu !")) {
+		    	if(nbfourmi == 0 || nbgraines == 0 || nbmurs == 0) {
+		    		@SuppressWarnings("unused")
+					MyCustomAlert alert = new MyCustomAlert(AlertType.WARNING,"Attention",null,"Vous avez oublié de confirmer les valeurs d'initialisations !");
+		    	}
 		       	resetGame();
 		       	initAleatoire(nbmurs,nbfourmi,nbgraines);
 				viewantcolony.getPlateau().updateGrid();
@@ -48,7 +96,7 @@ public class ControllerAntColony {
 					nbfourmi = (int) Knbfourmi;
 					nbgraines = (int) Knbgraines;
 			        @SuppressWarnings("unused")
-					MyCustomAlert alert = new MyCustomAlert(AlertType.INFORMATION,"Confirmation",null,"Les Valeurs Aleatoires ont été prise en compte !");
+					MyCustomAlert alert = new MyCustomAlert(AlertType.INFORMATION,"Confirmation",null,"Les Valeurs Aléatoires ont été prise en compte !");
 			    } else {
 			        // Afficher un message d'erreur si les nombres ne sont pas positifs
 			        @SuppressWarnings("unused")
@@ -60,55 +108,9 @@ public class ControllerAntColony {
 				MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres valides.");
 			}
 		});
-		
-		viewantcolony.getReset().setOnAction(e -> {
-		    if(myCustomeAlerteConfirm("Reset Game",
-		    		"Voulez-vous vraiment réinitialiser le jeu ?",
-		    		"Tout progrès sera perdu !")) {
-		    	resetGame();
-		    }
-		    
-		});
-		viewantcolony.getConfirmerParam().setOnAction(e -> {
-			
-			String newcap = viewantcolony.getChangecapacite().getTextFieldInput();
-			String newtaille = viewantcolony.getChangeTaille().getTextFieldInput();
-			try {
-			    double cap = Double.parseDouble(newcap);
-			    double taille = Double.parseDouble(newtaille);
-			    if (cap >= 0 && taille >= 0) {
-			        Fourmiliere nvFormuliere = new Fourmiliere((int)taille, (int)taille, (int)cap);
-			        Board nvplateau = new Board(nvFormuliere);
-			        PlayPauseButton nvbtn = new PlayPauseButton(viewantcolony.getPlaypause().getSize(), nvFormuliere, nvplateau, viewantcolony.getZoomedWindow());
-			        viewantcolony.setPlateau(nvplateau);
-			        
-			        this.setAntcolony(nvFormuliere);
-			        viewantcolony.setAntcolony(nvFormuliere);
-			        
-			        viewantcolony.setPlaypause(nvbtn);
-			        
-			        viewantcolony.getPlateau().updateGrid();
-			    } else {
-			        // Afficher un message d'erreur si les nombres ne sont pas positifs
-			        Alert alert = new Alert(AlertType.ERROR);
-			        alert.setTitle("Erreur");
-			        alert.setHeaderText(null);
-			        alert.setContentText("Les deux entrées doivent être des nombres positifs.");
-			        alert.showAndWait();
-			    }
-			} catch (NumberFormatException expt) {
-			    // Afficher un message d'erreur si les entrées ne sont pas des nombres valides
-			    Alert alert = new Alert(AlertType.ERROR);
-			    alert.setTitle("Erreur");
-			    alert.setHeaderText(null);
-			    alert.setContentText("Les deux entrées doivent être des nombres valides.");
-			    alert.showAndWait();
-			}
-		});
-			 
 	}
 	
-	public void initAleatoire( int nbMurs,int nbFourmis, int nbGraines) {
+	private void initAleatoire( int nbMurs,int nbFourmis, int nbGraines) {
 	    // Place nbMurs murs aléatoirement
 	    Random rand = new Random();
 	   // int nbMurs = rand.nextInt(antcolony.getHauteur()+antcolony.getLargeur()* rand.nextInt(randomMur)) / 2;

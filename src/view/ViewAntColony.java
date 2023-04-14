@@ -5,7 +5,6 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -19,7 +18,7 @@ import model.Fourmiliere;
 
 public class ViewAntColony extends HBox{
 
-	//les contenaires
+	//les conteneurs
 	private HBox left, bottominfoBox,btnsBox;
 	private VBox right, infoBox,paramBox, initBox;
 	private TabPane interactionPane;
@@ -168,9 +167,10 @@ public class ViewAntColony extends HBox{
 			
 			probaFourmi = new LabelTextField("Nombre Fourmi :");
 			probaFourmi.setTextFieldInput("7");
-			probagraines = new LabelTextField("Nombre graines : ");
+			probagraines = new LabelTextField("Densité des graines :");
 			probagraines.setTextFieldInput("25");
-			probamurs = new LabelTextField("Densité des Murs : ");
+			//probagraines.setSpacing(7);
+			probamurs = new LabelTextField("Densité des Murs :");
 			probamurs.setTextFieldInput("90");
 		
 			confirmerInit= new Button("Confirmer");
@@ -223,8 +223,9 @@ public class ViewAntColony extends HBox{
 		btn.setStyle("-fx-background-color: transparent;-fx-border-color:black;");
 	}
 	
-	
-	
+	//////////////////////
+	// SETTERS/GETTERS BUTTONS
+	//
 	public Button getInit() {
 		return init;
 	}
@@ -247,7 +248,9 @@ public class ViewAntColony extends HBox{
         playpause = newplaypause;  
 	}
 
-	
+	//////////////////////
+	// SETTERS/GETTERS BUTTONS
+	//
 	public Board getPlateau() {
 		return plateau;
 	}

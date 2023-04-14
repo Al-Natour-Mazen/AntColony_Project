@@ -14,7 +14,7 @@ public class LabelTextField extends HBox{
 		// TODO Auto-generated constructor stub
 		super(15);
 		lab = new Label(text);
-		lab.setMinWidth(100);
+		lab.setMinWidth(120);
 		tf = new TextField();
 		
 		getChildren().addAll(lab,tf);
