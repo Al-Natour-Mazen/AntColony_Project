@@ -115,10 +115,8 @@ public class ViewAntColony extends HBox{
 				        zoomedWindow = new ZoomWindow(plateau);
 				        zoomWindowProperty.set(zoomedWindow); // affecter la nouvelle fenêtre à la propriété
 				        if(tutoZoomWindow == 0) {
-				        	Alert myPopUp = new Alert(AlertType.INFORMATION);
-				        	myPopUp.setTitle("Tuto Zoom");
-				        	myPopUp.setContentText(">> Si vous souhaitez afficher le plateau principal dans le \n plateau zoome, il suffit de survoler avec votre \n souris le plateau principal :)");
-				        	myPopUp.showAndWait();
+				        	@SuppressWarnings("unused")
+							MyCustomAlert alert = new MyCustomAlert(AlertType.INFORMATION,"Tuto Zoom",null,">> Si vous souhaitez afficher le plateau principal dans le \n plateau zoome, il suffit de survoler avec votre \n souris le plateau principal :)");				     
 				        	tutoZoomWindow++;
 				        }
 				    }
@@ -155,6 +153,34 @@ public class ViewAntColony extends HBox{
 			infoBox.getChildren().addAll(springinfobox,lvitesseSimu,vitesseSimulation,lfourmi,lgraines,lite,btnsBox,bottominfoBox);
 			infoBox.setAlignment(Pos.CENTER);
 			
+			/////////////////////
+			// Les Valeurs D'init Alea
+			/////////
+			initTab = new Tab("Initialisations");
+			initTab.setClosable(false);
+		
+		
+			initBox = new VBox(20);
+			initTab.setContent(initBox);
+			
+			
+			infoInit = new Label("Changez les Valeurs Aléatoires de la Simulation :");
+			
+			probaFourmi = new LabelTextField("Nombre Fourmi :");
+			probaFourmi.setTextFieldInput("7");
+			probagraines = new LabelTextField("Nombre graines : ");
+			probagraines.setTextFieldInput("25");
+			probamurs = new LabelTextField("Densité des Murs : ");
+			probamurs.setTextFieldInput("90");
+		
+			confirmerInit= new Button("Confirmer");
+			SetStyleBtn(confirmerInit);
+			
+			MySpring springintiTop = new MySpring("VBox");
+			MySpring springintiBottom = new MySpring("VBox");
+			initBox.getChildren().addAll(springintiTop,infoInit,probaFourmi,probagraines,probamurs,confirmerInit,springintiBottom);
+			initBox.setAlignment(Pos.CENTER);
+			
 
 			/////////////////////
 			// Les parametres
@@ -181,32 +207,8 @@ public class ViewAntColony extends HBox{
 			paramBox.getChildren().addAll(springparamTop,infoparam,changeTaille,changecapacite,confirmerParam,springparamBottom);
 			paramBox.setAlignment(Pos.CENTER);
 
-			/////////////////////
-			// Les Valeurs D'init Alea
-			/////////
-			initTab = new Tab("Initialisations");
-			initTab.setClosable(false);
-
 		
-			initBox = new VBox(20);
-			initTab.setContent(initBox);
-			
-			
-			infoInit = new Label("Changez les Valeurs Aléatoires de la Simulation :");
-			
-			probaFourmi = new LabelTextField("Nombre Fourmi :");
-			probagraines = new LabelTextField("Nombre graines : ");
-			probamurs = new LabelTextField("Densité des Murs : ");
-
-			confirmerInit= new Button("Confirmer");
-			SetStyleBtn(confirmerInit);
-			
-			MySpring springintiTop = new MySpring("VBox");
-			MySpring springintiBottom = new MySpring("VBox");
-			initBox.getChildren().addAll(springintiTop,infoInit,probaFourmi,probagraines,probamurs,confirmerInit,springintiBottom);
-			initBox.setAlignment(Pos.CENTER);
-		
-		interactionPane.getTabs().addAll(infoTab,parametreTab,initTab);
+		interactionPane.getTabs().addAll(infoTab,initTab,parametreTab);
 		right.getChildren().add(interactionPane);
 		right.setMinWidth(300);
 		

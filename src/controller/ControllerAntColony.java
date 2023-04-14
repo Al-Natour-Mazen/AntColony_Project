@@ -8,6 +8,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import model.Fourmiliere;
 import view.Board;
+import view.MyCustomAlert;
 import view.PlayPauseButton;
 import view.ViewAntColony;
 
@@ -15,8 +16,7 @@ public class ControllerAntColony {
 	
 	private Fourmiliere antcolony;
 	private ViewAntColony viewantcolony;
-	private final static int randomMur = 10;
-	private int nbmurs , nbfourmi ,nbgraines;
+	private int nbmurs , nbfourmi ,nbgraines ;
 	
 	public ControllerAntColony(Fourmiliere colony, ViewAntColony vue) {
 		this.antcolony = colony;
@@ -47,14 +47,17 @@ public class ControllerAntColony {
 					nbmurs = (int) Knbmurs;
 					nbfourmi = (int) Knbfourmi;
 					nbgraines = (int) Knbgraines;
-			        myCustomAlert(AlertType.INFORMATION,"Confirmation",null,"Les Valeurs Aleatoires ont été prise en compte !");	
+			        @SuppressWarnings("unused")
+					MyCustomAlert alert = new MyCustomAlert(AlertType.INFORMATION,"Confirmation",null,"Les Valeurs Aleatoires ont été prise en compte !");
 			    } else {
 			        // Afficher un message d'erreur si les nombres ne sont pas positifs
-			        myCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres positifs.");
+			        @SuppressWarnings("unused")
+					MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres positifs.");
 			    }	    
 			} catch (NumberFormatException expt) {
 			    // Afficher un message d'erreur si les entrées ne sont pas des nombres valides
-			    myCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres valides.");
+			    @SuppressWarnings("unused")
+				MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres valides.");
 			}
 		});
 		
@@ -153,15 +156,6 @@ public class ControllerAntColony {
 	    Optional<ButtonType> result = alert.showAndWait();
 	    return result.isPresent() && result.get() == ButtonType.OK;
 	}
-	
-	private void myCustomAlert(AlertType alerttype,String title,String HeaderText, String ContentText) {
-		  Alert alert = new Alert(alerttype);
-		  alert.setTitle(title);
-		  alert.setHeaderText(HeaderText);
-		  alert.setContentText(ContentText);
-		  alert.showAndWait();
-	}
-	
 	
 	public Fourmiliere getAntcolony() {
 		return antcolony;

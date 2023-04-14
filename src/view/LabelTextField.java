@@ -24,5 +24,8 @@ public class LabelTextField extends HBox{
 	public String getTextFieldInput() {
 		return tf.getText();
 	}
+	 public void setTextFieldInput(String text) {
+		 tf.setText(text);
+	 }
 
 }
