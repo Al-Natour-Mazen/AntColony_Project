@@ -135,7 +135,7 @@ public class ControllerAntColony {
 	    for (int i = 0; i < nbMurs; i++) {
 	        int x = rand.nextInt(antcolony.getHauteur()) + 1;
 	        int y = rand.nextInt(antcolony.getLargeur()) + 1;
-	        antcolony.setMur(x, y, true);
+	        antcolony.setMur(y, x, true);
 	    }
 	    
 	    // Place jusqu'à nbFourmis fourmis aléatoirement
@@ -143,8 +143,8 @@ public class ControllerAntColony {
 	    while (nbFourmisPlaces < nbFourmis) {
 	    	int x = rand.nextInt(antcolony.getHauteur()) + 1;
 		    int y = rand.nextInt(antcolony.getLargeur()) + 1;
-	        if (!antcolony.contientFourmi(x, y) && !antcolony.getMur(x, y)) {
-	            antcolony.ajouteFourmi(x, y);
+	        if (!antcolony.contientFourmi(y, x) && !antcolony.getMur(y, x)) {
+	            antcolony.ajouteFourmi(y, x);
 	            nbFourmisPlaces++;
 	        }
 	    }
@@ -154,9 +154,9 @@ public class ControllerAntColony {
 	    	int x = rand.nextInt(antcolony.getHauteur()) + 1;
 		    int y = rand.nextInt(antcolony.getLargeur()) + 1;
 
-	        if (!antcolony.getMur(x, y)) {
+	        if (!antcolony.getMur(y, x)) {
 	            int qte = rand.nextInt(antcolony.getQMax() + 1);
-	            antcolony.setQteGraines(x, y, qte);
+	            antcolony.setQteGraines(y, x, qte);
 	        }
 	    }
 	}

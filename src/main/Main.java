@@ -14,7 +14,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
        
     	// Création du modèle
-        Fourmiliere fourmiliere = new Fourmiliere(20, 20, 10);
+        Fourmiliere fourmiliere = new Fourmiliere(30, 20, 50);
      	
         // Création de la vue
         ViewAntColony vue = new ViewAntColony(fourmiliere);

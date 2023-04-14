@@ -88,7 +88,7 @@ public class Board extends Pane {
     private void addAnt(int x , int y , boolean Hasseed) {
     	Ant ant = new Ant(cellSize/2,x*cellSize+(cellSize/2),y*cellSize+(cellSize/2), Hasseed);
     	ant.changeColorAnt();
-    	Ants[x][y] = ant;
+    	Ants[y][x] = ant;
     	this.getChildren().add(ant);
     }
     
@@ -97,7 +97,7 @@ public class Board extends Pane {
             if (node instanceof Ant) {
                 Ant ant = (Ant) node;
                 if (ant.getX() == x * cellSize + (cellSize/2) && ant.getY() == y * cellSize + (cellSize/2)) {
-                	Ants[x][y] = null;
+                	Ants[y][x] = null;
                     this.getChildren().remove(ant);
                     break;
                 }
@@ -154,7 +154,7 @@ public class Board extends Pane {
 		return cells[y][x];
 	}
 	public Ant getAntCell(int x,int y) {
-		return Ants[x][y];
+		return Ants[y][x];
 	}
 	
     public int getCellSize() {
