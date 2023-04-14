@@ -20,22 +20,23 @@ public class ControllerAntColony {
 		this.viewantcolony = vue;
 		
 		viewantcolony.getInit().setOnAction(e ->{
-			resetGame();
-			initAleatoire(10,50);
-			viewantcolony.getPlateau().updateGrid();
-			antcolony.MAJNbGrainesTotal();
+		    if(myCustomeAlerteConfirm("Init Game",
+		    		"Voulez-vous vraiment initialiser le jeu ?",
+		    		"Tout progrès sera perdu !")) {
+		       	resetGame();
+				initAleatoire(10,50);
+				viewantcolony.getPlateau().updateGrid();
+				antcolony.MAJNbGrainesTotal();
+		    }
 		});
 		
 		viewantcolony.getReset().setOnAction(e -> {
-			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		    alert.setTitle("Reset Game");
-		    alert.setHeaderText("Voulez-vous vraiment réinitialiser le jeu ?");
-		    alert.setContentText("Tout progrès sera perdu !");
-
-		    Optional<ButtonType> result = alert.showAndWait();
-		    if (result.isPresent() && result.get() == ButtonType.OK) {
-		        resetGame();
+		    if(myCustomeAlerteConfirm("Reset Game",
+		    		"Voulez-vous vraiment réinitialiser le jeu ?",
+		    		"Tout progrès sera perdu !")) {
+		    	resetGame();
 		    }
+		    
 		});
 		
 	}
@@ -79,7 +80,15 @@ public class ControllerAntColony {
 	}
 
 
+	public boolean myCustomeAlerteConfirm(String title,String HeaderText, String ContentText) {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+	    alert.setTitle(title);
+	    alert.setHeaderText(HeaderText);
+	    alert.setContentText(ContentText);
 
+	    Optional<ButtonType> result = alert.showAndWait();
+	    return result.isPresent() && result.get() == ButtonType.OK;
+	}
 
 
 
