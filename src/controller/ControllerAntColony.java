@@ -4,7 +4,6 @@ import java.util.Optional;
 import java.util.Random;
 
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import model.Fourmiliere;
@@ -18,7 +17,6 @@ public class ControllerAntColony {
 	
 	private Fourmiliere antcolony;
 	private ViewAntColony viewantcolony;
-	private Button init,reset;
 	private int nbmurs , nbfourmi ,nbgraines ;
 	
 	public ControllerAntColony(Fourmiliere colony, ViewAntColony vue) {

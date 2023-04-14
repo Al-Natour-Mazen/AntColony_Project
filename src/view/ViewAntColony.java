@@ -4,8 +4,6 @@ package view;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -15,18 +13,12 @@ public class ViewAntColony extends HBox{
 
 	//les conteneurs
 	private HBox left;
-	private VBox right,paramBox,initBox;
+	private VBox right;
 	private TabPane interactionPane;
-	private Tab parametreTab, initTab;
+	private MyParamTab parametreTab;
 	private MyInfoTab infoTab;
-	
-
-
-	//elements d'interaction
-	private Button confirmerParamCap, confirmerParamTaille  , confirmerInit;	
-	private LabelTextField changeTaille,changecapacite,probaFourmi,probagraines,probamurs;
-	private Label infoparam,infoInit;
-	
+	private MyInitTab initTab;
+		
 	// Utilitaires
 	private Board plateau;
 	private Fourmiliere antcolony;
@@ -49,84 +41,27 @@ public class ViewAntColony extends HBox{
 		left.getChildren().add(plateau);
 		left.setAlignment(Pos.CENTER);
 		
-		
-		
 		/////////////////////
 		// La droite
 		/////////
 		right = new VBox();
 		interactionPane = new TabPane();
-		
-		
+			
 			/////////////////////
 			// Les infos
 			/////////
 			infoTab = new MyInfoTab(antcolony,plateau);
-			
-		
+				
 			/////////////////////
 			// Les Valeurs D'init Alea
 			/////////
-			initTab = new Tab("Initialisations");
-			initTab.setClosable(false);
-		
-		
-			initBox = new VBox(20);
-			initTab.setContent(initBox);
-			
-			
-			infoInit = new Label("Changez les Valeurs d'initialisations de la Simulation :");
-			
-			probaFourmi = new LabelTextField("Nombre Fourmi :");
-			probaFourmi.setTextFieldInput("7");
-			
-			probagraines = new LabelTextField("Densité des graines :");
-			probagraines.setTextFieldInput("25");
-			
-			probamurs = new LabelTextField("Densité des Murs :");
-			probamurs.setTextFieldInput("90");
-		
-			confirmerInit= new Button("Confirmer");
-			SetStyleBtn(confirmerInit);
-			
-			MySpring springintiTop = new MySpring("VBox");
-			MySpring springintiBottom = new MySpring("VBox");
-			initBox.getChildren().addAll(springintiTop,infoInit,probaFourmi,probagraines,probamurs,confirmerInit,springintiBottom);
-			initBox.setAlignment(Pos.CENTER);
-			
-
+			initTab = new MyInitTab();
+	
 			/////////////////////
 			// Les parametres
 			/////////
-			parametreTab = new Tab("Paramètres");
-			parametreTab.setClosable(false);
-			//on ne peut pas changez les parametres si on est en pleine simulation
-			parametreTab.disableProperty().bind(infoTab.getPlaypause().isPlayingProperty());
-		
-			paramBox = new VBox(20);
-			parametreTab.setContent(paramBox);
+			parametreTab = new MyParamTab(infoTab,antcolony);
 			
-			
-			infoparam = new Label("Changez les parametres de la Simulation :");
-			
-			changeTaille = new LabelTextField("Taille plateau :");
-			confirmerParamTaille = new Button("Confirmer");
-			SetStyleBtn(confirmerParamTaille);
-			changeTaille.getTextField().setMaxWidth(40);
-			changeTaille.getChildren().add(confirmerParamTaille);
-			
-			changecapacite = new LabelTextField("Capacite max graines :");
-			changecapacite.setTextFieldInput(String.valueOf(antcolony.getQMax()));
-			confirmerParamCap = new Button("Confirmer");
-			SetStyleBtn(confirmerParamCap);
-			changecapacite.getTextField().setMaxWidth(40);
-			changecapacite.getChildren().add(confirmerParamCap);
-			
-			MySpring springparamTop = new MySpring("VBox");
-			MySpring springparamBottom = new MySpring("VBox");
-			paramBox.getChildren().addAll(springparamTop,infoparam,changeTaille,changecapacite,springparamBottom);
-			paramBox.setAlignment(Pos.CENTER);
-
 		
 		interactionPane.getTabs().addAll(infoTab,initTab,parametreTab);
 		right.getChildren().add(interactionPane);
@@ -134,15 +69,9 @@ public class ViewAntColony extends HBox{
 		
 		MySpring spring = new MySpring("HBox");
 		MySpring spring2 = new MySpring("HBox");
-		this.getChildren().addAll(spring,left,spring2,right);
+		this.getChildren().addAll(spring,left,spring2,right);		
+	}
 
-		
-	}
-	
-	private void SetStyleBtn(Button btn) {
-		btn.setStyle("-fx-background-color: transparent;-fx-border-color:black;");
-	}
-	
 	//////////////////////
 	// SETTERS/GETTERS BUTTONS
 	//
@@ -154,13 +83,13 @@ public class ViewAntColony extends HBox{
 	}
 
 	public Button getConfirmerParamCap() {
-		return confirmerParamCap;
+		return parametreTab.getConfirmerParamCap();
 	}
 	public Button getConfirmerParamTaille() {
-		return confirmerParamTaille;
+		return parametreTab.getConfirmerParamTaille();
 	}
 	public Button getConfirmerInit() {
-		return confirmerInit;
+		return initTab.getConfirmerInit();
 	}
 
 	public PlayPauseButton getPlaypause() {
@@ -198,20 +127,20 @@ public class ViewAntColony extends HBox{
 	// SETTERS/GETTERS LebelTextFields
 	//
 	public LabelTextField getChangeTaille() {
-		return changeTaille;
+		return parametreTab.getChangeTaille();
 	}
 
 	public LabelTextField getChangecapacite() {
-		return changecapacite;
+		return parametreTab.getChangecapacite();
 	}
 	public LabelTextField getProbaFourmi() {
-		return probaFourmi;
+		return initTab.getProbaFourmi();
 	}
 	public LabelTextField getProbagraines() {
-		return probagraines;
+		return initTab.getProbagraines();
 	}
 	public LabelTextField getProbamurs() {
-		return probamurs;
+		return initTab.getProbamurs();
 	}
 
 	
