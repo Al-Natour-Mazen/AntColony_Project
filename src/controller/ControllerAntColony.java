@@ -1,7 +1,10 @@
 package controller;
 
+import java.util.Optional;
 import java.util.Random;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import model.Fourmiliere;
 import view.ViewAntColony;
 
@@ -24,7 +27,15 @@ public class ControllerAntColony {
 		});
 		
 		viewantcolony.getReset().setOnAction(e -> {
-			resetGame();
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		    alert.setTitle("Reset Game");
+		    alert.setHeaderText("Voulez-vous vraiment réinitialiser le jeu ?");
+		    alert.setContentText("Tout progrès sera perdu !");
+
+		    Optional<ButtonType> result = alert.showAndWait();
+		    if (result.isPresent() && result.get() == ButtonType.OK) {
+		        resetGame();
+		    }
 		});
 		
 	}

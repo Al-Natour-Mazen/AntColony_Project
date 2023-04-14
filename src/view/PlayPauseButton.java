@@ -23,7 +23,7 @@ public class PlayPauseButton extends Button {
 	private final ZoomWindow zoom;
 	
 	private final DoubleProperty valueSpeedProperty;
-	private final static int DefaultSpeed = 10;
+	private final static int DefaultSpeed = 1;
 	
     private boolean isPlaying;   
  
