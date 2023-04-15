@@ -110,17 +110,12 @@ public class ViewAntColony extends HBox{
 		this.plateau = plateau;
 		left.getChildren().add(plateau);
 	}
-	
-	
-	public MyInfoTab getInfoTab() {
-		return infoTab;
-	}
 
-
-	public void setInfoTab(MyInfoTab newinfoTab) {
-		interactionPane.getTabs().removeAll(this.infoTab,initTab,parametreTab);
+	public void setNewTabs(MyInfoTab newinfoTab,MyParamTab newparamTab) {
+		interactionPane.getTabs().removeAll(this.infoTab,this.initTab,parametreTab);
 		this.infoTab = newinfoTab;
-		interactionPane.getTabs().addAll(newinfoTab,initTab,parametreTab);
+		this.parametreTab = newparamTab;
+		interactionPane.getTabs().addAll(newinfoTab,initTab,newparamTab);
 	}
 	
 	//////////////////////

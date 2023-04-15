@@ -10,7 +10,7 @@ import model.Fourmiliere;
 import view.Board;
 import view.MyCustomAlert;
 import view.MyInfoTab;
-import view.PlayPauseButton;
+import view.MyParamTab;
 import view.ViewAntColony;
 
 public class ControllerAntColony {
@@ -24,16 +24,12 @@ public class ControllerAntColony {
 		this.viewantcolony = vue;
 		
 		doInitEvents();
-		
-		viewantcolony.getReset().setOnAction(e -> {
-		    if(myCustomeAlerteConfirm("Reset Simulation",
-		    		"Voulez-vous vraiment réinitialiser la simulation ?",
-		    		"Tout progrès sera perdu !")) {
-		    	resetGame();
-		    }
-		    
-		});
-		
+		doResetEvents();
+		doChangeCapEvent();
+		doChangeTailleEvent();	
+	}
+	
+	private void doChangeCapEvent() {
 		viewantcolony.getConfirmerParamCap().setOnAction(e ->{
 			String newcap = viewantcolony.getChangecapacite().getTextFieldInput();
 			try {
@@ -49,26 +45,42 @@ public class ControllerAntColony {
 				MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres valides.");
 			}
 		});
-		
-		/*viewantcolony.getConfirmerParamTaille().setOnAction(e -> {			
+	}
+	
+	private void doChangeTailleEvent() {
+		viewantcolony.getConfirmerParamTaille().setOnAction(e -> {			
 			String newtaille = viewantcolony.getChangeTaille().getTextFieldInput();
 			try {
 			    double taille = Double.parseDouble(newtaille);
 			    if ( taille >= 0) {
+			    	
+			    	//On creer une nouvelle fourmilere
 			        Fourmiliere nvFormuliere = new Fourmiliere((int)taille, (int)taille, antcolony.getQMax());
-			        Board nvplateau = new Board(nvFormuliere);
-			       // PlayPauseButton nvbtn = new PlayPauseButton(viewantcolony.getPlaypause().getSize(), nvFormuliere, nvplateau, viewantcolony.getZoomedWindow());
+			        
+			        //on creer un nv plateau qui va avec la nouvelle fourmiliere
+			        Board nvplateau = new Board(nvFormuliere);	        
 			        viewantcolony.setPlateau(nvplateau);
 			        
+			        //On met à jour la nvl foumiliere dans la vue et dans le controller
 			        this.setAntcolony(nvFormuliere);
 			        viewantcolony.setAntcolony(nvFormuliere);
 			        
+			        //On creer les 2 nouvelles onglets pour synchroniser 
 			        MyInfoTab nvinfo = new MyInfoTab(nvFormuliere, nvplateau);
-			        viewantcolony.setInfoTab(nvinfo);
+			        MyParamTab nvparam = new MyParamTab(nvinfo, nvFormuliere);
 			        
-			       // viewantcolony.setPlaypause(nvbtn);
+			        //On mets les 2 nouvelles onglets dans la vue
+			        viewantcolony.setNewTabs(nvinfo,nvparam);
 			    
+			        //On update le plateau et on re met à jour les actions des boutons init et reset et changement de taille et de capacite
 			        viewantcolony.getPlateau().updateGrid();
+			        doInitEvents();
+			        doResetEvents();
+			        doChangeCapEvent();
+			        doChangeTailleEvent();
+			        
+			        @SuppressWarnings("unused")
+					MyCustomAlert alert = new MyCustomAlert(AlertType.INFORMATION,"Succès",null,"La nouvelle taille a été prise en compte !"); 
 			    } else {
 			        // Afficher un message d'erreur si les nombres ne sont pas positifs
 			    	 @SuppressWarnings("unused")
@@ -79,8 +91,20 @@ public class ControllerAntColony {
 				 @SuppressWarnings("unused")
 				MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres valides.");
 			}
-		});*/
-			 
+		});		 
+		
+	}
+	
+	private void doResetEvents() {
+		viewantcolony.getReset().setOnAction(e -> {
+		    if(myCustomeAlerteConfirm("Reset Simulation",
+		    		"Voulez-vous vraiment réinitialiser la simulation ?",
+		    		"Tout progrès sera perdu !")) {
+		    	resetGame();
+		    }
+		    
+		});
+		
 	}
 	
 	private void doInitEvents() {
