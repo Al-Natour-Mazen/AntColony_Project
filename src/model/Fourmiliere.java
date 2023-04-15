@@ -22,12 +22,6 @@ import java.util.Iterator;
 public class Fourmiliere {
  
   private int largeur, hauteur ;
-  public void setLargeur(int largeur) {
-	this.largeur = largeur;
-  }
-public void setHauteur(int hauteur) {
-	this.hauteur = hauteur;
-	}
 
 // Le nombre maximal de graines par cases  
   private int qMax ;  	
@@ -99,7 +93,7 @@ public void setHauteur(int hauteur) {
 			  /*****************/
   			  // POUR LA REINISIALISATION 
   			  /*****************/
-			  public void Reset() {
+			  public void resetModel() {
 			    setNbFourmi(0);
 			    setNbGraine(0);
 			    setIteration(0);

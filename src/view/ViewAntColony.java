@@ -128,7 +128,7 @@ public class ViewAntColony extends HBox{
 	}
 
 	public void setNewTabs(MyInfoTab newinfoTab,MyParamTab newparamTab) {
-		interactionPane.getTabs().removeAll(this.infoTab,this.initTab,parametreTab);
+		interactionPane.getTabs().removeAll(this.infoTab,this.initTab,this.parametreTab);
 		this.infoTab = newinfoTab;
 		this.parametreTab = newparamTab;
 		interactionPane.getTabs().addAll(newinfoTab,initTab,newparamTab);

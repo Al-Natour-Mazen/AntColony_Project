@@ -72,7 +72,7 @@ public class ControllerAntColony {
 					        this.setAntcolony(nvFormuliere);
 					        viewantcolony.setAntcolony(nvFormuliere);
 					        
-					        //On creer les 2 nouvelles onglets pour synchroniser avec la nouvelle fourmiliere
+					        //On creer les 2 nouvelles onglets pour synchroniser les informations avec la nouvelle fourmiliere
 					        MyInfoTab nvinfo = new MyInfoTab(nvFormuliere, nvplateau);
 					        MyParamTab nvparam = new MyParamTab(nvinfo, nvFormuliere);
 					        
@@ -197,7 +197,7 @@ public class ControllerAntColony {
 	}
 	
 	public void resetGame() {
-		antcolony.Reset();
+		antcolony.resetModel();
 		viewantcolony.getPlateau().resestGrid();
 	}
 
