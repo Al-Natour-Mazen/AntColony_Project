@@ -59,7 +59,7 @@ public class ControllerAntColony {
 				 	String newtaille = viewantcolony.getChangeTaille().getTextFieldInput();
 					try {
 					    double taille = Double.parseDouble(newtaille);
-					    if ( taille > 0) {
+					    if ( taille >= 20) {
 					    	
 					    	//On creer une nouvelle fourmilere
 					        Fourmiliere nvFormuliere = new Fourmiliere((int)taille, (int)taille, antcolony.getQMax());
@@ -96,12 +96,12 @@ public class ControllerAntColony {
 					    } else {
 					        // Afficher un message d'erreur si les nombres ne sont pas positifs
 					    	 @SuppressWarnings("unused")
-							MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres positifs.");
+							MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"L'entrée doit être un nombre superieur ou égale à 20 (taille minimale d'une fourmiliere).");
 					    }
 					} catch (NumberFormatException expt) {
 					    // Afficher un message d'erreur si les entrées ne sont pas des nombres valides
 						 @SuppressWarnings("unused")
-						MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres valides.");
+						MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"L'entrée doit être un nombre valide.");
 					}
 			    }	
 		});		 	

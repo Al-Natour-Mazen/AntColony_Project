@@ -1,6 +1,7 @@
 package view;
 
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -12,7 +13,7 @@ import model.Fourmiliere;
 public class ViewAntColony extends HBox{
 
 	//les conteneurs
-	private HBox left;
+	private HBox left,bottomQuitBox;
 	private VBox right;
 	private TabPane interactionPane;
 	private MyParamTab parametreTab;
@@ -23,9 +24,11 @@ public class ViewAntColony extends HBox{
 	private Board plateau;
 	private Fourmiliere antcolony;
 	
+	//btn pour quitter
+	private Button quit;
+	
 	
 	public ViewAntColony(Fourmiliere fm) {
-		// TODO Auto-generated constructor stub
 		this.antcolony = fm;
 		initComponent();
 	}
@@ -62,9 +65,25 @@ public class ViewAntColony extends HBox{
 			/////////
 			parametreTab = new MyParamTab(infoTab,antcolony);
 			
+			/////////////////////
+			// Le Btn Quitter
+			/////////
+			bottomQuitBox = new HBox();
+			
+			quit = new Button("Quit");
+			quit.setOnAction(e -> {
+				Platform.exit();
+			});
+			quit.setStyle("-fx-background-color: transparent;-fx-border-color:black;");
+			
+			bottomQuitBox.setAlignment(Pos.BOTTOM_RIGHT);
+			bottomQuitBox.getChildren().add(quit);
+			bottomQuitBox.setPadding(new Insets(5));
+			
 		
 		interactionPane.getTabs().addAll(infoTab,initTab,parametreTab);
-		right.getChildren().add(interactionPane);
+		MySpring springright = new MySpring("VBox");
+		right.getChildren().addAll(interactionPane,springright,bottomQuitBox);
 		right.setMinWidth(300);
 		
 		/////////////////////
@@ -95,12 +114,6 @@ public class ViewAntColony extends HBox{
 		return initTab.getConfirmerInit();
 	}
 
-	public PlayPauseButton getPlaypause() {
-		return infoTab.getPlaypause();
-	}
-	public void setPlaypause(PlayPauseButton newplaypause) {
-		infoTab.setPlaypause(newplaypause);  
-	}
 
 	//////////////////////
 	// SETTERS/GETTERS PLATEAU ET TABS
@@ -153,11 +166,4 @@ public class ViewAntColony extends HBox{
 		this.antcolony = antcolony;		
 	}
 	
-	public ZoomWindow getZoomedWindow() {
-		return infoTab.getZoomedWindow();
-	}
-
-	public void setZoomedWindow(ZoomWindow zoomedWindow) {
-		infoTab.setZoomedWindow(zoomedWindow);;
-	}
 }

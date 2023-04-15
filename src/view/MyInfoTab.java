@@ -1,9 +1,7 @@
 package view;
 
-import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
@@ -18,12 +16,12 @@ import model.Fourmiliere;
 public class MyInfoTab extends Tab {
 
 	    //les conteneurs
-		private HBox bottominfoBox,btnsBox;
+		private HBox btnsBox;
 		private VBox infoBox;
 		private GridPane buttonsGrid;
 		
 		//elements d'interaction
-		private Button loupe,quit,init,reset;
+		private Button loupe,init,reset;
 		private Slider vitesseSimulation;
 		private PlayPauseButton playpause;
 
@@ -112,21 +110,10 @@ public class MyInfoTab extends Tab {
 		btnsBox.getChildren().add(buttonsGrid);
 		btnsBox.setAlignment(Pos.CENTER);
 		
-		//le bas
-		bottominfoBox = new HBox();
-		quit = new Button("Quit");
-		quit.setOnAction(e -> {
-			Platform.exit();
-		});
-		SetStyleBtn(quit);
-		bottominfoBox.setAlignment(Pos.BOTTOM_RIGHT);
-		bottominfoBox.getChildren().add(quit);
-		bottominfoBox.setPadding(new Insets(5));
-		
 		//ajouter à la VBOx
 		MySpring springinfobox = new MySpring("VBox");
 		MySpring springinfobox2 = new MySpring("VBox");
-		infoBox.getChildren().addAll(springinfobox,lvitesseSimu,vitesseSimulation,lfourmi,lgraines,lite,btnsBox,springinfobox2,bottominfoBox);
+		infoBox.getChildren().addAll(springinfobox,lvitesseSimu,vitesseSimulation,lfourmi,lgraines,lite,btnsBox,springinfobox2);
 		infoBox.setAlignment(Pos.CENTER);
 		VBox.setVgrow(infoBox, Priority.ALWAYS);
 		

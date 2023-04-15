@@ -30,7 +30,7 @@ public class MyParamTab extends Tab{
 		
 		infoparam = new Label("Changez les parametres de la Simulation :");
 		
-		changeTaille = new LabelTextField("Taille plateau :");
+		changeTaille = new LabelTextField("Taille du plateau :");
 		confirmerParamTaille = new Button("Confirmer");
 		SetStyleBtn(confirmerParamTaille);
 		changeTaille.getTextField().setMaxWidth(40);

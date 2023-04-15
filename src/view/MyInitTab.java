@@ -16,7 +16,7 @@ public class MyInitTab extends Tab{
 	//elements d'interaction
 	private Button confirmerInit;	
 
-
+	//les Labels
 	private LabelTextField probaFourmi,probagraines,probamurs;
 	private Label infoInit;
 	
@@ -30,12 +30,12 @@ public class MyInitTab extends Tab{
 		setContent(initBox);
 		
 		
-		infoInit = new Label("Changez les Valeurs d'initialisations de la Simulation :");
+		infoInit = new Label("Changez les valeurs d'initialisations de la Simulation :");
 		
-		probaFourmi = new LabelTextField("Nombre Fourmi :");
+		probaFourmi = new LabelTextField("Nombre de Fourmi :");
 		probaFourmi.setTextFieldInput("7");
 		
-		probagraines = new LabelTextField("Densité des graines :");
+		probagraines = new LabelTextField("Densité des Graines :");
 		probagraines.setTextFieldInput("25");
 		
 		probamurs = new LabelTextField("Densité des Murs :");
