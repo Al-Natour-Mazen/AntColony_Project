@@ -55,12 +55,11 @@ public class ControllerAntColony {
 		viewantcolony.getConfirmerParamTaille().setOnAction(e -> {		
 			 if(myCustomeAlerteConfirm("Change Taille Simulation",
 			    		"Voulez-vous vraiment Changer la taille du plateau  ?",
-			    		"Tout progrès sera perdu !")) {
-				 
+			    		"Tout progrès sera perdu !")) { 
 				 	String newtaille = viewantcolony.getChangeTaille().getTextFieldInput();
 					try {
 					    double taille = Double.parseDouble(newtaille);
-					    if ( taille >= 0) {
+					    if ( taille > 0) {
 					    	
 					    	//On creer une nouvelle fourmilere
 					        Fourmiliere nvFormuliere = new Fourmiliere((int)taille, (int)taille, antcolony.getQMax());
@@ -87,6 +86,7 @@ public class ControllerAntColony {
 					        doChangeCapEvent();
 					        doChangeTailleEvent();
 					        
+					        //On update la taille de la fentre principale
 					        //Techniquement ça ne sert à rien la taille c'est seulement pour update la prop et notifier dans le main pour adapter la taille de la fentre
 					        setSize(taille);
 					        

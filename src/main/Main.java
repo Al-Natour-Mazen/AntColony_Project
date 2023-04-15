@@ -25,7 +25,7 @@ public class Main extends Application {
         // Configuration de la scène
         Scene scene = new Scene(vue);
         
-        // Lier la taille de la scène à la taille de la vue qui change 
+        // Lier la taille de la scène à la taille de la vue qui change via le controller
         controller.SizeProperty().addListener((obs, oldVal, newVal) -> {
         	// Redimensionnement de la fenêtre en fonction de la nouvelle taille préférée de la scène
         	primaryStage.sizeToScene();
@@ -33,7 +33,6 @@ public class Main extends Application {
         	primaryStage.show();
         });
    
-
         // Configuration de la fenêtre principale
         primaryStage.setScene(scene);
         primaryStage.setTitle("Fourmilière");

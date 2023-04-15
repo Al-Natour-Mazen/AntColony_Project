@@ -11,6 +11,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import model.Fourmiliere;
 
@@ -127,6 +128,7 @@ public class MyInfoTab extends Tab {
 		MySpring springinfobox2 = new MySpring("VBox");
 		infoBox.getChildren().addAll(springinfobox,lvitesseSimu,vitesseSimulation,lfourmi,lgraines,lite,btnsBox,springinfobox2,bottominfoBox);
 		infoBox.setAlignment(Pos.CENTER);
+		VBox.setVgrow(infoBox, Priority.ALWAYS);
 		
 	}
 	
