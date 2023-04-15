@@ -3,6 +3,8 @@ package controller;
 import java.util.Optional;
 import java.util.Random;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -18,13 +20,15 @@ public class ControllerAntColony {
 	private Fourmiliere antcolony;
 	private ViewAntColony viewantcolony;
 	private int nbmurs , nbfourmi ,nbgraines ;
+	private final DoubleProperty SizeProperty;
 	
 	public ControllerAntColony(Fourmiliere colony, ViewAntColony vue) {
 		this.antcolony = colony;
-		this.viewantcolony = vue;
+		this.viewantcolony = vue;	
+		SizeProperty = new SimpleDoubleProperty();
 		
 		doInitEvents();
-		doResetEvents();
+		doResetEvent();
 		doChangeCapEvent();
 		doChangeTailleEvent();	
 	}
@@ -48,54 +52,62 @@ public class ControllerAntColony {
 	}
 	
 	private void doChangeTailleEvent() {
-		viewantcolony.getConfirmerParamTaille().setOnAction(e -> {			
-			String newtaille = viewantcolony.getChangeTaille().getTextFieldInput();
-			try {
-			    double taille = Double.parseDouble(newtaille);
-			    if ( taille >= 0) {
-			    	
-			    	//On creer une nouvelle fourmilere
-			        Fourmiliere nvFormuliere = new Fourmiliere((int)taille, (int)taille, antcolony.getQMax());
-			        
-			        //on creer un nv plateau qui va avec la nouvelle fourmiliere
-			        Board nvplateau = new Board(nvFormuliere);	        
-			        viewantcolony.setPlateau(nvplateau);
-			        
-			        //On met à jour la nvl foumiliere dans la vue et dans le controller
-			        this.setAntcolony(nvFormuliere);
-			        viewantcolony.setAntcolony(nvFormuliere);
-			        
-			        //On creer les 2 nouvelles onglets pour synchroniser 
-			        MyInfoTab nvinfo = new MyInfoTab(nvFormuliere, nvplateau);
-			        MyParamTab nvparam = new MyParamTab(nvinfo, nvFormuliere);
-			        
-			        //On mets les 2 nouvelles onglets dans la vue
-			        viewantcolony.setNewTabs(nvinfo,nvparam);
-			    
-			        //On update le plateau et on re update les actions des boutons init et reset et changement de taille et de capacite
-			        viewantcolony.getPlateau().updateGrid();
-			        doInitEvents();
-			        doResetEvents();
-			        doChangeCapEvent();
-			        doChangeTailleEvent();
-			        
-			        @SuppressWarnings("unused")
-					MyCustomAlert alert = new MyCustomAlert(AlertType.INFORMATION,"Succès",null,"La nouvelle taille a été prise en compte !"); 
-			    } else {
-			        // Afficher un message d'erreur si les nombres ne sont pas positifs
-			    	 @SuppressWarnings("unused")
-					MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres positifs.");
-			    }
-			} catch (NumberFormatException expt) {
-			    // Afficher un message d'erreur si les entrées ne sont pas des nombres valides
-				 @SuppressWarnings("unused")
-				MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres valides.");
-			}
-		});		 
-		
+		viewantcolony.getConfirmerParamTaille().setOnAction(e -> {		
+			 if(myCustomeAlerteConfirm("Change Taille Simulation",
+			    		"Voulez-vous vraiment Changer la taille du plateau  ?",
+			    		"Tout progrès sera perdu !")) {
+				 
+				 	String newtaille = viewantcolony.getChangeTaille().getTextFieldInput();
+					try {
+					    double taille = Double.parseDouble(newtaille);
+					    if ( taille >= 0) {
+					    	
+					    	//On creer une nouvelle fourmilere
+					        Fourmiliere nvFormuliere = new Fourmiliere((int)taille, (int)taille, antcolony.getQMax());
+					        
+					        //on creer un nv plateau qui va avec la nouvelle fourmiliere
+					        Board nvplateau = new Board(nvFormuliere);	        
+					        viewantcolony.setPlateau(nvplateau);
+					        
+					        //On met à jour la nvl foumiliere dans la vue et dans le controller
+					        this.setAntcolony(nvFormuliere);
+					        viewantcolony.setAntcolony(nvFormuliere);
+					        
+					        //On creer les 2 nouvelles onglets pour synchroniser avec la nouvelle fourmiliere
+					        MyInfoTab nvinfo = new MyInfoTab(nvFormuliere, nvplateau);
+					        MyParamTab nvparam = new MyParamTab(nvinfo, nvFormuliere);
+					        
+					        //On mets les 2 nouvelles onglets dans la vue
+					        viewantcolony.setNewTabs(nvinfo,nvparam);
+					    
+					        //On update le plateau et on re update les actions des boutons init et reset et changement de taille et de capacite
+					        viewantcolony.getPlateau().updateGrid();
+					        doInitEvents();
+					        doResetEvent();
+					        doChangeCapEvent();
+					        doChangeTailleEvent();
+					        
+					        //Techniquement ça ne sert à rien la taille c'est seulement pour update la prop et notifier dans le main pour adapter la taille de la fentre
+					        setSize(taille);
+					        
+					        @SuppressWarnings("unused")
+							MyCustomAlert alert = new MyCustomAlert(AlertType.INFORMATION,"Succès",null,"La nouvelle taille a été prise en compte !"); 
+					        
+					    } else {
+					        // Afficher un message d'erreur si les nombres ne sont pas positifs
+					    	 @SuppressWarnings("unused")
+							MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres positifs.");
+					    }
+					} catch (NumberFormatException expt) {
+					    // Afficher un message d'erreur si les entrées ne sont pas des nombres valides
+						 @SuppressWarnings("unused")
+						MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres valides.");
+					}
+			    }	
+		});		 	
 	}
 	
-	private void doResetEvents() {
+	private void doResetEvent() {
 		viewantcolony.getReset().setOnAction(e -> {
 		    if(myCustomeAlerteConfirm("Reset Simulation",
 		    		"Voulez-vous vraiment réinitialiser la simulation ?",
@@ -207,7 +219,17 @@ public class ControllerAntColony {
 	public void setAntcolony(Fourmiliere antcolony) {
 		this.antcolony = antcolony;
 	}
-
-
-
+	
+	  
+	public DoubleProperty SizeProperty() {
+	    return SizeProperty;
+	}	
+	
+	public double getSize() {
+	    return SizeProperty.get();
+	}	
+	
+	public void setSize(double value) {
+		SizeProperty.set(value);
+	}
 }

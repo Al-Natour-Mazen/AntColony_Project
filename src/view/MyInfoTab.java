@@ -26,7 +26,6 @@ public class MyInfoTab extends Tab {
 		private Slider vitesseSimulation;
 		private PlayPauseButton playpause;
 
-
 		private ZoomWindow zoomedWindow;
 		private LabelWithBind lfourmi,lgraines,lite,lvitesseSimu;
 		
@@ -97,7 +96,7 @@ public class MyInfoTab extends Tab {
 			    }
 			});
 		
-		init  = new Button("init");
+		init  = new Button("Init");
 		init.setMinWidth(50);
 		SetStyleBtn(init);
 		reset = new Button("Reset");

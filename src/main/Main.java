@@ -14,18 +14,26 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
        
     	// Création du modèle
-        Fourmiliere fourmiliere = new Fourmiliere(24, 6, 50);
+        Fourmiliere fourmiliere = new Fourmiliere(20, 20, 10);
      	
         // Création de la vue
         ViewAntColony vue = new ViewAntColony(fourmiliere);
         
         // Création du contrôleur
-        @SuppressWarnings("unused")
-		ControllerAntColony controleur = new ControllerAntColony(fourmiliere, vue);
+        ControllerAntColony controller = new ControllerAntColony(fourmiliere, vue);
                
         // Configuration de la scène
         Scene scene = new Scene(vue);
         
+        // Lier la taille de la scène à la taille de la vue qui change 
+        controller.SizeProperty().addListener((obs, oldVal, newVal) -> {
+        	// Redimensionnement de la fenêtre en fonction de la nouvelle taille préférée de la scène
+        	primaryStage.sizeToScene();
+        	// Affichage de la fenêtre
+        	primaryStage.show();
+        });
+   
+
         // Configuration de la fenêtre principale
         primaryStage.setScene(scene);
         primaryStage.setTitle("Fourmilière");

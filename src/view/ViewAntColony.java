@@ -160,7 +160,4 @@ public class ViewAntColony extends HBox{
 	public void setZoomedWindow(ZoomWindow zoomedWindow) {
 		infoTab.setZoomedWindow(zoomedWindow);;
 	}
-
-
-	
 }

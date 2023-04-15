@@ -97,7 +97,7 @@ public void setHauteur(int hauteur) {
 			  }
 			  
 			  /*****************/
-  			  // POUR LA REsINISIALISATION ALEATOIRE
+  			  // POUR LA REINISIALISATION 
   			  /*****************/
 			  public void Reset() {
 			    setNbFourmi(0);
