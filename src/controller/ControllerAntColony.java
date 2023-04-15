@@ -72,7 +72,7 @@ public class ControllerAntColony {
 			        //On mets les 2 nouvelles onglets dans la vue
 			        viewantcolony.setNewTabs(nvinfo,nvparam);
 			    
-			        //On update le plateau et on re met à jour les actions des boutons init et reset et changement de taille et de capacite
+			        //On update le plateau et on re update les actions des boutons init et reset et changement de taille et de capacite
 			        viewantcolony.getPlateau().updateGrid();
 			        doInitEvents();
 			        doResetEvents();
@@ -104,7 +104,6 @@ public class ControllerAntColony {
 		    }
 		    
 		});
-		
 	}
 	
 	private void doInitEvents() {

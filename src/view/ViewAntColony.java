@@ -67,6 +67,9 @@ public class ViewAntColony extends HBox{
 		right.getChildren().add(interactionPane);
 		right.setMinWidth(300);
 		
+		/////////////////////
+		// La HBox principale
+		/////////
 		MySpring spring = new MySpring("HBox");
 		MySpring spring2 = new MySpring("HBox");
 		this.getChildren().addAll(spring,left,spring2,right);		
@@ -100,7 +103,7 @@ public class ViewAntColony extends HBox{
 	}
 
 	//////////////////////
-	// SETTERS/GETTERS BUTTONS
+	// SETTERS/GETTERS PLATEAU ET TABS
 	//
 	public Board getPlateau() {
 		return plateau;
