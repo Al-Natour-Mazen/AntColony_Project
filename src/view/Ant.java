@@ -26,6 +26,21 @@ public class Ant extends Circle{
 		setY(y);
 		changeColorAnt();
 	}
+	
+	/**
+	   * Change la couleur de la fourmi selon si elle porte une graine ou non
+	   */
+	public void changeColorAnt() {
+		if(HasSeed) {
+			this.setFill(Color.BLUE);
+		}
+		else
+			this.setFill(Color.GREEN);
+	}
+	
+	//////////////////////
+	// SETTERS/GETTERS 
+	//
 
 	public Boolean getHasSeed() {
 		return HasSeed;
@@ -33,14 +48,6 @@ public class Ant extends Circle{
 
 	public void setHasSeed(Boolean hasSeed) {
 		HasSeed = hasSeed;
-	}
-	
-	public void changeColorAnt() {
-		if(HasSeed) {
-			this.setFill(Color.BLUE);
-		}
-		else
-			this.setFill(Color.GREEN);
 	}
 	
 	public int getX() {

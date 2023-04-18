@@ -13,6 +13,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.Fourmiliere;
 
+/**
+ * Cette classe représente un bouton personnalisé permettant de jouer et mettre en pause
+ * l'évolution d'une fourmilière.
+ */
 public class PlayPauseButton extends Button {
 
     private final Image imagePause;
@@ -70,7 +74,13 @@ public class PlayPauseButton extends Button {
     };
     
 
-
+    /**
+     * Constructeur de la classe PlayPauseButton.
+     * @param size La taille du bouton.
+     * @param fm La fourmilière à faire évoluer.
+     * @param board Le plateau de jeu.
+     * @param zoomepane La fenêtre de zoom.
+     */
     public PlayPauseButton(int size, Fourmiliere fm, Board board, ZoomWindow zoomepane) {
     	this.zoom = zoomepane;
 		this.antcolony =fm;
@@ -110,6 +120,11 @@ public class PlayPauseButton extends Button {
 	
         setStyle("-fx-background-color: transparent;");
     }
+    
+    
+	//////////////////////
+	// SETTERS/GETTERS 
+	//
     
     public DoubleProperty valueSpeedProperty() {
         return valueSpeedProperty;

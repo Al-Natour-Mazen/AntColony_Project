@@ -59,6 +59,11 @@ public class Fourmiliere {
 			  public void setNbGraine(double qte) {
 				  NbGraineProperty.set(qte);
 			  }		  
+			  /**
+			   * Met à jour le nombre total de graines présentes dans le modèle de fourmilière.
+			   * Parcourt le tableau de quantités de graines et ajoute chaque quantité à la variable nbGrainesTotal.
+			   * Met ensuite à jour l'attribut nbGraine de la fourmilière avec la valeur calculée.
+			  */
 			  public void MAJNbGrainesTotal() {
 				    int nbGrainesTotal = 0;
 				    for (int i = 1; i <= hauteur; i++) {
@@ -93,6 +98,13 @@ public class Fourmiliere {
 			  /*****************/
   			  // POUR LA REINISIALISATION 
   			  /*****************/
+			  
+			  /**
+			   * Réinitialise le modèle de la fourmilière.
+			   *  Remet à zéro le nombre de fourmis, le nombre de graines, le nombre d'itérations et la liste des fourmis.
+			   *   Remet à false toutes les cases des tableaux fourmis et murs, et à zéro toutes les cases du tableau qteGraines.
+			   *   Met à jour le nombre total de graines avec la méthode MAJNbGrainesTotal().
+			  */
 			  public void resetModel() {
 			    setNbFourmi(0);
 			    setNbGraine(0);

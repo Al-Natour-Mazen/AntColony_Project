@@ -9,34 +9,39 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import model.Fourmiliere;
 
+/**
+ * Classe représentant l'onglet d'informations dans l'interface graphique.
+*/
 public class MyInfoTab extends Tab {
 
-	    //les conteneurs
-		private HBox btnsBox;
-		private VBox infoBox;
-		private GridPane buttonsGrid;
-		
-		//elements d'interaction
-		private Button loupe,init,reset;
-		private Slider vitesseSimulation;
-		private PlayPauseButton playpause;
+    //les conteneurs
+	private HBox btnsBox;
+	private VBox infoBox;
+	private GridPane buttonsGrid;
+	
+	//elements d'interaction
+	private Button loupe,init,reset;
+	private Slider vitesseSimulation;
+	private PlayPauseButton playpause;
 
-		private ZoomWindow zoomedWindow;
-		private LabelWithBind lfourmi,lgraines,lite,lvitesseSimu;
-		
-		// Utilitaires
-		private int tutoZoomWindow = 0;
-		private final static int sizePlayBtn = 30;	
-		private ObjectProperty<ZoomWindow> zoomWindowProperty;
-		private Board plateau;
-		private Fourmiliere antcolony;
+	private ZoomWindow zoomedWindow;
+	private LabelWithBind lfourmi,lgraines,lite,lvitesseSimu;
 	
+	// Utilitaires
+	private int tutoZoomWindow = 0;
+	private final static int sizePlayBtn = 30;	
+	private ObjectProperty<ZoomWindow> zoomWindowProperty;
+	private Board plateau;
+	private Fourmiliere antcolony;
 	
-	
+	/**
+	 * Constructeur de la classe MyInfoTab.
+	 * @param antcol la fourmilière utilisée dans la simulation.
+	 * @param plat le plateau utilisé dans la simulation.
+	*/
 	public MyInfoTab(Fourmiliere antcol,Board plat) {
 		super("Informations");
 		/////////////////////
@@ -64,15 +69,18 @@ public class MyInfoTab extends Tab {
 		// les btn d'interaction
 		btnsBox = new HBox();
 		buttonsGrid = new GridPane();
-		buttonsGrid.setHgap(10); // espace horizontal entre les éléments
-		buttonsGrid.setVgap(10); // espace vertical entre les éléments
+		buttonsGrid.setHgap(10); // espace horizontal 
+		buttonsGrid.setVgap(10); // espace vertical 
 		
+		//le btn de playpause
 		playpause = new PlayPauseButton(sizePlayBtn,antcolony,plateau,zoomedWindow);
 		playpause.valueSpeedProperty().bind(vitesseSimulation.valueProperty());
 		
+		//on cree le btn loupe
 	    loupe = new Button("Loupe");
 	    loupe.setMinWidth(20);
 	    SetStyleBtn(loupe);
+	    	//on cree la prop et on ajoute un listener afin d'ouvrir qu'une seule fentre zoome à la fois
 			zoomWindowProperty = new SimpleObjectProperty<>();
 			zoomWindowProperty.addListener((observable, oldZoomWindow, newZoomWindow) -> {
 			    if (newZoomWindow != null) {
@@ -83,6 +91,8 @@ public class MyInfoTab extends Tab {
 			        });
 			    }
 			});
+			
+			//on ajoute l'action au btn loupe
 			loupe.setOnAction(e -> {
 			    if (zoomWindowProperty.get() == null) { // vérifier si la propriété est à null
 			        zoomedWindow = new ZoomWindow(plateau);
@@ -102,6 +112,7 @@ public class MyInfoTab extends Tab {
 		reset.setMinWidth(50);
 		SetStyleBtn(reset);
 
+		//On ajoute au grid
 		buttonsGrid.add(playpause, 0, 0); // ajouter playpause en haut à gauche
 		buttonsGrid.add(loupe, 1, 0); // ajouter loupe en haut à droite
 		buttonsGrid.add(init, 0, 1); // ajouter init en bas à gauche
@@ -115,36 +126,35 @@ public class MyInfoTab extends Tab {
 		MySpring springinfobox2 = new MySpring("VBox");
 		infoBox.getChildren().addAll(springinfobox,lvitesseSimu,vitesseSimulation,lfourmi,lgraines,lite,btnsBox,springinfobox2);
 		infoBox.setAlignment(Pos.CENTER);
-		VBox.setVgrow(infoBox, Priority.ALWAYS);
-		
 	}
 	
+	/**
+	 * Méthode permettant de définir le style des boutons de l'interface en leur affectant une couleur de fond transparente
+	 * et une bordure noire.
+	 * @param btn le bouton dont on souhaite définir le style
+	*/
 	private void SetStyleBtn(Button btn) {
 		btn.setStyle("-fx-background-color: transparent;-fx-border-color:black;");
 	}
+	
+
+	//////////////////////
+	// SETTERS/GETTERS 
+	//
 	public PlayPauseButton getPlaypause() {
 		return playpause;
-	}
-	
-	public void setPlaypause(PlayPauseButton newplaypause) {
-		buttonsGrid.add(newplaypause, 0, 0); // ajouter playpause en haut à gauche
-		this.playpause = newplaypause;
 	}
 	public ZoomWindow getZoomedWindow() {
 		return zoomedWindow;
 	}
-
 	public void setZoomedWindow(ZoomWindow zoomedWindow) {
 		this.zoomedWindow = zoomedWindow;
 	}
-	
 	public Button getInit() {
 		return init;
 	}
 	public Button getReset() {
 		return reset;
 	}
-
-	
 	
 }

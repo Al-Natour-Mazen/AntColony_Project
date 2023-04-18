@@ -19,6 +19,10 @@ public class Board extends Pane {
 	private Rectangle[][] cells;
 	private Ant[][] Ants;
 
+	/**
+	 * Constructeur de la classe Board.
+	 * @param antColony    Une Fourmiliere pour laquelle le tableau sera créé.
+	 */
 	public Board(Fourmiliere antColony) {
         this.antColony = antColony;
         this.gridheight = antColony.getHauteur();
@@ -40,7 +44,9 @@ public class Board extends Pane {
         doEventsChangeTerrain();
     }
 
-    
+	/**
+	 * Met à jour la grille à partir de l'état actuel de la Fourmiliere.
+	 */
     public void updateGrid() {
         for (int i = 0; i < gridheight+2; i++) {
             for (int j = 0; j < gridwidth+2; j++) {
@@ -75,6 +81,9 @@ public class Board extends Pane {
         }
     }
     
+    /**
+     * Remet à zéro la grille (toutes les cases sont blanches).
+     */
     public void resestGrid() {
     	 for (int i = 0; i < gridheight+2; i++){
              for (int j = 0; j < gridwidth+2; j++){
@@ -84,6 +93,12 @@ public class Board extends Pane {
     	 }
     }
     
+    /**
+     * Ajoute une fourmi à la case (x, y) et crée une instance de la classe Ant à cette position.
+     * @param x         Coordonnée x de la case.
+     * @param y         Coordonnée y de la case.
+     * @param Hasseed   Si la fourmi a une graine.
+     */
     private void addAnt(int x , int y , boolean Hasseed) {
     	Ant ant = new Ant(cellSize/2,x*cellSize+(cellSize/2),y*cellSize+(cellSize/2), Hasseed);
     	ant.changeColorAnt();
@@ -91,6 +106,11 @@ public class Board extends Pane {
     	this.getChildren().add(ant);
     }
     
+    /**
+     * Supprime la fourmi de la case (x, y) en parcourant les enfants du Pane et en supprimant la fourmi correspondante.
+     * @param x     Coordonnée x de la case.
+     * @param y     Coordonnée y de la case.
+     */
     private void removeAnt(int x, int y) {
         for (Node node : this.getChildren()) {
             if (node instanceof Ant) {
@@ -104,7 +124,11 @@ public class Board extends Pane {
         }
     }
     
+    /**
+     * Configure les événements de la souris pour changer l'état de la grille (ajout de fourmi ou changement d'état du mur).
+     */
     private void doEventsChangeTerrain() {
+    	//pour l'ajout des murs
 	    setOnMouseClicked(event -> {
 		        int x = (int) (event.getX() / cellSize);
 		        int y = (int) (event.getY() / cellSize);
@@ -121,7 +145,7 @@ public class Board extends Pane {
     	        updateGrid();
     	    });
     	    
-	    
+	    //Pour l'ajout des graines
 	    setOnScroll(event -> {
 	        int x = (int) (event.getX() / cellSize);
 	        int y = (int) (event.getY() / cellSize);
@@ -129,18 +153,18 @@ public class Board extends Pane {
 	        if(!antColony.getMur(x, y)) {
 	        	if (event.getDeltaY() > 0) {
 		            antColony.setQteGraines(x, y, antColony.getQteGraines(x, y) + 1);
-		           // antColony.MAJNbGrainesTotal();
 		          
 		        } else {
 		            antColony.setQteGraines(x, y, antColony.getQteGraines(x, y) - 1);
-		          //  antColony.MAJNbGrainesTotal();
 		        }
 		        updateGrid();
 	        }
 	    });
     }
 
-    
+	//////////////////////
+	// SETTERS/GETTERS 
+	//
     public int getGridheight() {
 		return gridheight;
 	}
