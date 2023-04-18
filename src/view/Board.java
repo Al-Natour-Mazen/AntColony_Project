@@ -21,7 +21,7 @@ public class Board extends Pane {
 
 	/**
 	 * Constructeur de la classe Board.
-	 * @param antColony    Une Fourmiliere pour laquelle le tableau sera créé.
+	 * @param antColony    Une Fourmiliere pour laquelle le plateau sera créé.
 	 */
 	public Board(Fourmiliere antColony) {
         this.antColony = antColony;
@@ -128,7 +128,7 @@ public class Board extends Pane {
      * Configure les événements de la souris pour changer l'état de la grille (ajout de fourmi ou changement d'état du mur).
      */
     private void doEventsChangeTerrain() {
-    	//pour l'ajout des murs
+    	//pour l'ajout des murs/fourmis
 	    setOnMouseClicked(event -> {
 		        int x = (int) (event.getX() / cellSize);
 		        int y = (int) (event.getY() / cellSize);

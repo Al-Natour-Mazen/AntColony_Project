@@ -14,7 +14,6 @@ public class Ant extends Circle{
 	   * @param x		coordonnee
 	   * @param y		abcisse
 	   * @param hasseed  vrai si la fourmi porte une graine
-	   * @return		 une fourmi
 	   */
 	public Ant(int taille,int x , int y, boolean hasseed) {
 		// TODO Auto-generated constructor stub
@@ -28,8 +27,8 @@ public class Ant extends Circle{
 	}
 	
 	/**
-	   * Change la couleur de la fourmi selon si elle porte une graine ou non
-	   */
+	* Change la couleur de la fourmi selon si elle porte une graine ou non
+	*/
 	public void changeColorAnt() {
 		if(HasSeed) {
 			this.setFill(Color.BLUE);
