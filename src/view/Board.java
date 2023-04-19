@@ -11,7 +11,7 @@ import model.Fourmiliere;
 public class Board extends Pane {
 
     private final Fourmiliere antColony;
-    private final static int cellSize = 10; // taille par défaut d'une cellule
+    private final static int cellSize = 20; // taille par défaut d'une cellule
 	
     private int gridheight;
 	private int gridwidth;
@@ -62,6 +62,7 @@ public class Board extends Pane {
         		    }
                 }else if (antColony.getMur(j, i)) {
                     cells[j][i].setFill(Color.BLACK);
+                    removeAnt(j, i); 
                 } else if (antColony.getQteGraines(j, i) > 0) {
                 	int seedLevel = antColony.getQteGraines(j, i);
                 	double ratio = (double) seedLevel / antColony.getQMax();

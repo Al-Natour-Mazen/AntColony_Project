@@ -121,6 +121,10 @@ public class ViewAntColony extends HBox{
 	public Button getConfirmerInit() {
 		return initTab.getConfirmerInit();
 	}
+	
+	public PlayPauseButton getplaypause() {
+		return infoTab.getPlaypause();
+	}
 
 
 	//////////////////////

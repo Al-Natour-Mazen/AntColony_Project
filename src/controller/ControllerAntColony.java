@@ -17,7 +17,7 @@ import view.MyParamTab;
 import view.ViewAntColony;
 
 /**
- * Le contrôleur pour la simulation de la fourmilière. Cette classe gère les interactions entre la vue et la fourmilière.
+ * Le controleur pour la simulation de la fourmiliere. Cette classe gere les interactions entre la vue et la fourmiliere.
  */
 public class ControllerAntColony {
 	
@@ -27,7 +27,7 @@ public class ControllerAntColony {
 	private final DoubleProperty SizeProperty;
 	
 	/**
-	 * Crée un nouveau contrôleur pour la simulation de la fourmilière.
+	 * Crée un nouveau contrleur pour la simulation de la fourmilière.
 	 *
 	 * @param colony la fourmilière utilisée dans la simulation
 	 * @param vue la vue utilisée pour afficher la simulation
@@ -46,6 +46,7 @@ public class ControllerAntColony {
 	
 	/**
 	 * Met en place l'événement de changement de capacité.
+	 * 
 	 */
 	private void doChangeCapEvent() {
 		viewantcolony.getConfirmerParamCap().setOnAction(e ->{
@@ -214,7 +215,12 @@ public class ControllerAntColony {
     	                antcolony.setMur(x, y, !antcolony.getMur(x, y));
 		            }
     	        }
-	        	viewantcolony.getPlateau().updateGrid();
+	        	//on regarde si la simualtion n'est pas encore
+	        	// si elle est encore alors ça ne sert à rien d'update le plateau 2 fois, si on le fait on risque d'avoir des fourmis fantomes pendant quelques tours
+	        	// sinon on va l'update 
+	        	// car si on met pas de condtion nous aurons des fourmis fantomes durant 1 tour chose qui n'est pas normal
+	        	if(!viewantcolony.getplaypause().getisPlaying())
+	        		viewantcolony.getPlateau().updateGrid();
     	    });
     	    
 	    //Pour l'ajout des graines
@@ -229,7 +235,12 @@ public class ControllerAntColony {
 		        } else {
 		            antcolony.setQteGraines(x, y, antcolony.getQteGraines(x, y) - 1);
 		        }
-	        	viewantcolony.getPlateau().updateGrid();
+	        	//on regarde si la simualtion n'est pas encore
+	        	// si elle est encore alors ça ne sert à rien d'update le plateau 2 fois
+	        	// sinon on va l'update 
+	        	// car si on met pas de condtion nous aurons des fourmis fantomes durant 1 tour chose qui n'est pas normal
+	        	if(!viewantcolony.getplaypause().getisPlaying())
+	        		viewantcolony.getPlateau().updateGrid();
 	        }
 	    });
     }
