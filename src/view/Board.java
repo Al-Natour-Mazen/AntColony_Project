@@ -11,7 +11,7 @@ import model.Fourmiliere;
 public class Board extends Pane {
 
     private final Fourmiliere antColony;
-    private final static int cellSize = 20; // taille par défaut d'une cellule
+    private final static int cellSize = 10; // taille par défaut d'une cellule
 	
     private int gridheight;
 	private int gridwidth;

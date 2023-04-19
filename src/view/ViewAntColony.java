@@ -48,7 +48,7 @@ public class ViewAntColony extends HBox{
 		/////////
 		left = new HBox();
 		plateau = new Board(antcolony);	
-		left.setPadding(new Insets(20));
+		left.setPadding(new Insets(40,20,40,20));
 		left.getChildren().add(plateau);
 		left.setAlignment(Pos.CENTER);
 		
