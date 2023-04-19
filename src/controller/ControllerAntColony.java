@@ -7,6 +7,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseButton;
 import javafx.scene.control.ButtonType;
 import model.Fourmiliere;
 import view.Board;
@@ -40,6 +41,7 @@ public class ControllerAntColony {
 		doResetEvent();
 		doChangeCapEvent();
 		doChangeTailleEvent();	
+		doEventsChangeTerrainBoard();
 	}
 	
 	/**
@@ -105,6 +107,7 @@ public class ControllerAntColony {
 					        doResetEvent();
 					        doChangeCapEvent();
 					        doChangeTailleEvent();
+					        doEventsChangeTerrainBoard();
 					        
 					        //On update la taille de la fentre principale
 					        //Techniquement ici ça ne sert à rien la varibale taille, c'est seulement pour update la prop et notifier dans le main pour adapter la taille de la fentre
@@ -192,6 +195,44 @@ public class ControllerAntColony {
 			}
 		});
 	}
+	
+	   /**
+     * Configure les événements de la souris pour changer l'état de la grille (ajout de fourmi ou changement d'état du mur).
+     */
+    private void doEventsChangeTerrainBoard() {
+    	//pour l'ajout des murs/fourmis
+    	viewantcolony.getPlateau().setOnMouseClicked(event -> {
+		        int x = (int) (event.getX() / viewantcolony.getPlateau().getCellSize());
+		        int y = (int) (event.getY() / viewantcolony.getPlateau().getCellSize());
+	        
+	        	if (event.getButton() == MouseButton.PRIMARY) {
+		            if (event.isShiftDown() && !antcolony.contientFourmi(x, y)) {
+		                // Ajoute une fourmi à la position (x, y)
+		                antcolony.ajouteFourmi(x, y);
+		            } else if (antcolony.getQteGraines(x, y) == 0) {
+	                	// Change l'état du mur à la position (x, y)
+    	                antcolony.setMur(x, y, !antcolony.getMur(x, y));
+		            }
+    	        }
+	        	viewantcolony.getPlateau().updateGrid();
+    	    });
+    	    
+	    //Pour l'ajout des graines
+    	viewantcolony.getPlateau().setOnScroll(event -> {
+	        int x = (int) (event.getX() / viewantcolony.getPlateau().getCellSize());
+	        int y = (int) (event.getY() / viewantcolony.getPlateau().getCellSize());
+	        
+	        if(!antcolony.getMur(x, y)) {
+	        	if (event.getDeltaY() > 0) {
+		            antcolony.setQteGraines(x, y, antcolony.getQteGraines(x, y) + 1);
+		          
+		        } else {
+		            antcolony.setQteGraines(x, y, antcolony.getQteGraines(x, y) - 1);
+		        }
+	        	viewantcolony.getPlateau().updateGrid();
+	        }
+	    });
+    }
 	
 	/**
 	 * Initialise le jeu avec des murs, des fourmis et des graines placés aléatoirement.

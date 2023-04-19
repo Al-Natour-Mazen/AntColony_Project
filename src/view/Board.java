@@ -2,7 +2,6 @@ package view;
 
 
 import javafx.scene.Node;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -41,7 +40,6 @@ public class Board extends Pane {
         }
         Ants = new Ant[gridheight+2][gridwidth+2];
         updateGrid();
-        doEventsChangeTerrain();
     }
 
 	/**
@@ -124,44 +122,6 @@ public class Board extends Pane {
         }
     }
     
-    /**
-     * Configure les événements de la souris pour changer l'état de la grille (ajout de fourmi ou changement d'état du mur).
-     */
-    private void doEventsChangeTerrain() {
-    	//pour l'ajout des murs/fourmis
-	    setOnMouseClicked(event -> {
-		        int x = (int) (event.getX() / cellSize);
-		        int y = (int) (event.getY() / cellSize);
-	        
-	        	if (event.getButton() == MouseButton.PRIMARY) {
-		            if (event.isShiftDown() && !antColony.contientFourmi(x, y)) {
-		                // Ajoute une fourmi à la position (x, y)
-		                antColony.ajouteFourmi(x, y);
-		            } else if (antColony.getQteGraines(x, y) == 0) {
-	                	// Change l'état du mur à la position (x, y)
-    	                antColony.setMur(x, y, !antColony.getMur(x, y));
-		            }
-    	        }
-    	        updateGrid();
-    	    });
-    	    
-	    //Pour l'ajout des graines
-	    setOnScroll(event -> {
-	        int x = (int) (event.getX() / cellSize);
-	        int y = (int) (event.getY() / cellSize);
-	        
-	        if(!antColony.getMur(x, y)) {
-	        	if (event.getDeltaY() > 0) {
-		            antColony.setQteGraines(x, y, antColony.getQteGraines(x, y) + 1);
-		          
-		        } else {
-		            antColony.setQteGraines(x, y, antColony.getQteGraines(x, y) - 1);
-		        }
-		        updateGrid();
-	        }
-	    });
-    }
-
 	//////////////////////
 	// SETTERS/GETTERS 
 	//
