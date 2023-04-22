@@ -4,6 +4,7 @@ package main;
 import controller.ControllerAntColony;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.Fourmiliere;
 import view.ViewAntColony;
@@ -37,6 +38,11 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Fourmilière");
         primaryStage.show();
+        
+        //Ajout d'un icon à la fentre 
+        Image icon = new Image(getClass().getResourceAsStream("icon.png"));
+        primaryStage.getIcons().add(icon);
+
     }
     
     public static void main(String[] args) {

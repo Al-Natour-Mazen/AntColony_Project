@@ -1,18 +1,19 @@
 package view;
 
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 /**
- * Cette classe représente une fenêtre de zoom pour afficher une zone plus détaillée d'un plateau de jeu.
- * Elle hérite de la classe Stage de JavaFX.
+ * Cette classe représente une fenêtre de zoom pour afficher une zone plus détaillée du plateau.
+ * Elle hérite de la classe Stage.
  */
 public class ZoomWindow extends Stage {
 
-    private final int cellSize = 20;
-    private final int zoomSize = 11;
+    private static final int cellSize = 20;
+    private static final int zoomSize = 11;
     private Pane thepane ;
     private final Board plateau;
     private int startX , startY;
@@ -56,6 +57,10 @@ public class ZoomWindow extends Stage {
         	updateZoomGrid();
         });
 
+        
+        //Ajout d'un icon à la fentre 
+        Image icon = new Image(getClass().getResourceAsStream("loupe-icon.png"));
+        getIcons().add(icon);
         // show la fenetre
         setScene(scene);
         setTitle("Zoom Window");
