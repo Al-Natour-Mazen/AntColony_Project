@@ -33,6 +33,11 @@ public class Main extends Application {
         	// Affichage de la fenêtre
         	primaryStage.show();
         });
+        
+        // si on ferme la fentre principale autrement qu'avec le bouton quitter, il faudra fermer la fenetre de zoom aussi
+        primaryStage.setOnCloseRequest(e -> {
+        	vue.getZoomedWindow().close();
+        });
    
         // Configuration de la fenêtre principale
         primaryStage.setScene(scene);

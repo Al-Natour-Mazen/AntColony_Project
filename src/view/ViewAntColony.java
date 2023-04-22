@@ -178,4 +178,8 @@ public class ViewAntColony extends HBox{
 		this.antcolony = antcolony;		
 	}
 	
+	public ZoomWindow getZoomedWindow() {
+		return infoTab.getZoomedWindow();
+	}
+	
 }
