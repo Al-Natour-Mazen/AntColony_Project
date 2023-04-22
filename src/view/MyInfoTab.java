@@ -73,7 +73,7 @@ public class MyInfoTab extends Tab {
 		buttonsGrid.setVgap(10); // espace vertical 
 		
 		//le btn de playpause
-		playpause = new PlayPauseButton(sizePlayBtn,antcolony,plateau,zoomedWindow);
+		playpause = new PlayPauseButton(sizePlayBtn,antcolony,plateau);
 		playpause.valueSpeedProperty().bind(vitesseSimulation.valueProperty());
 		
 		//on cree le btn loupe
@@ -88,6 +88,7 @@ public class MyInfoTab extends Tab {
 			        newZoomWindow.setOnCloseRequest(e -> {
 			            loupe.setDisable(false); // réactiver le bouton lorsque la fenêtre se ferme
 			            zoomWindowProperty.set(null); // réinitialiser la propriété à null
+			            playpause.setZoom(null); // On met à null la fenetre de zoom pour pas faire des update dans le service
 			        });
 			    }
 			});
@@ -97,6 +98,7 @@ public class MyInfoTab extends Tab {
 			    if (zoomWindowProperty.get() == null) { // vérifier si la propriété est à null
 			        zoomedWindow = new ZoomWindow(plateau);
 			        zoomWindowProperty.set(zoomedWindow); // affecter la nouvelle fenêtre à la propriété
+			        playpause.setZoom(zoomedWindow); // On met la fenetre de zoom pour faire des update dans le service
 			        if(tutoZoomWindow == 0) {
 			        	@SuppressWarnings("unused")
 						MyCustomAlert alert = new MyCustomAlert(AlertType.INFORMATION,"Tuto Zoom",null,">> Si vous souhaitez afficher le plateau principal dans le \n plateau zoome, il suffit de survoler avec votre \n souris le plateau principal :)");				     

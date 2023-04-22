@@ -26,8 +26,8 @@ public class PlayPauseButton extends Button {
     
 	private final Fourmiliere antcolony;
 	private final Board plateau;
-	private final ZoomWindow zoom;
-	
+	private ZoomWindow zoom;
+
 	private final DoubleProperty valueSpeedProperty;
 	private final BooleanProperty isPlayingProperty;  
 	private final static int DefaultSpeed = 1;
@@ -79,10 +79,8 @@ public class PlayPauseButton extends Button {
      * @param size La taille du bouton.
      * @param fm La fourmilière à faire évoluer.
      * @param board Le plateau de jeu.
-     * @param zoomepane La fenêtre de zoom.
      */
-    public PlayPauseButton(int size, Fourmiliere fm, Board board, ZoomWindow zoomepane) {
-    	this.zoom = zoomepane;
+    public PlayPauseButton(int size, Fourmiliere fm, Board board) {
 		this.antcolony =fm;
 		this.plateau = board;
 		this.size = size;
@@ -156,4 +154,16 @@ public class PlayPauseButton extends Button {
     public void setisPlaying(boolean val) {
 	  isPlayingProperty.set(val);
     }	
+    
+	
+	public ZoomWindow getZoom() {
+		return zoom;
+	}
+
+
+	public void setZoom(ZoomWindow zoom) {
+		this.zoom = zoom;
+	}
+
+    
 }
