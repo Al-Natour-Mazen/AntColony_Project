@@ -28,8 +28,8 @@ public class PlayPauseButton extends Button {
 	private final Board plateau;
 	private ZoomWindow zoom;
 
-	private final DoubleProperty valueSpeedProperty;
-	private final BooleanProperty isPlayingProperty;  
+	private DoubleProperty valueSpeedProperty;
+	private BooleanProperty isPlayingProperty;  
 	private final static int DefaultSpeed = 1;
 	private final static boolean DefaultisPlaying = false;   
 	

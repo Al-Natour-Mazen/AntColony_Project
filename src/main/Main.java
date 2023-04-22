@@ -25,7 +25,7 @@ public class Main extends Application {
         // Configuration de la scène
         Scene scene = new Scene(vue);
         
-        // Lier la taille de la scène à la taille de la vue qui change via le controller
+        // on met un ecouteur sur la taille de la vue qui change via le controller pour changer la taille de la scène à un changement
         controller.SizeProperty().addListener((obs, oldVal, newVal) -> {
         	// Redimensionnement de la fenêtre en fonction de la nouvelle taille préférée de la scène
         	primaryStage.sizeToScene();
