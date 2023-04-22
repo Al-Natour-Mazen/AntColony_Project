@@ -28,7 +28,7 @@ public class MyParamTab extends Tab{
 	 * @param antcol la fourmilière à afin d'afficher la quantité max des graines par case
 	*/
 	public MyParamTab(MyInfoTab infotab, Fourmiliere antcol) {
-		super("Paramètres");
+		super("Parametres");
 		setClosable(false);
 		//on ne peut pas changer les parametres si on est en pleine simulation
 		disableProperty().bind(infotab.getPlaypause().isPlayingProperty());

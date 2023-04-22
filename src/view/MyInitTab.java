@@ -39,10 +39,10 @@ public class MyInitTab extends Tab{
 		probaFourmi = new LabelTextField("Nombre de Fourmi :");
 		probaFourmi.setTextFieldInput("8");
 		
-		probagraines = new LabelTextField("Densité des Graines :");
+		probagraines = new LabelTextField("Densite des Graines :");
 		probagraines.setTextFieldInput("110");
 		
-		probamurs = new LabelTextField("Densité des Murs :");
+		probamurs = new LabelTextField("Densite des Murs :");
 		probamurs.setTextFieldInput("140");
 	
 		//Le btn pour confirmer

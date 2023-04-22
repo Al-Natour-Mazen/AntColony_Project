@@ -42,7 +42,7 @@ public class Main extends Application {
    
         // Configuration de la fenêtre principale
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Fourmilière");
+        primaryStage.setTitle("Fourmiliere");
         primaryStage.show();
         
         //Ajout d'un icon à la fentre 
