@@ -36,7 +36,8 @@ public class Main extends Application {
         
         // si on ferme la fentre principale autrement qu'avec le bouton quitter, il faudra fermer la fenetre de zoom aussi
         primaryStage.setOnCloseRequest(e -> {
-        	vue.getZoomedWindow().close();
+        	if(vue.getZoomedWindow() != null)
+        		vue.getZoomedWindow().close();
         });
    
         // Configuration de la fenêtre principale
