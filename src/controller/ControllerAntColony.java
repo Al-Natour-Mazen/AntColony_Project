@@ -56,15 +56,15 @@ public class ControllerAntColony {
 			    if (cap > 0 ) {
 			    	antcolony.setQMax((int)cap);
 			    	@SuppressWarnings("unused")
-					MyCustomAlert alert = new MyCustomAlert(AlertType.INFORMATION,"Succès",null,"La nouvelle capacité a été prise en compte !");
+					MyCustomAlert alert = new MyCustomAlert(AlertType.INFORMATION,"Succes",null,"La nouvelle capacite a ete prise en compte !");
 			    } else {
 				    @SuppressWarnings("unused")
-				    MyCustomAlert alert = new MyCustomAlert(AlertType.INFORMATION,"Erreur",null,"La nouvelle capacité doit être superieur à 0 !");
+				    MyCustomAlert alert = new MyCustomAlert(AlertType.INFORMATION,"Erreur",null,"La nouvelle capacite doit etre superieur à 0 !");
 			    }
 			} catch (NumberFormatException expt) {
 			    // Afficher un message d'erreur si les entrées ne sont pas des nombres valides
 				 @SuppressWarnings("unused")
-				MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"L'entrée doit être un nombre valide.");
+				MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"L'entree doit être un nombre valide.");
 			}
 		});
 	}
@@ -76,7 +76,7 @@ public class ControllerAntColony {
 		viewantcolony.getConfirmerParamTaille().setOnAction(e -> {		
 			 if(myCustomeAlerteConfirm("Change Taille Simulation",
 			    		"Voulez-vous vraiment Changer la taille du plateau  ?",
-			    		"Tout progrès sera perdu !")) { 
+			    		"Tout progres sera perdu !")) { 
 				 //on recupere la taille
 				 	String newtaille = viewantcolony.getChangeTaille().getTextFieldInput();
 					try {
@@ -115,17 +115,17 @@ public class ControllerAntColony {
 					        setSize(taille);
 					        
 					        @SuppressWarnings("unused")
-							MyCustomAlert alert = new MyCustomAlert(AlertType.INFORMATION,"Succès",null,"La nouvelle taille a été prise en compte !"); 
+							MyCustomAlert alert = new MyCustomAlert(AlertType.INFORMATION,"Succes",null,"La nouvelle taille a ete prise en compte !"); 
 					        
 					    } else {
 					        // Afficher un message d'erreur si les nombres ne sont pas positifs
 					    	 @SuppressWarnings("unused")
-							MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"L'entrée doit être un nombre superieur ou égale à 20 (taille minimale d'une fourmiliere).");
+							MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"L'entree doit etre un nombre superieur ou egale à 20 (taille minimale d'une fourmiliere).");
 					    }
 					} catch (NumberFormatException expt) {
 					    // Afficher un message d'erreur si l'entrée n est pas un nombre valide
 						 @SuppressWarnings("unused")
-						MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"L'entrée doit être un nombre valide.");
+						MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"L'entree doit être un nombre valide.");
 					}
 			    }	
 		});		 	
@@ -137,8 +137,8 @@ public class ControllerAntColony {
 	private void doResetEvent() {
 		viewantcolony.getReset().setOnAction(e -> {
 		    if(myCustomeAlerteConfirm("Reset Simulation",
-		    		"Voulez-vous vraiment réinitialiser la simulation ?",
-		    		"Tout progrès sera perdu !")) {
+		    		"Voulez-vous vraiment reinitialiser la simulation ?",
+		    		"Tout progres sera perdu !")) {
 		    	resetGame();
 		    }
 		    
@@ -153,10 +153,10 @@ public class ControllerAntColony {
 		viewantcolony.getInit().setOnAction(e ->{
 		    if(myCustomeAlerteConfirm("Init Simulation",
 		    		"Voulez-vous vraiment initialiser la simulation ?",
-		    		"Tout progrès sera perdu !")) {
+		    		"Tout progrss sera perdu !")) {
 		    	if(nbfourmi == 0 || nbgraines == 0 || nbmurs == 0) {
 		    		@SuppressWarnings("unused")
-					MyCustomAlert alert = new MyCustomAlert(AlertType.WARNING,"Attention",null,"Vous avez oublié de confirmer les valeurs d'initialisations !");
+					MyCustomAlert alert = new MyCustomAlert(AlertType.WARNING,"Attention",null,"Vous avez oublie de confirmer les valeurs d'initialisations !");
 		    	}else {
 		    	  	resetGame();
 			       	initAleatoire(nbmurs,nbfourmi,nbgraines);
@@ -183,16 +183,16 @@ public class ControllerAntColony {
 					nbfourmi = (int) Knbfourmi;
 					nbgraines = (int) Knbgraines;
 			        @SuppressWarnings("unused")
-					MyCustomAlert alert = new MyCustomAlert(AlertType.INFORMATION,"Confirmation",null,"Les valeurs d'initialisations ont été prise en compte !");
+					MyCustomAlert alert = new MyCustomAlert(AlertType.INFORMATION,"Confirmation",null,"Les valeurs d'initialisations ont ete prise en compte !");
 			    } else {
 			        // Afficher un message d'erreur si les nombres ne sont pas positifs
 			        @SuppressWarnings("unused")
-					MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres positifs.");
+					MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrees doivent etre des nombres positifs.");
 			    }	    
 			} catch (NumberFormatException expt) {
 			    // Afficher un message d'erreur si les entrées ne sont pas des nombres valides
 			    @SuppressWarnings("unused")
-				MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrées doivent être des nombres valides.");
+				MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrees doivent etre des nombres valides.");
 			}
 		});
 	}
