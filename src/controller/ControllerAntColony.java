@@ -203,7 +203,8 @@ public class ControllerAntColony {
     private void doEventsChangeTerrainBoard() {
     	//pour l'ajout des murs/fourmis
     	viewantcolony.getPlateau().setOnMouseClicked(event -> {
-		        int x = (int) (event.getX() / viewantcolony.getPlateau().getCellSize());
+    		if(!viewantcolony.getplaypause().getisPlaying()) {
+    			int x = (int) (event.getX() / viewantcolony.getPlateau().getCellSize());
 		        int y = (int) (event.getY() / viewantcolony.getPlateau().getCellSize());
 	        
 	        	if (event.getButton() == MouseButton.PRIMARY) {
@@ -215,32 +216,30 @@ public class ControllerAntColony {
     	                antcolony.setMur(x, y, !antcolony.getMur(x, y));
 		            }
     	        }
-	        	//on regarde si la simualtion n'est pas encore
-	        	// si elle est encore alors ça ne sert à rien d'update le plateau 2 fois, si on le fait on risque d'avoir des fourmis fantomes pendant quelques tours
-	        	// sinon on va l'update 
-	        	// car si on met pas de condtion nous aurons des fourmis fantomes durant 1 tour chose qui n'est pas normal
-	        	if(!viewantcolony.getplaypause().getisPlaying())
-	        		viewantcolony.getPlateau().updateGrid();
-    	    });
+	        	viewantcolony.getPlateau().updateGrid(); // on MAJ le plateau
+	        	if(viewantcolony.getZoomedWindow() != null) // on MAJ le plateau zoom s'il existe
+	        		viewantcolony.getZoomedWindow().updateZoomGrid();
+    		}
+		        
+    	});
     	    
 	    //Pour l'ajout des graines
     	viewantcolony.getPlateau().setOnScroll(event -> {
-	        int x = (int) (event.getX() / viewantcolony.getPlateau().getCellSize());
-	        int y = (int) (event.getY() / viewantcolony.getPlateau().getCellSize());
-	        
-	        if(!antcolony.getMur(x, y)) {
-	        	if (event.getDeltaY() > 0) {
-		            antcolony.setQteGraines(x, y, antcolony.getQteGraines(x, y) + 1);
-		          
-		        } else {
-		            antcolony.setQteGraines(x, y, antcolony.getQteGraines(x, y) - 1);
-		        }
-	        	//on regarde si la simualtion n'est pas encore
-	        	// si elle est encore alors ça ne sert à rien d'update le plateau 2 fois
-	        	// sinon on va l'update 
-	        	// car si on met pas de condtion nous aurons des fourmis fantomes durant 1 tour chose qui n'est pas normal
-	        	if(!viewantcolony.getplaypause().getisPlaying())
-	        		viewantcolony.getPlateau().updateGrid();
+    		if(!viewantcolony.getplaypause().getisPlaying()) {
+    			  int x = (int) (event.getX() / viewantcolony.getPlateau().getCellSize());
+    		        int y = (int) (event.getY() / viewantcolony.getPlateau().getCellSize());
+    		        
+    		        if(!antcolony.getMur(x, y)) {
+    		        	if (event.getDeltaY() > 0) {
+    			            antcolony.setQteGraines(x, y, antcolony.getQteGraines(x, y) + 1);
+    			          
+    			        } else {
+    			            antcolony.setQteGraines(x, y, antcolony.getQteGraines(x, y) - 1);
+    			        }
+    		        	viewantcolony.getPlateau().updateGrid(); // on MAJ le plateau
+    		        	if(viewantcolony.getZoomedWindow() != null) // on MAJ le plateau zoom s'il existe
+    		        		viewantcolony.getZoomedWindow().updateZoomGrid();
+    		        }
 	        }
 	    });
     }
