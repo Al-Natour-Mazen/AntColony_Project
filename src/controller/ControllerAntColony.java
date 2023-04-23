@@ -75,7 +75,7 @@ public class ControllerAntColony {
 	private void doChangeTailleEvent() {
 		viewantcolony.getConfirmerParamTaille().setOnAction(e -> {		
 			 if(myCustomeAlerteConfirm("Change Taille Simulation",
-			    		"Voulez-vous vraiment Changer la taille du plateau  ?",
+			    		"Voulez-vous vraiment changer la taille du plateau ?",
 			    		"Tout progres sera perdu !")) { 
 				 //on recupere la taille
 				 	String newtaille = viewantcolony.getChangeTaille().getTextFieldInput();
@@ -151,7 +151,7 @@ public class ControllerAntColony {
 	
 
 	/**
-	 * Met en place l'événement d'initialisation.
+	 * Met en place les evenements d'initialisation.
 	 */
 	private void doInitEvents() {
 		viewantcolony.getInit().setOnAction(e ->{
@@ -233,6 +233,7 @@ public class ControllerAntColony {
     private void doEventsChangeTerrainBoard() {
     	//pour l'ajout des murs/fourmis
     	viewantcolony.getPlateau().setOnMouseClicked(event -> {
+    		//on fait les changements seulement si la simulation n'est pas en mode play
     		if(!viewantcolony.getplaypause().getisPlaying()) {
     			int x = (int) (event.getX() / viewantcolony.getPlateau().getCellSize());
 		        int y = (int) (event.getY() / viewantcolony.getPlateau().getCellSize());
@@ -255,6 +256,7 @@ public class ControllerAntColony {
     	    
 	    //Pour l'ajout des graines
     	viewantcolony.getPlateau().setOnScroll(event -> {
+    		//on fait les changements seulement si la simulation n'est pas en mode play
     		if(!viewantcolony.getplaypause().getisPlaying()) {
     			  int x = (int) (event.getX() / viewantcolony.getPlateau().getCellSize());
     		        int y = (int) (event.getY() / viewantcolony.getPlateau().getCellSize());
