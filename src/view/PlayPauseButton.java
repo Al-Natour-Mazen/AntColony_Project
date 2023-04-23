@@ -108,20 +108,19 @@ public class PlayPauseButton extends Button {
             	if(zoom != null)
         			zoom.updateZoomGrid();
                 setGraphic(imageViewPlay); // on change l'image du btn
-                // on arrete le service et on MAJ la property
+                // on arrete le service et on MAJ la property isPlaying
                 setisPlaying(false); 
                 service.cancel();
             } else {
                 // Passer en mode play
             	plateau.setdisplayGrids(false); // on enleve les grilles du plateau 
                 setGraphic(imageViewPause); // on change l'image du btn
-                // on relance le service et on MAJ la property
+                // on relance le service et on MAJ la property isPlaying
                 setisPlaying(true);
                 service.restart();
             }
         });
         
-	
         setStyle("-fx-background-color: transparent;");
     }
     

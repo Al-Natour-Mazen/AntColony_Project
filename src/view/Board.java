@@ -87,9 +87,9 @@ public class Board extends Pane {
             	final int ibis = i;
             	final int jbis = j;
             	displayGridsProperty.addListener((obs, oldVal, newVal) -> {
-            		if(newVal)
+            		if(newVal) // on les affiche
             			cells[jbis][ibis].setStroke(Color.BLACK);
-            		else
+            		else // sinon on les affiche pas
             			cells[jbis][ibis].setStroke(null);
             	});
             }
