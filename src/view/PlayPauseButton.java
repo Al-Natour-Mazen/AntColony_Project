@@ -160,12 +160,9 @@ public class PlayPauseButton extends Button {
 	  isPlayingProperty.set(val);
     }	
     
-	
 	public ZoomWindow getZoom() {
 		return zoom;
 	}
-
-
 	public void setZoom(ZoomWindow zoom) {
 		this.zoom = zoom;
 	}
