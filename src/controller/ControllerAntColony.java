@@ -111,7 +111,7 @@ public class ControllerAntColony {
 					        doEventsChangeTerrainBoard();
 					        
 					        //On update la taille de la fentre principale
-					        //Techniquement ici ça ne sert à rien la varibale taille, c'est seulement pour update la prop et notifier dans le main pour adapter la taille de la fentre
+					        //Techniquement ici la varibale taille ne sert à rien, c'est seulement pour update la prop et notifier dans le main pour adapter la taille de la fentre
 					        setSize(taille);
 					        
 					        @SuppressWarnings("unused")
