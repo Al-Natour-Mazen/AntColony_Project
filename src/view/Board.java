@@ -1,6 +1,8 @@
 package view;
 
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -17,6 +19,9 @@ public class Board extends Pane {
 	private int gridwidth;
 	private Rectangle[][] cells;
 	private Ant[][] Ants;
+	
+	private BooleanProperty displayGridsProperty;
+	private final static boolean DefaultDisplay = true;
 
 	/**
 	 * Constructeur de la classe Board.
@@ -39,6 +44,7 @@ public class Board extends Pane {
             }
         }
         Ants = new Ant[gridheight+2][gridwidth+2];
+        displayGridsProperty = new SimpleBooleanProperty(DefaultDisplay);
         updateGrid();
     }
 
@@ -76,6 +82,16 @@ public class Board extends Pane {
                     cells[j][i].setFill(Color.WHITE);
               	    removeAnt(j, i); 
                 }
+            	
+            	//Pour changer automatiquement les grilles (les afficher ou pas)
+            	final int ibis = i;
+            	final int jbis = j;
+            	displayGridsProperty.addListener((obs, oldVal, newVal) -> {
+            		if(newVal)
+            			cells[jbis][ibis].setStroke(Color.BLACK);
+            		else
+            			cells[jbis][ibis].setStroke(null);
+            	});
             }
         }
     }
@@ -144,4 +160,17 @@ public class Board extends Pane {
     public int getCellSize() {
 		return cellSize;
 	}
+    
+    public BooleanProperty displayGridsProperty() {
+        return displayGridsProperty;
+    }
+
+    public Boolean getdisplayGrids() {
+        return displayGridsProperty.get();
+    }
+
+    public void setdisplayGrids(Boolean value) {
+    	displayGridsProperty.set(value);
+    }
+    
 }

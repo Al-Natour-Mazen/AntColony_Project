@@ -160,7 +160,9 @@ public class ControllerAntColony {
 		    	}else {
 		    	  	resetGame();
 			       	initAleatoire(nbmurs,nbfourmi,nbgraines);
-					viewantcolony.getPlateau().updateGrid();
+					viewantcolony.getPlateau().updateGrid(); // on MAJ le plateau 
+					if(viewantcolony.getZoomedWindow() != null) // on MAJ le plateau zoom s'il existe
+		        		viewantcolony.getZoomedWindow().updateZoomGrid();
 					antcolony.MAJNbGrainesTotal();
 		    	}
 		    }
@@ -289,6 +291,8 @@ public class ControllerAntColony {
 	public void resetGame() {
 		antcolony.resetModel();
 		viewantcolony.getPlateau().resestGrid();
+    	if(viewantcolony.getZoomedWindow() != null) // on MAJ le plateau zoom s'il existe
+    		viewantcolony.getZoomedWindow().updateZoomGrid();
 	}
 
 	/**

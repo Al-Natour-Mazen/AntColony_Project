@@ -43,7 +43,7 @@ public class PlayPauseButton extends Button {
             return new Task<>() {
                 @Override
                 protected Void call() throws Exception {
-                    while (getisPlaying()) {
+                    while (getisPlaying() && !isCancelled()) {
                     	Platform.runLater(()->{
                 			antcolony.evolue();
                     		plateau.updateGrid();
@@ -104,12 +104,18 @@ public class PlayPauseButton extends Button {
         setOnAction(event -> {
             if (getisPlaying()) {
                 // Passer en mode pause
-                setGraphic(imageViewPlay);
-                setisPlaying(false);
+            	plateau.setdisplayGrids(true); // on remet les grilles du plateau 
+            	if(zoom != null)
+        			zoom.updateZoomGrid();
+                setGraphic(imageViewPlay); // on change l'image du btn
+                // on arrete le service et on MAJ la property
+                setisPlaying(false); 
                 service.cancel();
             } else {
                 // Passer en mode play
-                setGraphic(imageViewPause);
+            	plateau.setdisplayGrids(false); // on enleve les grilles du plateau 
+                setGraphic(imageViewPause); // on change l'image du btn
+                // on relance le service et on MAJ la property
                 setisPlaying(true);
                 service.restart();
             }
