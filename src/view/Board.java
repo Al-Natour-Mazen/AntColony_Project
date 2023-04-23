@@ -102,8 +102,8 @@ public class Board extends Pane {
     public void resestGrid() {
     	 for (int i = 0; i < gridheight+2; i++){
              for (int j = 0; j < gridwidth+2; j++){
-                     cells[j][i].setFill(Color.WHITE);   
-                     removeAnt(j, i);
+            	    removeAnt(j, i);
+                    cells[j][i].setFill(Color.WHITE);   
              }
     	 }
     }

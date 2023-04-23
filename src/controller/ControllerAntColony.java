@@ -180,14 +180,9 @@ public class ControllerAntColony {
 			    double Knbfourmi = Double.parseDouble(fourmi);
 			    double Knbgraines = Double.parseDouble(graines);
 			    
-
-			    
-			  
 				if (Knbmurs > 0 && Knbfourmi > 0 && Knbgraines > 0) {
 					
-				    
 				    //On fait des verficataion car si on met un nombre trop eleve par rapport à la taille le modele aura tendance de crash
-				
 					int nbMaxFourmis = (int) (antcolony.getHauteur() * antcolony.getLargeur()* 0.046); 
 				    boolean nbFourmisValid = nbMaxFourmis >= Knbfourmi;
 
@@ -198,7 +193,6 @@ public class ControllerAntColony {
 				    int nbMursMax = (int) (nbCasesInterieures * 0.47); 
 				    boolean densiteMursValid = nbMursMax >= Knbmurs;
 				    
-
 					int nbGrainesMax = (int) (((nbCasesInterieures * antcolony.getQMax()) - nbMursMax)* 0.15);
 					boolean densiteGrainesValid = nbGrainesMax >= Knbgraines; // par exemple, maximum de graines arbitraire
 									    
@@ -212,7 +206,7 @@ public class ControllerAntColony {
 				    else {
 				    	@SuppressWarnings("unused")
 						MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur","Pour un plateau de taille "+ antcolony.getHauteur()+ "*"+ antcolony.getLargeur() +
-																						", les valeurs d'initialisations max sont : \n" ," * Nombre de Fourmi : " + nbMaxFourmis + "\n" +
+																						", les valeurs max d'initialisations sont : \n" ," * Nombre de Fourmi : " + nbMaxFourmis + "\n" +
 																																		 " * Densite des Graines : " + nbGrainesMax + "\n" + 
 																																		 " * Densite des Murs : " + nbMursMax );
 				    }

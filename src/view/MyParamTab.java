@@ -43,6 +43,7 @@ public class MyParamTab extends Tab{
 		confirmerParamTaille = new Button("Confirmer");
 		SetStyleBtn(confirmerParamTaille);
 		changeTaille.getTextField().setMaxWidth(40);
+		changeTaille.setTextFieldInput(String.valueOf(antcol.getHauteur()));
 		changeTaille.getChildren().add(confirmerParamTaille);
 		
 		changecapacite = new LabelTextField("Capacite max graines :");
