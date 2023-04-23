@@ -94,6 +94,10 @@ public class ControllerAntColony {
 					        this.setAntcolony(nvFormuliere);
 					        viewantcolony.setAntcolony(nvFormuliere);
 					        
+					        // on Ferme l'ancienne fenetre de zoom s'elle existe car on va changer de plateau
+				        	if(viewantcolony.getZoomedWindow() != null) 
+				        		viewantcolony.getZoomedWindow().close();
+					        
 					        //On creer les 2 nouvelles onglets pour synchroniser les informations avec la nouvelle fourmiliere
 					        MyInfoTab nvinfo = new MyInfoTab(nvFormuliere, nvplateau);
 					        MyParamTab nvparam = new MyParamTab(nvinfo, nvFormuliere);
@@ -182,19 +186,19 @@ public class ControllerAntColony {
 			    
 				if (Knbmurs > 0 && Knbfourmi > 0 && Knbgraines > 0) {
 					
-				    //On fait des verficataion car si on met un nombre trop eleve par rapport à la taille le modele aura tendance de crash
-					int nbMaxFourmis = (int) (antcolony.getHauteur() * antcolony.getLargeur()* 0.046); 
+				    //On fait des verficataion car si on met un nombre trop eleve par rapport à la taille du plateau, le modele aura tendance à crash
+					int nbMaxFourmis = (int) (antcolony.getHauteur() * antcolony.getLargeur()* 0.076); 
 				    boolean nbFourmisValid = nbMaxFourmis >= Knbfourmi;
 
 				    int nbCases =  antcolony.getLargeur() * antcolony.getHauteur();
 				    int nbCasesBordure = ( antcolony.getLargeur() + antcolony.getHauteur()) * 2;
 				    int nbCasesInterieures = nbCases - nbCasesBordure;
 				    
-				    int nbMursMax = (int) (nbCasesInterieures * 0.47); 
+				    int nbMursMax = (int) (nbCasesInterieures * 0.55); 
 				    boolean densiteMursValid = nbMursMax >= Knbmurs;
 				    
-					int nbGrainesMax = (int) (((nbCasesInterieures * antcolony.getQMax()) - nbMursMax)* 0.15);
-					boolean densiteGrainesValid = nbGrainesMax >= Knbgraines; // par exemple, maximum de graines arbitraire
+					int nbGrainesMax = (int) (((nbCasesInterieures * antcolony.getQMax()) - nbMursMax)* 0.21);
+					boolean densiteGrainesValid = nbGrainesMax >= Knbgraines; 
 									    
 				    if(densiteMursValid && nbFourmisValid && densiteGrainesValid) {
 				    	nbmurs = (int) Knbmurs;
