@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import model.Fourmiliere;
 
 /**
- * Classe représentant l'onglet d'informations dans l'interface graphique.
+ * Classe representant l'onglet d'informations dans l'interface graphique.
 */
 public class MyInfoTab extends Tab {
 
