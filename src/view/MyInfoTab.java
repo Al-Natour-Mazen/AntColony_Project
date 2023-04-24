@@ -39,8 +39,8 @@ public class MyInfoTab extends Tab {
 	
 	/**
 	 * Constructeur de la classe MyInfoTab.
-	 * @param antcol la fourmilière utilisée dans la simulation.
-	 * @param plat le plateau utilisé dans la simulation.
+	 * @param antcol la fourmiliere utilisee dans la simulation.
+	 * @param plat le plateau utilise dans la simulation.
 	*/
 	public MyInfoTab(Fourmiliere antcol,Board plat) {
 		super("Informations");
@@ -69,8 +69,9 @@ public class MyInfoTab extends Tab {
 		// les btn d'interaction
 		btnsBox = new HBox();
 		buttonsGrid = new GridPane();
-		buttonsGrid.setHgap(10); // espace horizontal 
-		buttonsGrid.setVgap(10); // espace vertical 
+		// espace horizontal & vertical 
+		buttonsGrid.setHgap(10); 
+		buttonsGrid.setVgap(10); 
 		
 		//le btn de playpause
 		playpause = new PlayPauseButton(sizePlayBtn,antcolony,plateau);
@@ -80,24 +81,24 @@ public class MyInfoTab extends Tab {
 	    loupe = new Button("Loupe");
 	    loupe.setMinWidth(20);
 	    SetStyleBtn(loupe);
-	    	//on cree la prop et on ajoute un listener afin d'ouvrir qu'une seule fentre zoome à la fois
+	    	//on cree la prop et on ajoute un listener afin d'ouvrir qu'une seule fentre zoome a la fois
 			zoomWindowProperty = new SimpleObjectProperty<>();
 			zoomWindowProperty.addListener((observable, oldZoomWindow, newZoomWindow) -> {
 			    if (newZoomWindow != null) {
-			        loupe.setDisable(true); // désactiver le bouton si la fenêtre est ouverte
+			        loupe.setDisable(true); // desactiver le bouton si la fenetre est ouverte
 			        newZoomWindow.setOnCloseRequest(e -> {
-			            loupe.setDisable(false); // réactiver le bouton lorsque la fenêtre se ferme
-			            zoomWindowProperty.set(null); // réinitialiser la propriété à null
-			            playpause.setZoom(null); // On met à null la fenetre de zoom pour pas faire des updates dans le service
+			            loupe.setDisable(false); // reactiver le bouton lorsque la fenêtre se ferme
+			            zoomWindowProperty.set(null); // reinitialiser la propriété à null
+			            playpause.setZoom(null); // On met a null la fenetre de zoom dans play/pausebtn pour pas faire des updates dans le service
 			        });
 			    }
 			});
 			
 			//on ajoute l'action au btn loupe
 			loupe.setOnAction(e -> {
-			    if (zoomWindowProperty.get() == null) { // vérifier si la propriété est à null
+			    if (zoomWindowProperty.get() == null) { // verifier si la proprieta est a null
 			        zoomedWindow = new ZoomWindow(plateau);
-			        zoomWindowProperty.set(zoomedWindow); // affecter la nouvelle fenêtre à la propriété
+			        zoomWindowProperty.set(zoomedWindow); // affecter la nouvelle fenetre a la propriete
 			        playpause.setZoom(zoomedWindow); // On met la fenetre de zoom pour faire des updates dans le service
 			        if(tutoZoomWindow == 0) {
 			        	@SuppressWarnings("unused")
@@ -115,15 +116,15 @@ public class MyInfoTab extends Tab {
 		SetStyleBtn(reset);
 
 		//On ajoute au grid
-		buttonsGrid.add(playpause, 0, 0); // ajouter playpause en haut à gauche
-		buttonsGrid.add(loupe, 1, 0); // ajouter loupe en haut à droite
-		buttonsGrid.add(init, 0, 1); // ajouter init en bas à gauche
-		buttonsGrid.add(reset, 1, 1); // ajouter reset en bas à droite
+		buttonsGrid.add(playpause, 0, 0); // ajouter playpause en haut a gauche
+		buttonsGrid.add(loupe, 1, 0); // ajouter loupe en haut a droite
+		buttonsGrid.add(init, 0, 1); // ajouter init en bas a gauche
+		buttonsGrid.add(reset, 1, 1); // ajouter reset en bas a droite
 		
 		btnsBox.getChildren().add(buttonsGrid);
 		btnsBox.setAlignment(Pos.CENTER);
 		
-		//ajouter à la VBOx
+		//ajouter a la VBOx
 		MySpring springinfobox = new MySpring("VBox");
 		MySpring springinfobox2 = new MySpring("VBox");
 		infoBox.getChildren().addAll(springinfobox,lvitesseSimu,vitesseSimulation,lfourmi,lgraines,lite,btnsBox,springinfobox2);
@@ -131,9 +132,9 @@ public class MyInfoTab extends Tab {
 	}
 	
 	/**
-	 * Méthode permettant de définir le style des boutons de l'interface en leur affectant une couleur de fond transparente
+	 * Methode permettant de definir le style des boutons de l'interface en leur affectant une couleur de fond transparente
 	 * et une bordure noire.
-	 * @param btn le bouton dont on souhaite définir le style
+	 * @param btn le bouton dont on souhaite definir le style
 	*/
 	private void SetStyleBtn(Button btn) {
 		btn.setStyle("-fx-background-color: transparent;-fx-border-color:black;");
