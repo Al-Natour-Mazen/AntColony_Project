@@ -8,9 +8,9 @@ import javafx.scene.layout.VBox;
 import model.Fourmiliere;
 
 /**
- * Cette classe représente l'onglet de paramètres de la simulation de la fourmilière.
- * Elle contient les éléments d'interaction permettant de modifier les paramètres de la simulation tels que la taille du plateau
- * ou la capacité maximale des graines dans la fourmilière.
+ * Cette classe represente l'onglet de parametres de la simulation de la fourmiliere.
+ * Elle contient les elements d'interaction permettant de modifier les paramètres de la simulation tels que la taille du plateau
+ * ou la capacite maximale des graines dans la fourmiliere.
 */
 public class MyParamTab extends Tab{
 	
@@ -25,7 +25,7 @@ public class MyParamTab extends Tab{
 	/**
 	 * Constructeur de la classe MyParamTab.
 	 * @param infotab l'onglet d'informations de la simulation
-	 * @param antcol la fourmilière à afin d'afficher la quantité max des graines par case
+	 * @param antcol la fourmiliere pour afficher la quantite max des graines par case
 	*/
 	public MyParamTab(MyInfoTab infotab, Fourmiliere antcol) {
 		super("Parametres");
@@ -60,9 +60,9 @@ public class MyParamTab extends Tab{
 	}
 	
 	/**
-	 * Méthode permettant de définir le style des boutons de l'interface en leur affectant une couleur de fond transparente
+	 * Methode permettant de definir le style des boutons de l'interface en leur affectant une couleur de fond transparente
 	 * et une bordure noire.
-	 * @param btn le bouton dont on souhaite définir le style
+	 * @param btn le bouton dont on souhaite definir le style
 	*/
 	private void SetStyleBtn(Button btn) {
 		btn.setStyle("-fx-background-color: transparent;-fx-border-color:black;");
