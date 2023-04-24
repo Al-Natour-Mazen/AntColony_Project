@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 import model.Fourmiliere;
 
 /**
- * ViewAntColony est une classe qui représente la vue principale de l'application.
+ * ViewAntColony est une classe qui represente la vue principale de l'application.
 */
 public class ViewAntColony extends HBox{
 
@@ -32,7 +32,7 @@ public class ViewAntColony extends HBox{
 	
 	/**
 	 * Constructeur de la classe ViewAntColony.
-	 * @param fm la fourmilière utilisée pour la simulation.
+	 * @param fm la fourmiliere utilisee pour la simulation.
 	*/
 	public ViewAntColony(Fourmiliere fm) {
 		this.antcolony = fm;
@@ -40,7 +40,7 @@ public class ViewAntColony extends HBox{
 	}
 
 	/**
-	 * Méthode qui initialise les différents composants de la vue et les organise dans les conteneurs appropriés.
+	 * Methode qui initialise les differents composants de la vue et les organise dans les conteneurs appropries.
 	*/
 	private void initComponent() {
 		/////////////////////
