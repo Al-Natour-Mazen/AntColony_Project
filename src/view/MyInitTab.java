@@ -7,7 +7,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
 
 /**
- * Classe représentant un onglet d'initialisation pour une simulation de fourmis.
+ * Classe representant un onglet d'initialisation pour une simulation de fourmis.
 */
 public class MyInitTab extends Tab{
 	
@@ -22,8 +22,8 @@ public class MyInitTab extends Tab{
 	private Label infoInit;
 	
 	/**
-	 * Constructeur par défaut de la classe MyInitTab.
-	 * Il initialise l'onglet avec les différents éléments nécessaires.
+	 * Constructeur par defaut de la classe MyInitTab.
+	 * Il initialise l'onglet avec les differents elements necessaires.
 	*/
 	public MyInitTab() {
 		super("Initialisations");
@@ -56,7 +56,7 @@ public class MyInitTab extends Tab{
 	}
 	
 	/**
-	 * Méthode permettant de définir le style des boutons de l'interface en leur affectant une couleur de fond transparente
+	 * Methode permettant de definir le style des boutons de l'interface en leur affectant une couleur de fond transparente
 	 * et une bordure noire.
 	 * @param btn le bouton dont on souhaite définir le style
 	*/
