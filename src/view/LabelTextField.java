@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 /**
- * Cette classe représente un élément d'interface graphique composé d'un label et d'un champ de texte pour la saisie de données.
+ * Cette classe represente un element d'interface graphique compose d'un label et d'un champ de texte pour la saisie de donnees.
 */
 public class LabelTextField extends HBox{
 	
@@ -14,8 +14,8 @@ public class LabelTextField extends HBox{
 	private TextField tf;
 
 	/**
-	 * Constructeur qui crée un élément LabelTextField.
-	 * @param text le texte du label associé au champ de texte
+	 * Constructeur qui cree un element LabelTextField.
+	 * @param text le texte du label associe au champ de texte
 	*/
 	public LabelTextField(String text) {
 		// TODO Auto-generated constructor stub
@@ -30,16 +30,16 @@ public class LabelTextField extends HBox{
 	
 	
 	/**
-	 * Méthode qui renvoie le texte saisi dans le champ de texte associé à l'élément LabelTextField.
-	 * @return le texte saisi dans le champ de texte associé à l'élément LabelTextField
+	 * Methode qui renvoie le texte saisi dans le champ de texte associe a l'element LabelTextField.
+	 * @return le texte saisi dans le champ de texte associe à l'element LabelTextField
 	*/
 	public String getTextFieldInput() {
 		return tf.getText();
 	}
 	
 	/**
-	 * Méthode qui définit le texte affiché dans le champ de texte associé à l'élément LabelTextField.
-	 * @param text le texte à afficher dans le champ de texte associé à l'élément LabelTextField
+	 * Methode qui definit le texte affiche dans le champ de texte associe a l'element LabelTextField.
+	 * @param text le texte a afficher dans le champ de texte associé a l'element LabelTextField
 	*/
 	public void setTextFieldInput(String text) {
 		tf.setText(text);
