@@ -27,10 +27,10 @@ public class ControllerAntColony {
 	private final DoubleProperty SizeProperty;
 	
 	/**
-	 * Crée un nouveau contrleur pour la simulation de la fourmilière.
+	 * Cree un nouveau contrleur pour la simulation de la fourmiliere.
 	 *
-	 * @param colony la fourmilière utilisée dans la simulation
-	 * @param vue la vue utilisée pour afficher la simulation
+	 * @param colony la fourmiliere utilisee dans la simulation
+	 * @param vue la vue utilisee pour afficher la simulation
 	 */
 	public ControllerAntColony(Fourmiliere colony, ViewAntColony vue) {
 		this.antcolony = colony;
@@ -45,7 +45,7 @@ public class ControllerAntColony {
 	}
 	
 	/**
-	 * Met en place l'événement de changement de capacité.
+	 * Met en place l'evenement de changement de capacite.
 	 * 
 	 */
 	private void doChangeCapEvent() {
@@ -62,7 +62,7 @@ public class ControllerAntColony {
 				    MyCustomAlert alert = new MyCustomAlert(AlertType.INFORMATION,"Erreur",null,"La nouvelle capacite doit etre superieur à 0 !");
 			    }
 			} catch (NumberFormatException expt) {
-			    // Afficher un message d'erreur si les entrées ne sont pas des nombres valides
+			    // Afficher un message d'erreur si les entrres ne sont pas des nombres valides
 				 @SuppressWarnings("unused")
 				MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"L'entree doit être un nombre valide.");
 			}
@@ -90,7 +90,7 @@ public class ControllerAntColony {
 					        Board nvplateau = new Board(nvFormuliere);	        
 					        viewantcolony.setPlateau(nvplateau);
 					        
-					        //On met à jour la nvl foumiliere dans la vue et dans le controller
+					        //On met a jour la nvl foumiliere dans la vue et dans le controller
 					        this.setAntcolony(nvFormuliere);
 					        viewantcolony.setAntcolony(nvFormuliere);
 					        
@@ -115,7 +115,7 @@ public class ControllerAntColony {
 					        doEventsChangeTerrainBoard();
 					        
 					        //On update la taille de la fentre principale
-					        //Techniquement ici la varibale taille ne sert à rien, c'est seulement pour update la prop et notifier dans le main pour adapter la taille de la fentre
+					        //Techniquement ici la varibale taille ne sert a rien, c'est seulement pour update la prop et notifier dans le main pour adapter la taille de la fentre
 					        setSize(taille);
 					        
 					        @SuppressWarnings("unused")
@@ -127,7 +127,7 @@ public class ControllerAntColony {
 							MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"L'entree doit etre un nombre superieur ou egale à 20 (taille minimale d'une fourmiliere).");
 					    }
 					} catch (NumberFormatException expt) {
-					    // Afficher un message d'erreur si l'entrée n est pas un nombre valide
+					    // Afficher un message d'erreur si l'entree n est pas un nombre valide
 						 @SuppressWarnings("unused")
 						MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"L'entree doit être un nombre valide.");
 					}
@@ -136,7 +136,7 @@ public class ControllerAntColony {
 	}
 	
 	/**
-	 * Met en place l'événement de réinitialisation.
+	 * Met en place l'evenement de reinitialisation.
 	 */
 	private void doResetEvent() {
 		viewantcolony.getReset().setOnAction(e -> {
@@ -175,7 +175,7 @@ public class ControllerAntColony {
 		
 		viewantcolony.getConfirmerInit().setOnAction(e -> {
 			
-			//On recupere les 3 entrées des textfields 
+			//On recupere les 3 entrees des textfields 
 			String fourmi = viewantcolony.getProbaFourmi().getTextFieldInput();
 			String graines = viewantcolony.getProbagraines().getTextFieldInput();
 			String murs = viewantcolony.getProbamurs().getTextFieldInput();
@@ -186,7 +186,7 @@ public class ControllerAntColony {
 			    
 				if (Knbmurs > 0 && Knbfourmi > 0 && Knbgraines > 0) {
 					
-				    //On fait des verficataion car si on met un nombre trop eleve par rapport à la taille du plateau, le modele aura tendance à crash
+					//On fait des verifications pour avoir un nombre raisonnable de fourmi et de murs et de graines proportionnellement au plateau
 					int nbMaxFourmis = (int) (antcolony.getHauteur() * antcolony.getLargeur()* 0.076); 
 				    boolean nbFourmisValid = nbMaxFourmis >= Knbfourmi;
 
@@ -220,7 +220,7 @@ public class ControllerAntColony {
 					MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrees doivent etre des nombres positifs, strictement superieur a 0.");
 			    }	    
 			} catch (NumberFormatException expt) {
-			    // Afficher un message d'erreur si les entrées ne sont pas des nombres valides
+			    // Afficher un message d'erreur si les entrees ne sont pas des nombres valides
 			    @SuppressWarnings("unused")
 				MyCustomAlert alert = new MyCustomAlert(AlertType.ERROR,"Erreur",null,"Les entrees doivent etre des nombres valides.");
 			}
@@ -228,7 +228,7 @@ public class ControllerAntColony {
 	}
 	
 	   /**
-     * Configure les événements de la souris pour changer l'état de la grille (ajout de fourmi ou changement d'état du mur).
+     * Configure les evenements de la souris pour changer l'etat de la grille (ajout de fourmi ou changement d'etat du mur).
      */
     private void doEventsChangeTerrainBoard() {
     	//pour l'ajout des murs/fourmis
@@ -240,10 +240,10 @@ public class ControllerAntColony {
 	        
 	        	if (event.getButton() == MouseButton.PRIMARY) {
 		            if (event.isShiftDown() && !antcolony.contientFourmi(x, y)) {
-		                // Ajoute une fourmi à la position (x, y)
+		                // Ajoute une fourmi a la position (x, y)
 		                antcolony.ajouteFourmi(x, y);
 		            } else if (antcolony.getQteGraines(x, y) == 0) {
-	                	// Change l'état du mur à la position (x, y)
+	                	// Change l'etat du mur a la position (x, y)
     	                antcolony.setMur(x, y, !antcolony.getMur(x, y));
 		            }
     	        }
@@ -277,22 +277,21 @@ public class ControllerAntColony {
     }
 	
 	/**
-	 * Initialise le jeu avec des murs, des fourmis et des graines placés aléatoirement.
-	 * @param nbMurs le nombre de murs à placer
-	 * @param nbFourmis le nombre maximal de fourmis à placer
-	 * @param nbGraines le nombre de graines à placer
+	 * Initialise le jeu avec des murs, des fourmis et des graines places aleatoirement.
+	 * @param nbMurs le nombre de murs a placer
+	 * @param nbFourmis le nombre maximal de fourmis a placer
+	 * @param nbGraines le nombre de graines a placer
 	*/
 	private void initAleatoire( int nbMurs,int nbFourmis, int nbGraines) {
-	    // Place nbMurs murs aléatoirement
+	    // Place nbMurs murs aleatoirement
 	    Random rand = new Random();
-	   // int nbMurs = rand.nextInt(antcolony.getHauteur()+antcolony.getLargeur()* rand.nextInt(randomMur)) / 2;
 	    for (int i = 0; i < nbMurs; i++) {
 	        int x = rand.nextInt(antcolony.getHauteur()) + 1;
 	        int y = rand.nextInt(antcolony.getLargeur()) + 1;
 	        antcolony.setMur(y, x, true);
 	    }
 	    
-	    // Place jusqu'à nbFourmis fourmis aléatoirement
+	    // Place jusqu'a nbFourmis fourmis aleatoirement
 	    int nbFourmisPlaces = 0;
 	    while (nbFourmisPlaces < nbFourmis) {
 	    	int x = rand.nextInt(antcolony.getHauteur()) + 1;
@@ -303,7 +302,7 @@ public class ControllerAntColony {
 	        }
 	    }
 	    
-	    // Place nbGraines graines aléatoirement
+	    // Place nbGraines graines aleatoirement
 	    for (int i = 0; i < nbGraines; i++) {
 	    	int x = rand.nextInt(antcolony.getHauteur()) + 1;
 		    int y = rand.nextInt(antcolony.getLargeur()) + 1;
@@ -316,7 +315,7 @@ public class ControllerAntColony {
 	}
 	
 	/**
-	 * Réinitialise le jeu en remettant les modèles et la vue à leur état initial.
+	 * Reinitialise le jeu en remettant les modeles et la vue a leur etat initial.
 	*/
 	public void resetGame() {
 		antcolony.resetModel();
@@ -326,11 +325,11 @@ public class ControllerAntColony {
 	}
 
 	/**
-	 * Affiche une boîte de dialogue personnalisée de confirmation.
-	 * @param title le titre de la boîte de dialogue
-	 * @param HeaderText le texte d'en-tête de la boîte de dialogue
-	 * @param ContentText le texte de contenu de la boîte de dialogue
-	 * @return true si l'utilisateur a appuyé sur le bouton OK, false sinon
+	 * Affiche une boite de dialogue personnalisee de confirmation.
+	 * @param title le titre de la boite de dialogue
+	 * @param HeaderText le texte d'en-tete de la boite de dialogue
+	 * @param ContentText le texte de contenu de la boite de dialogue
+	 * @return true si l'utilisateur a appuye sur le bouton OK, false sinon
 	*/
 	private boolean myCustomeAlerteConfirm(String title,String HeaderText, String ContentText) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
