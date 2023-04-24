@@ -14,23 +14,23 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
        
-    	// Création du modèle
+    	// Creation du modele
         Fourmiliere fourmiliere = new Fourmiliere(20, 20, 10);
      	
-        // Création de la vue
+        // Creation de la vue
         ViewAntColony vue = new ViewAntColony(fourmiliere);
         
-        // Création du contrôleur
+        // Creation du controleur
         ControllerAntColony controller = new ControllerAntColony(fourmiliere, vue);
                
-        // Configuration de la scène
+        // Configuration de la scene
         Scene scene = new Scene(vue);
         
-        // on met un ecouteur sur la taille de la vue qui change via le controller pour changer la taille de la scène à un changement
+        // on met un ecouteur sur la taille de la vue qui change via le controller pour changer la taille de la scene a un changement
         controller.SizeProperty().addListener((obs, oldVal, newVal) -> {
-        	// Redimensionnement de la fenêtre en fonction de la nouvelle taille préférée de la scène
+        	// Redimensionnement de la fenetre en fonction de la nouvelle taille preferee de la scene
         	primaryStage.sizeToScene();
-        	// Affichage de la fenêtre
+        	// Affichage de la fenetre
         	primaryStage.show();
         });
         
@@ -40,12 +40,12 @@ public class Main extends Application {
         		vue.getZoomedWindow().close();
         });
    
-        // Configuration de la fenêtre principale
+        // Configuration de la fentre principale
         primaryStage.setScene(scene);
         primaryStage.setTitle("Fourmiliere");
         primaryStage.show();
         
-        //Ajout d'un icon à la fentre 
+        //Ajout d'un icon a la fentre 
         Image icon = new Image(getClass().getResourceAsStream("icon.png"));
         primaryStage.getIcons().add(icon);
 
