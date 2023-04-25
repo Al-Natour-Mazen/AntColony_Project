@@ -26,6 +26,15 @@ public class ControllerAntColony {
 	private int nbmurs , nbfourmi ,nbgraines ;
 	private final DoubleProperty SizeProperty;
 	
+	/*****/
+	/*
+	 * les coefficients de densité. Ils permettent de calculer le nombre maximal de graines, de murs et de fourmis en fonction de la taille de la colonie de fourmis.
+	 * Afin que la simulation soit plus clair car s'il y a trop de fourmis ou graines cela pourrait gêner la compréhension des evenements donc on limite. 
+	 */
+	private final static double coefDensiteFourmis = 0.076;
+	private final static double coefDensiteGraines = 0.21;
+	private final static double coefDensiteMurs = 0.55;
+	
 	/**
 	 * Crée un nouveau contrleur pour la simulation de la fourmilière.
 	 *
@@ -187,17 +196,17 @@ public class ControllerAntColony {
 				if (Knbmurs > 0 && Knbfourmi > 0 && Knbgraines > 0) {
 					
 				    //On fait des verficataion car si on met un nombre trop eleve par rapport à la taille du plateau, le modele aura tendance à crash
-					int nbMaxFourmis = (int) (antcolony.getHauteur() * antcolony.getLargeur()* 0.076); 
+					int nbMaxFourmis = (int) (antcolony.getHauteur() * antcolony.getLargeur() * coefDensiteFourmis ); 
 				    boolean nbFourmisValid = nbMaxFourmis >= Knbfourmi;
 
 				    int nbCases =  antcolony.getLargeur() * antcolony.getHauteur();
 				    int nbCasesBordure = ( antcolony.getLargeur() + antcolony.getHauteur()) * 2;
 				    int nbCasesInterieures = nbCases - nbCasesBordure;
 				    
-				    int nbMursMax = (int) (nbCasesInterieures * 0.55); 
+				    int nbMursMax = (int) (nbCasesInterieures * coefDensiteMurs); 
 				    boolean densiteMursValid = nbMursMax >= Knbmurs;
 				    
-					int nbGrainesMax = (int) (((nbCasesInterieures * antcolony.getQMax()) - nbMursMax)* 0.21);
+					int nbGrainesMax = (int) (((nbCasesInterieures * antcolony.getQMax()) - nbMursMax)* coefDensiteGraines);
 					boolean densiteGrainesValid = nbGrainesMax >= Knbgraines; 
 									    
 				    if(densiteMursValid && nbFourmisValid && densiteGrainesValid) {
