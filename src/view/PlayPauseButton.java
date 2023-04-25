@@ -14,8 +14,8 @@ import javafx.scene.image.ImageView;
 import model.Fourmiliere;
 
 /**
- * Cette classe represente un bouton personnalise permettant de jouer et mettre en pause
- * l'evolution d'une fourmiliere.
+ * Cette classe représente un bouton personnalisé permettant de jouer et mettre en pause
+ * l'évolution d'une fourmilière.
  */
 public class PlayPauseButton extends Button {
 
@@ -36,7 +36,7 @@ public class PlayPauseButton extends Button {
 	private int size;
 	
  
-    // Creer le service qui sera lance en arriere-plan
+    // Créer le service qui sera lancé en arrière-plan
     private final Service<Void> service = new Service<>() {
         @Override
         protected Task<Void> createTask() {
@@ -56,13 +56,13 @@ public class PlayPauseButton extends Button {
              		    System.out.println(antcolony.stringGraines());	
              		    System.out.println(antcolony.stringFourmis());
                     
-             		   //On recupere la valeur de valuespeed
+             		   //On Récupére la valeur de valuespeed
              		    double valuespeed = getValueSpeed();
 
-             		    // On calcule le temps de sommeil en fonction de valuespeed
+             		    // On Calcule le temps de sommeil en fonction de valuespeed
              		    long sleepTime = (long) (1050 - (valuespeed * 100)) /2  ;
 
-             		    // On verifier que le temps de sommeil est superieur a zero pour eviter une exception
+             		    // Vérifier que le temps de sommeil est supérieur à zéro pour éviter une exception
              		    if (sleepTime > 0) {
              		        Thread.sleep(sleepTime);
              		    }
@@ -77,7 +77,7 @@ public class PlayPauseButton extends Button {
     /**
      * Constructeur de la classe PlayPauseButton.
      * @param size La taille du bouton.
-     * @param fm La fourmiliere à faire evoluer.
+     * @param fm La fourmilière à faire évoluer.
      * @param board Le plateau de jeu.
      */
     public PlayPauseButton(int size, Fourmiliere fm, Board board) {

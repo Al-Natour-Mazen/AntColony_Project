@@ -14,38 +14,38 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
        
-    	// Creation du modele
+    	// Création du modèle
         Fourmiliere fourmiliere = new Fourmiliere(20, 20, 10);
      	
-        // Creation de la vue
+        // Création de la vue
         ViewAntColony vue = new ViewAntColony(fourmiliere);
         
-        // Creation du controleur
+        // Création du contrôleur
         ControllerAntColony controller = new ControllerAntColony(fourmiliere, vue);
                
-        // Configuration de la scene
+        // Configuration de la scène
         Scene scene = new Scene(vue);
         
-        // on met un ecouteur sur la taille de la vue qui change via le controller pour changer la taille de la scene a un changement
+        // on met un ecouteur sur la taille de la vue qui change via le controller pour changer la taille de la scène à un changement
         controller.SizeProperty().addListener((obs, oldVal, newVal) -> {
-        	// Redimensionnement de la fenetre en fonction de la nouvelle taille preferee de la scene
+        	// Redimensionnement de la fenêtre en fonction de la nouvelle taille préférée de la scène
         	primaryStage.sizeToScene();
-        	// Affichage de la fenetre
+        	// Affichage de la fenêtre
         	primaryStage.show();
         });
         
-        // si on ferme la fentre principale autrement qu'avec le bouton quitter, il faudra fermer la fenetre de zoom aussi
+        // si on ferme la fentre principale autrement qu'avec le bouton quitter, il faudra fermer la fênetre de zoom aussi
         primaryStage.setOnCloseRequest(e -> {
         	if(vue.getZoomedWindow() != null)
         		vue.getZoomedWindow().close();
         });
    
-        // Configuration de la fentre principale
+        // Configuration de la fenêtre principale
         primaryStage.setScene(scene);
         primaryStage.setTitle("Fourmiliere");
         primaryStage.show();
         
-        //Ajout d'un icon a la fentre 
+        //Ajout d'un icon à la fentre 
         Image icon = new Image(getClass().getResourceAsStream("icon.png"));
         primaryStage.getIcons().add(icon);
 

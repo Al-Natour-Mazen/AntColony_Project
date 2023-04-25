@@ -13,7 +13,7 @@ import model.Fourmiliere;
 public class Board extends Pane {
 
     private final Fourmiliere antColony;
-    private final static int cellSize = 10; // taille par defaut d'une cellule
+    private final static int cellSize = 10; // taille par défaut d'une cellule
 	
     private int gridheight;
 	private int gridwidth;
@@ -25,7 +25,7 @@ public class Board extends Pane {
 
 	/**
 	 * Constructeur de la classe Board.
-	 * @param antColony    Une Fourmiliere pour laquelle le plateau sera cree.
+	 * @param antColony    Une Fourmiliere pour laquelle le plateau sera créé.
 	 */
 	public Board(Fourmiliere antColony) {
         this.antColony = antColony;
@@ -49,7 +49,7 @@ public class Board extends Pane {
     }
 
 	/**
-	 * Met a jour la grille à partir de l'etat actuel de la Fourmiliere.
+	 * Met à jour la grille à partir de l'état actuel de la Fourmiliere.
 	 */
     public void updateGrid() {
         for (int i = 0; i < gridheight+2; i++) {
@@ -72,8 +72,8 @@ public class Board extends Pane {
                 } else if (antColony.getQteGraines(j, i) > 0) {
                 	int seedLevel = antColony.getQteGraines(j, i);
                 	double ratio = (double) seedLevel / antColony.getQMax();
-                	double saturation = 0.5 + (ratio * 0.5); // reduire la saturation pour les niveaux de graines faibles
-                	double brightness = 1.0 - (ratio * 0.5); // augmenter la luminosite pour les niveaux de graines eleves
+                	double saturation = 0.5 + (ratio * 0.5); // réduire la saturation pour les niveaux de graines faibles
+                	double brightness = 1.0 - (ratio * 0.5); // augmenter la luminosité pour les niveaux de graines élevés
                 	double hue =  460 / (ratio * 180.0); // gradation du vert au rouge
                 	cells[j][i].setFill(Color.hsb(hue, saturation, brightness));
                 	removeAnt(j, i); 
@@ -97,7 +97,7 @@ public class Board extends Pane {
     }
     
     /**
-     * Remet a zero la grille (toutes les cases sont blanches).
+     * Remet à zéro la grille (toutes les cases sont blanches).
      */
     public void resestGrid() {
     	 for (int i = 0; i < gridheight+2; i++){
@@ -109,9 +109,9 @@ public class Board extends Pane {
     }
     
     /**
-     * Ajoute une fourmi a la case (x, y) et cree une instance de la classe Ant a cette position.
-     * @param x         Coordonnee x de la case.
-     * @param y         Coordonnee y de la case.
+     * Ajoute une fourmi à la case (x, y) et crée une instance de la classe Ant à cette position.
+     * @param x         Coordonnée x de la case.
+     * @param y         Coordonnée y de la case.
      * @param Hasseed   Si la fourmi a une graine.
      */
     private void addAnt(int x , int y , boolean Hasseed) {
@@ -123,8 +123,8 @@ public class Board extends Pane {
     
     /**
      * Supprime la fourmi de la case (x, y) en parcourant les enfants du Pane et en supprimant la fourmi correspondante.
-     * @param x     Coordonnee x de la case.
-     * @param y     Coordonnee y de la case.
+     * @param x     Coordonnée x de la case.
+     * @param y     Coordonnée y de la case.
      */
     private void removeAnt(int x, int y) {
         for (Node node : this.getChildren()) {

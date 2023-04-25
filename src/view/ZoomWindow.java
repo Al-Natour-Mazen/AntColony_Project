@@ -7,8 +7,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 /**
- * Cette classe represente une fenetre de zoom pour afficher une zone plus detaillee du plateau.
- * Elle herite de la classe Stage.
+ * Cette classe représente une fenêtre de zoom pour afficher une zone plus détaillée du plateau.
+ * Elle hérite de la classe Stage.
  */
 public class ZoomWindow extends Stage {
 
@@ -20,7 +20,7 @@ public class ZoomWindow extends Stage {
 
     /**
      * Constructeur de la classe ZoomWindow.
-     * @param board le plateau de jeu a zoomer.
+     * @param board le plateau de jeu à zoomer.
      */
     public ZoomWindow(Board board) {
     	plateau = board;
@@ -29,9 +29,9 @@ public class ZoomWindow extends Stage {
 
         // Event si on zoom sur le plateau
         /*
-         * on calcule les coordonnees du coin superieur gauche de la fenetre de zoom en soustrayant les coordonnees x et y obtenues precedemment par la moitie de la taille de la fenetre de zoom. Ensuite, 
-         * on verifie si les coordonnees calculees ne sortent pas du plateau en comparant avec la largeur et la hauteur du plateau. Si elles sortent, on les ajuste pour qu'elles restent dans les limites 
-         * du plateau.Enfin, on appelle la methode updateZoomGrid() pour mettre a jour la fenetre de zoom avec les nouvelles cases a afficher. 
+         * on calcule les coordonnées du coin supérieur gauche de la fenêtre de zoom en soustrayant les coordonnées x et y obtenues précédemment par la moitié de la taille de la fenêtre de zoom. Ensuite, 
+         * on vérifie si les coordonnées calculées ne sortent pas du plateau en comparant avec la largeur et la hauteur du plateau. Si elles sortent, on les ajuste pour qu'elles restent dans les limites 
+         * du plateau.Enfin, on appelle la méthode updateZoomGrid() pour mettre à jour la fenêtre de zoom avec les nouvelles cases à afficher. 
          */
         plateau.setOnMouseMoved(event -> {
         	double mouseX = event.getX();
@@ -58,7 +58,7 @@ public class ZoomWindow extends Stage {
         });
 
         
-        //Ajout d'un icon a la fentre 
+        //Ajout d'un icon à la fentre 
         Image icon = new Image(getClass().getResourceAsStream("loupe-icon.png"));
         getIcons().add(icon);
         // show la fenetre
@@ -70,11 +70,11 @@ public class ZoomWindow extends Stage {
 
 
     /**
-     * Met a jour la grille de zoom pour afficher la zone correspondante du plateau de jeu.
+     * Met à jour la grille de zoom pour afficher la zone correspondante du plateau de jeu.
      */
-    //   On supprime tous les enfants de thepane, puis on parcourt toutes les cases de la grille correspondant a la 
-    // fenetre de zoom et ajoute un rectangle pour chaque case avec la couleur de fond et la couleur de contour 
-    // correspondantes. Si une fourmi est presente dans une case, elle est egalement ajoutee.
+    //   On supprime tous les enfants de thepane, puis on parcourt toutes les cases de la grille correspondant à la 
+    // fenêtre de zoom et ajoute un rectangle pour chaque case avec la couleur de fond et la couleur de contour 
+    // correspondantes. Si une fourmi est présente dans une case, elle est également ajoutée.
     public void updateZoomGrid() {
     	thepane.getChildren().clear();
         for (int x = startX;  x < plateau.getGridwidth() + 2; x++) {

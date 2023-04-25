@@ -1,5 +1,6 @@
 package view;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -7,7 +8,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
 
 /**
- * Classe representant un onglet d'initialisation pour une simulation de fourmis.
+ * Classe représentant un onglet d'initialisation pour une simulation de fourmis.
 */
 public class MyInitTab extends Tab{
 	
@@ -22,8 +23,8 @@ public class MyInitTab extends Tab{
 	private Label infoInit;
 	
 	/**
-	 * Constructeur par defaut de la classe MyInitTab.
-	 * Il initialise l'onglet avec les differents elements necessaires.
+	 * Constructeur par défaut de la classe MyInitTab.
+	 * Il initialise l'onglet avec les différents éléments nécessaires.
 	*/
 	public MyInitTab() {
 		super("Initialisations");
@@ -52,11 +53,12 @@ public class MyInitTab extends Tab{
 		MySpring springintiTop = new MySpring("VBox");
 		MySpring springintiBottom = new MySpring("VBox");
 		initBox.getChildren().addAll(springintiTop,infoInit,probaFourmi,probagraines,probamurs,confirmerInit,springintiBottom);
+		initBox.setPadding(new Insets(5));
 		initBox.setAlignment(Pos.CENTER);	
 	}
 	
 	/**
-	 * Methode permettant de definir le style des boutons de l'interface en leur affectant une couleur de fond transparente
+	 * Méthode permettant de définir le style des boutons de l'interface en leur affectant une couleur de fond transparente
 	 * et une bordure noire.
 	 * @param btn le bouton dont on souhaite définir le style
 	*/
