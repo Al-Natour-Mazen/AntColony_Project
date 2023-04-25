@@ -195,7 +195,7 @@ public class ControllerAntColony {
 			    
 				if (Knbmurs > 0 && Knbfourmi > 0 && Knbgraines > 0) {
 					
-				    //On fait des verficataion car si on met un nombre trop eleve par rapport à la taille du plateau, le modele aura tendance à crash
+					//On fait des verifications pour avoir un nombre raisonnable de fourmi et de murs et de graines proportionnellement au plateau
 					int nbMaxFourmis = (int) (antcolony.getHauteur() * antcolony.getLargeur() * coefDensiteFourmis ); 
 				    boolean nbFourmisValid = nbMaxFourmis >= Knbfourmi;
 
