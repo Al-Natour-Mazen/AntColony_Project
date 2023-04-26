@@ -32,6 +32,11 @@ public class Fourmiliere {
   private List<Fourmi> lesFourmis ;  
 	
   /************************************AJOUTE**************************************************/
+ 
+  /* On définie comme final chaque Property afin de garantir qu'une fois initialisée dans le constructeur, elle ne peut 
+   * plus être remplacée par une autre instance de DoubleProperty. Cela permet d'assurer l'intégrité 
+   * des données de la propriété et d'éviter toute modification accidentelle ou malveillante de la référence de la propriété.
+   */
 			  /*****************/
   			  // POUR LE NOMBRE DE FOURMI
   			  /*****************/

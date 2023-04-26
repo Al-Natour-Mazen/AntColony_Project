@@ -28,8 +28,12 @@ public class PlayPauseButton extends Button {
 	private final Board plateau;
 	private ZoomWindow zoom;
 
-	private DoubleProperty valueSpeedProperty;
-	private BooleanProperty isPlayingProperty;  
+	/* On définie comme final la Property afin de garantir qu'une fois initialisée dans le constructeur, elle ne peut 
+	 * plus être remplacée par une autre instance de chaque Property. Cela permet d'assurer l'intégrité 
+	 * des données de la propriété et d'éviter toute modification accidentelle ou malveillante de la référence de la propriété.
+	 */
+	private final DoubleProperty valueSpeedProperty;
+	private final BooleanProperty isPlayingProperty;  
 	private final static int DefaultSpeed = 1;
 	private final static boolean DefaultisPlaying = false;   
 	

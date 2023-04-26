@@ -33,7 +33,11 @@ public class MyInfoTab extends Tab {
 	// Utilitaires
 	private int tutoZoomWindow = 0;
 	private final static int sizePlayBtn = 30;	
-	private ObjectProperty<ZoomWindow> zoomWindowProperty;
+	/* On définie comme final la Property afin de garantir qu'une fois initialisée dans le constructeur, elle ne peut 
+	 * plus être remplacée par une autre instance de ObjectPropertyProperty. Cela permet d'assurer l'intégrité 
+	 * des données de la propriété et d'éviter toute modification accidentelle ou malveillante de la référence de la propriété.
+	 */
+	private final ObjectProperty<ZoomWindow> zoomWindowProperty;
 	private Board plateau;
 	private Fourmiliere antcolony;
 	

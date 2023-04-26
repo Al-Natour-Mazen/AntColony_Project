@@ -1,5 +1,6 @@
 package view;
 
+
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
@@ -12,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class ZoomWindow extends Stage {
 
-    private static final int cellSize = 20;
+    private static final int cellSize = 30;
     private static final int zoomSize = 11;
     private Pane thepane ;
     private final Board plateau;
@@ -34,10 +35,8 @@ public class ZoomWindow extends Stage {
          * du plateau.Enfin, on appelle la méthode updateZoomGrid() pour mettre à jour la fenêtre de zoom avec les nouvelles cases à afficher. 
          */
         plateau.setOnMouseMoved(event -> {
-        	double mouseX = event.getX();
-        	double mouseY = event.getY();
-        	double boardX = mouseX / board.getCellSize();
-        	double boardY = mouseY / board.getCellSize();
+        	double boardX = event.getX() / board.getCellSize();
+        	double boardY = event.getY() / board.getCellSize();
         	int zoomX = (int) (boardX - (zoomSize - 1) / 2);
         	int zoomY = (int) (boardY - (zoomSize - 1) / 2);
     	    if (zoomX < 0) {
@@ -51,10 +50,12 @@ public class ZoomWindow extends Stage {
     	    } else if (zoomY > plateau.getGridheight() - zoomSize) {
     	        zoomY = plateau.getGridheight() - zoomSize+2;
     	    }
-
-        	startX = zoomX;
-        	startY = zoomY;
-        	updateZoomGrid();
+    	    
+    	    if (zoomX != startX || zoomY != startY) {
+                startX = zoomX;
+                startY = zoomY;
+                updateZoomGrid();
+            }
         });
 
         
@@ -77,8 +78,10 @@ public class ZoomWindow extends Stage {
     // correspondantes. Si une fourmi est présente dans une case, elle est également ajoutée.
     public void updateZoomGrid() {
     	thepane.getChildren().clear();
-        for (int x = startX;  x < plateau.getGridwidth() + 2; x++) {
-            for (int y = startY; y < plateau.getGridheight() + 2; y++) {
+    	int gridWidth = plateau.getGridwidth() + 2;
+    	int gridHeight = plateau.getGridheight() + 2;
+        for (int x = startX;  x < gridWidth; x++) {
+            for (int y = startY; y < gridHeight; y++) {
                 Rectangle cell = new Rectangle(cellSize, cellSize);
                 cell.setFill(plateau.getcell(y, x).getFill());
                 cell.setStroke(plateau.getcell(y, x).getStroke());
@@ -94,5 +97,6 @@ public class ZoomWindow extends Stage {
             }
         }
     }
+    
 
 }

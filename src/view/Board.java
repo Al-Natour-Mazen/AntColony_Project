@@ -20,7 +20,12 @@ public class Board extends Pane {
 	private Rectangle[][] cells;
 	private Ant[][] Ants;
 	
-	private BooleanProperty displayGridsProperty;
+	 
+   /* On définie comme final la Property afin de garantir qu'une fois initialisée dans le constructeur, elle ne peut 
+    * plus être remplacée par une autre instance de BooleanProperty. Cela permet d'assurer l'intégrité 
+    * des données de la propriété et d'éviter toute modification accidentelle ou malveillante de la référence de la propriété.
+    */
+	private final BooleanProperty displayGridsProperty;
 	private final static boolean DefaultDisplay = true;
 
 	/**
