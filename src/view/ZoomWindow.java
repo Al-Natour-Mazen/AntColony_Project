@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class ZoomWindow extends Stage {
 
-    private static final int cellSize = 30;
+    private static final int cellSize = 20;
     private static final int zoomSize = 11;
     private Pane thepane ;
     private final Board plateau;
